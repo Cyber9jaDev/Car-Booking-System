@@ -1,13 +1,9 @@
 import { NavLink } from "react-router-dom";
 import '../../sass/banner.scss';
+import ReactSlider from "./Slider";
 
 const Banner = () => {
 
-  // style={({isActive, isPending}) => {
-  //             return {
-  //               color: isActive ? 'red' : 'white'
-  //             }
-  //           }}
   return (
     <section id="banner">
       <header>
@@ -32,8 +28,10 @@ const Banner = () => {
           </ul>
         </nav>
       </header>
-      <div className="banner-wrapper">
-
+      <div className="wrapper">
+        <div className="slider-container">
+          <ReactSlider />
+        </div>
       </div>
     </section>
     
