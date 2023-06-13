@@ -1,6 +1,6 @@
 export type SliderObjType = {
   h4: string,
-  h5?: string,
+  h5: string,
   img: string
 }
 
@@ -9,6 +9,7 @@ export type SliderType = SliderObjType[]
 const BannerSliderData: SliderType = [
   {
     h4: "24/7 Taxi Service",
+    h5: 'One Call Away',
     img: new URL('../../assets/banner5.jpg', import.meta.url).href
   },
   {

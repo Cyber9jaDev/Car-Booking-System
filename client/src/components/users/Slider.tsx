@@ -26,7 +26,7 @@ const ReactSlider = () => {
     autoplay: true,
     autoplaySpeed: 1000,
     infinite: true,
-    speed: 1000,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
   }

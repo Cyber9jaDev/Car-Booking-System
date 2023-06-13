@@ -1,14 +1,10 @@
 #banner{
-
   position: relative;
   min-height: calc(100vh - 78px);
-  // background: black;
   height: 100%;
-  z-index: 999 !important;
 
   nav{
     padding-top: 1.5em;
-    z-index: 999 !important;
   }
 
   nav > ul{
@@ -20,7 +16,7 @@
   nav > ul > li {
     list-style: none;
     margin: 0 10px;
-    z-index: 999 !important;
+    z-index: 1 !important;
   }
 
   nav > ul > li > .nav-link{
@@ -50,7 +46,7 @@
   }
 
   .banner-img{
-    z-index: -99 !important;
+    z-index: -1;
     background-position: center !important;
     background-size: cover !important;
     -webkit-background-size: cover !important;
@@ -59,11 +55,14 @@
     -moz-background-size: cover;
     -ms-background-size: cover;
     min-height: 710px;
-    width: 100% !important;
+    // width: 100% !important;
   }
 
   .banner-info{
     padding-top: 15em;
+    // background: red;
+    height: calc(100vh - 80px);
+    z-index: 999 !important;
   }
 
   .banner-info h4, .banner-info h5 {
@@ -73,22 +72,14 @@
     font-size: 4em;
     color: #fff;
     position: relative;
+    z-index: 1 !important;
   }
 
   .banner-info h5 {
     letter-spacing: 3px;
   }
 
-  .banner-info h5:after ,.banner-info h2:after{
-    position: absolute;
-    content: "";
-    width: 10%;
-    height: 4px;
-    background: #fff;
-    left: 45%;
-    bottom: -25%;
-  }
-  .banner-info a {
+  .banner-info .nav-link {
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
@@ -99,56 +90,14 @@
     border-radius: 3px;
     margin-top: 1em;
     display: inline-block;
+    z-index: 1 !important;
   }
 
-  .banner-info a:hover {
-    background: #ffc107;
-    border: 2px solid #ffc107;
-    color: #fff;
+  .banner-info .nav-link:hover {
+    background: #ffc107 !important;
+    border: 2px solid #ffc107 !important;
+    color: #fff !important;
+    z-index: 999 !important;
   }
-
-  .banner-info span {
-    font-size: 60px;
-    color: #fff;
-    margin-bottom: 10px;
-  }
-//   .rslides{
-//     position: relative;
-//     list-style: none;
-//     overflow: hidden;
-//     width: 100%;
-//     padding: 0;
-//   }
-
-//   .rslides li {
-//     -webkit-backface-visibility: hidden;
-//     position: absolute;
-//     display: none;
-//     width: 100%;
-//     left: 0;
-//     top: 0;
-//   }
-
-//   .rslides li:first-child {
-//     position: relative;
-//     display: block;
-//     float: left;
-//   }
-
-//   .rslides img {
-//     display: block;
-//     height: auto;
-//     width: 100%;
-//     border: 0;
-//   }
-
-
-
-
-
-
-
-
-
 
 }

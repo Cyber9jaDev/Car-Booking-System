@@ -1,15 +1,16 @@
 import { SliderObjType } from "./BannerSliderData";
+import { Link } from 'react-router-dom';
 
 const Slide = ({ h4, h5, img }: SliderObjType)  => {
 
   return (
-    <div className="banner-img" style={{background: `url(${img})` }}>
-      <div className="bs-slider-overlay">
-        <div className="banner-info text-center">
-          <h4>{h4}</h4>
-          { h5 && <h5 className="mb-5"><i className="fas fa-phone"></i> 12(00) 123 1234</h5>}
-          <a href="booking.html">Book Now</a>
-        </div>
+    // <div className="banner-img" style={{background: `url(${img})` }}>
+    <div className="wrapper">
+      <img className="banner-img" src={img} alt="" />
+      <div className="banner-info text-center">
+        <h4>{h4}</h4>
+        <h5 className="mb-5">{h5}</h5>
+        <Link role='button' className="nav-link" to="/booking">Book Now</Link>
       </div>
 			</div>
   )
@@ -17,8 +18,3 @@ const Slide = ({ h4, h5, img }: SliderObjType)  => {
 
 export default Slide;
 
-{/* <div>
-      <h4 className="">{h4}</h4>
-      {h5 && <h5 className="">{h5}</h5>}
-      <img className="" src={img} alt={h4} />
-    </div> */}
