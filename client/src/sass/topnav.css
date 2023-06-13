@@ -1,18 +1,16 @@
 .top-bar{
-  height: 80px;
+  /* height: 80px; */
   background: #fff;
   position: relative;
+  padding: .3em 2em;
 }
+
 .nav-link{
   text-decoration: none;
 }
 
-.log-icons{
-
-}
-
 .log-icons p {
-  font-size: 1em;
+  font-size: 1.25em;
   letter-spacing: 1px;
   color: #333;
   font-weight: 500;
@@ -21,4 +19,52 @@
 .log-icons p i{
   color: #ffc107;
   margin-right: 4px;
+}
+
+.logo i{
+  color: #ffc107;
+  text-shadow: none;
+}
+
+.navbar-brand{
+  font-size: 2.2em;
+	font-weight: 700;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.36);
+	color: #3d3e48;
+  letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.top-forms{
+  display: flex;
+  justify-content: center;
+}
+
+.top-forms > .wrapper{
+  margin: 0 10px;
+}
+
+.top-forms > .wrapper > span > .nav-link{
+  font-size: 1em;
+  letter-spacing: 1px;
+  color: #555;
+  border: 1px dotted #555;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.top-forms >.wrapper span .nav-link:hover{
+  background: #ffc107;
+  border: 1px dotted #fff;
+  color: #fff;
+}
+
+.top-forms > .wrapper > span > .nav-link:hover i{
+  color: #fff !important;
+  background: #ffc107;
+}
+
+.top-forms .nav-link i{
+  color: #ffc107;
 }
