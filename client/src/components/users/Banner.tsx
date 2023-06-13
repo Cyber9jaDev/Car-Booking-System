@@ -28,10 +28,8 @@ const Banner = () => {
           </ul>
         </nav>
       </header>
-      <div className="wrapper">
-        <div className="slider-container">
-          <ReactSlider />
-        </div>
+      <div className="slider-container">
+        <ReactSlider />
       </div>
     </section>
     
