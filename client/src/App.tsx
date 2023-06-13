@@ -1,4 +1,4 @@
-import Navbar from "./components/users/Navbar";
+import Banner from "./components/users/Banner";
 import TopNav from "./components/users/TopNav";
 
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <TopNav />
-    <Navbar />
+    <Banner />
     </>
   )
 }
