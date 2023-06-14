@@ -1,0 +1,81 @@
+#welcome{
+
+  padding: 3em 0;
+
+
+  header > h3{
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #333;
+  }
+
+  header > h5{
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 600;
+    color: #aaa;
+    letter-spacing: 2px;
+  }
+
+  .welcome-grid-top i.fa,.welcome-grid-top i.fas { font-size: 40px }
+  i.fas.fa-money-bill-alt { color: #00bce4 }
+  i.fa.fa-users { color: #34bf49 }
+  i.fa.fa-road { color: #ff4c4c }
+  i.fa.fa-taxi { color: #f48924 }
+  i.fa.fa-cogs { color: #2dde98 }
+  i.fa.fa-smile { color: #ce181e }
+
+  .welcome-grid-top h4{
+    margin-top: 20px;
+    color: #000;
+    font-size: 17px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .welcome-grid-top h4:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 20%;
+    background: #333;
+    bottom: -80%;
+    left: 40%;
+  }
+
+  .welcome-grid-bottom p {
+    font-size: 1em;
+    line-height: 30px;
+    text-align: left;
+    color: #2c2c2c;
+  }
+
+  .welcome-grid-bottom h4 {
+    text-align: left;
+    line-height: 36px;
+    font-size: 1em;
+    color: #000;
+    font-weight: 600;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .welcome-grid-bottom .about-link { 
+    background: #333;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 0.875em;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    text-decoration: none;
+  }
+
+  .welcome-grid-bottom .about-link:hover {
+    background: #ffc107;
+  }
+}

@@ -46,7 +46,7 @@ const ReactSlider = () => {
 
   return (
     <Slider { ...settings }>
-      { BannerSliderData.map(slide => <Slide { ...slide } /> ) }
+      { BannerSliderData.map((slide, index) => <Slide key={index} { ...slide } /> ) }
     </Slider>
   )
 }
