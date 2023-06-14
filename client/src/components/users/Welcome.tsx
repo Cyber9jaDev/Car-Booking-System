@@ -7,9 +7,8 @@ const Welcome = () => {
       <div className="wrapper">
         <div className="container">
 
-          <header>
+          <header className="mb-5">
             <h3 className="text-center"> Welcome</h3>
-            <h5 className="text-center"> Taxi Cab </h5>
           </header>
 
           <div className="row welcome-grids-top mb-4">
