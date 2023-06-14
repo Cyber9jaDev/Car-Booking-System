@@ -1,0 +1,100 @@
+#why{
+
+  h3.heading {
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #333;
+  }
+  
+  h5.heading {
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 600;
+      color: #aaa;
+      letter-spacing: 2px;
+  }
+  .grid1:hover, .grid2:hover, .grid3:hover, .grid4:hover, .grid5:hover, .grid6:hover,.grid7:hover, .grid8:hover {
+    opacity: .9;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    -o-transition: 0.5s all;
+  }
+
+  .grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8 {
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    -o-transition: 0.5s all;
+  }
+  
+  .grid1{
+    background:url(../assets/why1.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  .grid2{
+    background:url(../assets/why2.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  
+  .grid3{
+    background:url(../assets/why3.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  
+  .grid4{
+    background:url(../assets/why4.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  
+  
+  .grid5{
+    background:url(../assets/why3.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+
+  .grid6{
+    background:url(../assets/why1.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+    
+  .grid7{
+    background:url(../assets/why2.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  
+  
+  .grid8{
+    background:url(../assets/why4.jpg) no-repeat 0px 0px;
+    background-size: cover;
+  }
+  
+  
+  h4{
+      color: #fff;
+      font-weight: 800;
+      font-size: 35px;
+      text-align: center;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border: 2px solid #fff;
+      transform: rotate(45deg);
+  }
+
+  h4 span{
+    transform: rotate(-45deg);
+    display: block;
+  }
+
+  p {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 1px;
+      font-family: initial;
+  }
+}
