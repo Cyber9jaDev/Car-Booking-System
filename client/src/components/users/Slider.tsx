@@ -32,7 +32,7 @@ const ReactSlider = () => {
   const settings : SliderObjType = {
     arrows: false,
     fade: true,
-    dots: true, 
+    dots: false, 
     autoplay: true,
     autoplaySpeed: 5000,
     infinite: true,
