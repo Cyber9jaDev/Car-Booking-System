@@ -9,6 +9,10 @@ type CustomDotsType = (dots:ReactElement) => ReactElement;
 
 type CustomPagingType = (dot: number) => ReactElement;
 
+type ArrowType = () => ReactElement;
+
+
+
 type SliderObjType = {
   dots: boolean, 
   autoplay: boolean,
@@ -20,33 +24,24 @@ type SliderObjType = {
   arrows: boolean,
   fade: boolean,
   appendDots: CustomDotsType,
+  
   // customPaging: CustomPagingType
 }
 
 const ReactSlider = () => {
   const settings : SliderObjType = {
-    arrows: true,
+    arrows: false,
     fade: true,
     dots: true, 
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 5000,
     infinite: true,
-    speed: 2000,
+    speed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    appendDots: dots => <ul className='slick-dots'> { dots } </ul>,
-    // customPaging: (i) => <button style={{
-    //   fontSize: '2em',
-
-    // }}>{i + 1}</button>
-    // customPaging: (i) => <button style={{
-    //   content: '',
-    //   color: 'white',
-    //   fontSize: '1em',
-    //   // width: '50px', 
-    //   // height: '50px',
-    //   // background: 'white'
-    // }}>{i + 1}</button>
+    appendDots: dots => <div>
+      <ul style={{ margin: "0px" }} className='slick-dots'> { dots } </ul>
+    </div>,
   }
 
   return (
