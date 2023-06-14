@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const Slide = ({ h4, h5, img }: SliderObjType)  => {
 
   return (
-    // <div className="banner-img" style={{background: `url(${img})` }}>
     <div className="wrapper">
       <img className="banner-img" src={img} alt="" />
       <div className="banner-info text-center">
