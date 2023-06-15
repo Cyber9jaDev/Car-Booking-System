@@ -74,27 +74,27 @@
   
   
   h4{
-      color: #fff;
-      font-weight: 800;
-      font-size: 35px;
-      text-align: center;
-      width: 80px;
-      height: 80px;
-      line-height: 80px;
-      border: 2px solid #fff;
-      transform: rotate(45deg);
+    color: #fff;
+    font-weight: 800;
+    font-size: 35px;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
   }
 
   h4 span{
     transform: rotate(-45deg);
-    display: block;
   }
 
-  p {
+  p{
       font-size: 22px;
       font-weight: 600;
       color: #fff;
       letter-spacing: 1px;
-      font-family: initial;
   }
 }
