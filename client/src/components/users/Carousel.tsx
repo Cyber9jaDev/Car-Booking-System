@@ -22,7 +22,7 @@ const Carousel = ({ items, responsive, data }: ChildrenProp) => {
       infinite={data?.infinite}
       touchTracking={data?.touchTracking}
       disableButtonsControls={data?.disableButtonsControls}
-      keyboardNavigation={data.keyboardNavigation}
+      keyboardNavigation={data?.keyboardNavigation || false}
       responsive={responsive}
     />
   )

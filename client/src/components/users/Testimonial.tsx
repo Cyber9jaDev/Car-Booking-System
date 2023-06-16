@@ -28,8 +28,8 @@ const Testimonial = () => {
 
   const responsive: ResponsiveType = {
     0: { items: 1 },
-    568: { items: 2 },
-    1024: { items: 3 },
+    720: { items: 2 },
+    991: { items: 3 },
   }
 
   const items: TestimonialCarouselType = [
@@ -111,7 +111,7 @@ const Testimonial = () => {
       <header>
         <h4 className="text-capitalize text-center mb-4">Testimonial</h4>
       </header>
-      <div className="slider-container container-lg">
+      <div className="slider-container container">
         <Carousel items={items} responsive={responsive} data={data} />
       </div>
     </section>
