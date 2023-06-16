@@ -11,7 +11,7 @@ const Slide = ({ h4, h5, img }: SliderObjType)  => {
         <Link role='button' className="nav-link" to="/booking">Book Now</Link>
       </div>
 			</div>
-  )
+  );
 }
 
 export default Slide;

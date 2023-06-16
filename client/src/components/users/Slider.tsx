@@ -7,12 +7,6 @@ import { ReactElement } from 'react';
 
 type CustomDotsType = (dots:ReactElement) => ReactElement;
 
-type CustomPagingType = (dot: number) => ReactElement;
-
-type ArrowType = () => ReactElement;
-
-
-
 type SliderObjType = {
   dots: boolean, 
   autoplay: boolean,
@@ -24,8 +18,6 @@ type SliderObjType = {
   arrows: boolean,
   fade: boolean,
   appendDots: CustomDotsType,
-  
-  // customPaging: CustomPagingType
 }
 
 const ReactSlider = () => {
