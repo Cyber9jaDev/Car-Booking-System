@@ -1,30 +1,28 @@
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { TestimonialCarouselType } from './Testimonial';
+import { CarouselDataType, ResponsiveType, TestimonialCarouselType } from './Testimonial';
+
 
 type ChildrenProp = {
-  items: TestimonialCarouselType
+  items: TestimonialCarouselType,
+  responsive: ResponsiveType,
+  data: CarouselDataType
 }
 
-const Carousel = ({ items }: ChildrenProp) => {
-  const responsive = {
-    0: { items: 1 },
-    568: { items: 2 },
-    1024: { items: 3 },
-  }
+const Carousel = ({ items, responsive, data }: ChildrenProp) => {
 
   return (
     <AliceCarousel
-      autoPlay
-      autoPlayStrategy="none"
-      autoPlayInterval={3000}
-      animationDuration={3000}
-      animationType="fadeout"
-      infinite
-      touchTracking={false}
-      disableButtonsControls={true}
       items={items}
-      keyboardNavigation={true}
+      autoPlay={data?.autoPlay}
+      autoPlayStrategy={data?.autoPlayStrategy}
+      autoPlayInterval={data?.autoPlayInterval}
+      animationDuration={data?.animationDuration}
+      animationType={data?.animationType}
+      infinite={data?.infinite}
+      touchTracking={data?.touchTracking}
+      disableButtonsControls={data?.disableButtonsControls}
+      keyboardNavigation={data.keyboardNavigation}
       responsive={responsive}
     />
   )
