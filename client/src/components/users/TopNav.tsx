@@ -5,12 +5,12 @@ import '../../sass/topnav.css';
 const TopNav = () => {
   return (
     <div className='top-bar container-fluid'>
-      <div className="container h-100">
+      <div className="h-100">
         <div className="h-100 row justify-content-center align-items-center">
           <div className="col-md-4 col sm-6 log-icons d-flex align-items-center justify-content-center">
-            <p className="py-2 my-auto"><i className="fa fa-phone"></i>Call Taxi : 12(00) 123 1234</p>
+            <p className="py-2 my-auto"><i className="fa fa-phone"></i>Call Taxi : <a href="tel:08062128170">+2348062128170</a></p>
           </div>
-          <div className="col-md-4 col-sm-6 logo d-flex justify-content-center">
+          <div className="col-md-4 col-sm-6 logo d-flex justify-content-center my-2 mb-3">
             <NavLink className="navbar-brand" to="/"> <i className="fas fa-taxi"></i> Taxi Cab</NavLink>
           </div>
           <div className="col-md-4 top-forms">

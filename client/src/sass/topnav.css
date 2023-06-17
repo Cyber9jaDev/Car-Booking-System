@@ -19,6 +19,13 @@
 
 .log-icons p i{
   color: #ffc107;
+  margin-right: 6px;
+}
+
+.log-icons p a{
+  text-decoration: none;
+  color: inherit;
+  font-family: initial;
   margin-right: 4px;
 }
 
@@ -31,7 +38,7 @@
   font-size: 2.5em;
 	font-weight: bolder;
   text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.36);
-	color: #3d3e48;
+	color: #202020;
   letter-spacing: 2px;
 	text-transform: uppercase;
 }
@@ -53,6 +60,7 @@
   padding: 10px 20px;
   border-radius: 3px;
   font-weight: 600;
+  transition: all ease .6s;
 }
 
 .top-forms >.wrapper span .nav-link:hover{
@@ -68,4 +76,21 @@
 
 .top-forms .nav-link i{
   color: #ffc107;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .top-forms{ justify-content: space-between }
+  .top-forms > .wrapper{ margin: 0 !important }
+}
+
+@media screen and (max-width: 568px) {
+  .log-icons p { font-size: 1.075em }  
+  .logo i{ font-size: 1em }
+  .navbar-brand{ font-size: 2em }
+}
+
+@media screen and (max-width: 486px) {
+  .log-icons p { font-size: 1em }  
 }
