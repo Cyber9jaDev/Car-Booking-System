@@ -1,5 +1,4 @@
 .top-bar{
-  /* height: 80px; */
   background: #fff;
   position: relative;
   padding: .5em 2em;
@@ -81,8 +80,7 @@
 
 
 @media screen and (max-width: 768px) {
-  .top-forms{ justify-content: space-between }
-  .top-forms > .wrapper{ margin: 0 !important }
+
 }
 
 @media screen and (max-width: 568px) {
@@ -92,5 +90,12 @@
 }
 
 @media screen and (max-width: 486px) {
+  .log-icons p { font-size: 1.125em }  
+}
+
+@media screen and (max-width: 375px) {
   .log-icons p { font-size: 1em }  
+  .navbar-brand{ font-size: 1.8em }
+  .top-forms > .wrapper{ margin: 0 5px }
+  .top-forms > .wrapper > span > .nav-link{ font-size: .925em }
 }

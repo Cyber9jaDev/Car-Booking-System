@@ -75,6 +75,7 @@
     font-size: 4em;
     color: #fff;
     z-index: 1 !important;
+    font-weight: 700;
   }
 
   .banner-info h5 {
@@ -100,6 +101,35 @@
     border: 2px solid #ffc107 !important;
     color: #fff !important;
     z-index: 1 !important;
+  }
+
+
+  @media screen and (max-width: 768px){
+    min-height: 52vh !important;
+    max-height: 52vh !important;
+
+    nav{
+      display: none;
+    }
+
+    .wrapper{
+      min-height: 52vh !important;
+      max-height: 52vh !important;
+    }
+
+    .banner-info h4, .banner-info h5 {
+      font-size: 2.7em;
+      text-align: center;
+
+    }
+  }
+
+  
+  @media screen and (max-width: 468px){
+
+    .banner-info h4, .banner-info h5 {
+      font-size: 2.2em;
+    }
   }
 
 }
