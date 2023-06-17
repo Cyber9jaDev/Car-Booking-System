@@ -84,9 +84,9 @@ const Footer = () => {
 							</div>
 						</div>
 					</div> */}
-					<div className="col-lg-4 col-sm-6 subscribe-main footer-grid text-left">
-						<h3 className="mb-sm-5 mb-4">Newsletter</h3>
-						<div className="subscribe-main text-left">
+					<div className="col-lg-4 col-sm-6 footer-grid text-left">
+						<h3 className="mb-sm-5 mb-4">Stay In Touch</h3>
+						{/* <div className="subscribe-main text-left">
 							<div className="subscribe-form">
 								<form action="#" method="post" className="subscribe_form">
 									<input className="form-control" type="email" placeholder="Enter Your Email..." required />
@@ -94,33 +94,32 @@ const Footer = () => {
 											aria-hidden="true"></i></button>
 								</form>
 							</div>
-						</div>
+						</div> */}
 						<div className="footer-social">
-							<div className="copyrighttop">
-								<h3 className="mb-sm-5 mb-4">Stay In Touch</h3>
+							<div>
 								<ul>
-									<li className="mr-1">
-										<a className="facebook" href="#">
+									<li className="me-1">
+										<a className="icon" href="#">
 											<i className="fab fa-facebook-f"></i>
 										</a>
 									</li>
-									<li className="mr-1">
-										<a className="facebook" href="#">
+									<li className="me-1">
+										<a className="icon" href="#">
 											<i className="fab fa-twitter"></i>
 										</a>
 									</li>
-									<li className="mr-1">
-										<a className="facebook" href="#">
+									<li className="me-1">
+										<a className="icon" href="#">
 											<i className="fab fa-google-plus-g"></i>
 										</a>
 									</li>
-									<li className="mr-1">
-										<a className="facebook" href="#">
+									<li className="me-1">
+										<a className="icon" href="#">
 											<i className="fab fa-pinterest-p"></i>
 										</a>
 									</li>
 									<li>
-										<a className="facebook" href="#">
+										<a className="icon" href="#">
 											<i className="fab fa-linkedin-in"></i>
 										</a>
 									</li>
