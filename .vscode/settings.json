@@ -1,3 +1,26 @@
 {
-  "cSpell.words": ["topnav"]
+  "cSpell.words": ["topnav"],
+  "cSpell.ignoreWords": [
+    "Donec",
+    "Duis",
+    "Pellentesque",
+    "Vestibulum",
+    "agileits",
+    "areeros",
+    "congue",
+    "copyrightbottom",
+    "copyrighttop",
+    "corper",
+    "felis",
+    "hendrerit",
+    "metus",
+    "nisl",
+    "pinterest",
+    "pretium",
+    "rhoncus",
+    "tincidunt",
+    "ullam",
+    "volutpat",
+    "websitename"
+  ]
 }
