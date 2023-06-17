@@ -130,11 +130,12 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="footer-cpy text-center pt-sm-5 mt-sm-5 mt-4 pt-3">
-					<div className="w3layouts-agile-copyrightbottom">
-						<p>© 2018 Taxi Cab. All Rights Reserved | Design by
-							<a href="http://w3layouts.com/">W3layouts</a>
+					<div className="copyright-bottom">
+						<p>&trade; 2018 Taxi Cab, Built by
+							<a className='ms-1' href="http://w3layouts.com/">Cyber9ja</a>
 						</p>
-
+						<p>&copy; All Rights Reserved | Design Source - <a className='ms-1' href="http://w3layouts.com/">w3layouts</a>
+						</p>
 					</div>
 				</div>
 			</div>

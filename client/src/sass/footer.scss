@@ -118,4 +118,18 @@
       background: #ccc;
     }
   }
+
+  .copyright-bottom p{
+    color: #64686b;
+    letter-spacing: 1px;
+    line-height: 28px;
+    font-size: 16px;
+    font-family: initial;
+  }
+
+  .copyright-bottom p a{
+    color: #ccc;
+    text-decoration: none;
+    font-family: initial;
+  }
 }
