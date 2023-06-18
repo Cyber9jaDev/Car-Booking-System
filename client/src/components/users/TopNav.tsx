@@ -16,7 +16,7 @@ const TopNav = () => {
           <div className="col-md-4 top-forms">
             <div className="wrapper">
               <span className="">
-                <NavLink className='nav-link' to="/sign-in">
+                <NavLink className='nav-link' to="/login">
                   <i className="fas fa-lock me-2"></i>Sign in
                 </NavLink>
               </span>
@@ -24,7 +24,7 @@ const TopNav = () => {
             <div className="wrapper">
               <span className="">
                 <NavLink className='nav-link' to="/signup" >
-                  <i className="fas fa-user me-2"></i>Register
+                  <i className="fas fa-user me-2"></i>Sign up
                 </NavLink>
               </span>
             </div>
