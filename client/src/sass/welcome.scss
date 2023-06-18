@@ -1,7 +1,6 @@
 #welcome{
 
-  padding: 3em 0;
-
+  padding: 2em 0;
 
   header > h3{
     text-transform: uppercase;
@@ -9,14 +8,6 @@
     font-weight: 800;
     letter-spacing: 3px;
     color: #333;
-  }
-
-  header > h5{
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: 600;
-    color: #aaa;
-    letter-spacing: 2px;
   }
 
   .welcome-grid-top i.fa,.welcome-grid-top i.fas { font-size: 40px }
@@ -77,5 +68,12 @@
 
   .welcome-grid-bottom .about-link:hover {
     background: #ffc107;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    header > h3{
+      font-size: 32px;
+    }
   }
 }

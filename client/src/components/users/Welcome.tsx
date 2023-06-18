@@ -7,7 +7,7 @@ const Welcome = () => {
       <div className="wrapper">
         <div className="container">
 
-          <header className="mb-5">
+          <header className="mb-3">
             <h3 className="text-center"> Welcome</h3>
           </header>
 

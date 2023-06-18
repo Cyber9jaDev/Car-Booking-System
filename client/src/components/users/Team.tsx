@@ -7,10 +7,10 @@ import img4 from '../../assets/team4.jpg';
 const Team = () => {
   return (
     <section id='team'>
-      <div className="container py-lg-5 py-3">
+      <div className="container py-3">
         
         <header>
-          <h4 className="text-capitalize text-center mb-4">Our Drivers</h4>
+          <h4 className="text-capitalize text-center m3-4">Our Drivers</h4>
         </header>
 
         <div className="row text-center">

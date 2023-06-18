@@ -2,9 +2,9 @@ import '../../sass/why.scss';
 
 const Why = () => {
   return (
-    <section id='why' className='my-5'>
-      <div className="container p-md-5 p-3">
-        <header className='mb-5'>
+    <section id='why' className='mb-4'>
+      <div className="container p-3">
+        <header className='mb-4'>
           <h3 className="heading text-capitalize text-center">Why taxi cab</h3>
         </header>
         <div className="row why-grids">
