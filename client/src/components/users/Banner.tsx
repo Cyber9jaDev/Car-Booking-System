@@ -1,28 +1,32 @@
 import { NavLink } from "react-router-dom";
 import '../../sass/banner.scss';
 import ReactSlider from "./Slider";
+import { useState } from "react";
 
 const Banner = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (
     <section id="banner">
+      <div onClick={() => setShowMenu(!showMenu)} className="menu">
+        <i className={`fa-solid ${showMenu ? 'fa-xmark' : 'fa-bars'}`}></i>
+      </div>
       <header>
-        <nav>
+        <nav className={showMenu ? `active` : ''}>
           <ul>
-            <li className="nav-item">
-              {/* <NavLink className="nav-link active" to="/">Home</NavLink> */}
+            <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/">Home</NavLink>
             </li>
-            <li className="nav-item">
+            <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/about">About</NavLink>
             </li>
-            <li className="nav-item">
+            <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/services">Services</NavLink>
             </li>
-            <li className="nav-item">
+            <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/booking">Booking</NavLink>
             </li>
-            <li className="nav-item">
+            <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/contact">Contact</NavLink>
             </li>
           </ul>
