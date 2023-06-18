@@ -132,18 +132,26 @@
     }
 
     nav{
-      background-color: rgba(0, 0, 0, 0.8);
       position: absolute !important;
       width: 100%;
       left: -100%;
       transition: left 1s ease-in-out;
-      top: 80px;
+      top: 50px;
+    }
+
+    nav > ul{
+      background-color: rgba(0, 0, 0, 0.8);
+      width: 90%;
+      margin: 0 auto;
+      height: 100%;
+      padding-top: 20px;
+      border-radius: 5px;
     }
 
     nav.active{
       left: 0 !important;
       display: block !important;
-      top: 80px;
+      top: 50px;
     }
     
     nav > ul{
