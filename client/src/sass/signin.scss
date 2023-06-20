@@ -12,7 +12,7 @@ main{
   }
 
   header{
-    background-color: #ffdb6e;
+    background-color: #ffc107;
     padding: 1.5em 4em;
   }
 
@@ -48,7 +48,7 @@ main{
   }
 
   button[type='submit']{
-    background: #ffcc33 !important;
+    background-color: #ffc107 !important;
     border: none;
     outline: none;
     padding: 10px;
@@ -57,7 +57,7 @@ main{
   }
 
   button[type='submit']:hover{
-    background: #e7b719 !important;
+    // background: #e7b719 !important;
     color: #fff;
   }
   
