@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import { BadRequestError, NotFoundError } from "../../errors/CustomAPIError.js";
 
 const UserSchema = new Schema({
   username: {
@@ -45,9 +46,22 @@ const UserSchema = new Schema({
 
 // Hash password before saving to the database
 
-UserSchema.statics.findUserByEmail = function(email){
-  const user = User.findOne({ email });
-  return user ? user : null
+UserSchema.statics.hasExistingUsername = async function(username){
+  const foundUsername = await User.findOne( { username });
+  if(foundUsername) throw new BadRequestError('Username is taken');
+  return false;
+}
+
+UserSchema.statics.hasExistingEmail = async function(email){
+  const foundEmail = await User.findOne({ email });
+  if(foundEmail) throw new BadRequestError('Email is in use');
+  return false;
+}
+
+UserSchema.statics.findUser = async function(email){
+  const user = await User.findOne({ email });
+  if(user) return user; 
+  throw new NotFoundError('User does not exist');
 }
 
 UserSchema.pre('save', function(){ 

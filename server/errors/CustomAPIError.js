@@ -27,3 +27,10 @@ export class InternalServerError extends CustomAPIError{
   }
 }
 
+export class NotFoundError extends CustomAPIError{
+  constructor(message){
+    super(message);
+    this.statusCode = StatusCodes.NOT_FOUND;
+  }
+}
+

@@ -4,57 +4,28 @@ import { StatusCodes } from 'http-status-codes';
 
 export const register = async (req, res) => {
   const { email, username, password } = req.body;
-  const user = await User.create({ email, username, password });
 
-  if(user){
-    return res.status(StatusCodes.CREATED).json(user)
-  }
-  throw new InternalServerError('Something went wrong!')
-}
+  if(!email || !username || !password){ throw new BadRequestError('Fill in all fields')};
 
-// export const login = async (req, res) => {
-//   const { email, password } = req.body;
-//   const user = await User.findUserByEmail(email);
-
-//   const isCorrectPassword = await user.isCorrectPassword(password);
-
-//   if(isCorrectPassword === false){ throw new UnAuthorizedError('Password entered is incorrect!')}
-
-//   if(user && isCorrectPassword == true){
-//     return res.status(StatusCodes.OK).json(user);
-//   }
-
-//   // if(!user){ return res.status(StatusCodes.NOT_FOUND).json({message: 'User not found'}) }
-
-//   if(!user.isCorrectPassword(password)){ 
-    
-//     return res.status(StatusCodes.UNAUTHORIZED).json({message: "Passwords do not match"});
-//     // throw new BadRequestError('Password is incorrect') 
-//   }
+  const existingUsername = await User.hasExistingUsername(username);
+  const existingEmail = await User.hasExistingEmail(email);
   
-//   // return res.status(StatusCodes.OK).json(user);
-
-// }
+  if(!existingUsername && !existingEmail){
+    const newUser = await User.create({ email, username, password });
+    if(newUser){ return res.status(StatusCodes.CREATED).json(newUser) }
+  }
+  throw new InternalServerError('Something went wrong!');
+}
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findUserByEmail(email);
 
-  if (!user) {
-    throw new UnAuthorizedError('User not found');
+  const foundUser = await User.findUser(email);
+
+  if(!foundUser.isCorrectPassword(password)){ throw new BadRequestError('You have entered an incorrect password.')}
+
+  if(foundUser && foundUser.isCorrectPassword(password)){
+    return res.status(StatusCodes.OK).json(foundUser);
   }
 
-  const isCorrectPassword = await user.isCorrectPassword(password);
-
-  if (!isCorrectPassword) {
-    throw new UnAuthorizedError('Password entered is incorrect!');
-  }
-
-  return res.status(StatusCodes.OK).json(user);
-};
-
-
-
-
-
-
+}
