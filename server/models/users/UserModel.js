@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import validator from "validator";
+import bcrypt from "bcrypt";
 
 const UserSchema = new Schema({
   username: {
@@ -40,7 +41,28 @@ const UserSchema = new Schema({
 }, { minimize: false, timestamps: true });
 
 
+
+
 // Hash password before saving to the database
+
+UserSchema.statics.findUserByEmail = async function(email){
+  const user = await User.findOne({ email });
+  return user ? user : null;
+}
+
+UserSchema.pre('save', function(){ 
+  if(!this.isModified('password')) return;
+  return this.password = bcrypt.hashSync(this.password, 10);
+});
+
+// compare password before approval using
+UserSchema.methods.comparePassword = function(password){
+  if(!password) return;
+  return bcrypt.compareSync(password, this.password); // returns true if passwords match and otherwise false
+}
+
+
+
 
 
 // Remove password from item

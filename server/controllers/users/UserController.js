@@ -14,12 +14,14 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  
-  const user = await User.findOne({ email, password });
-
+  const user = await User.findUserByEmail(email);
   if(user){
     return res.status(StatusCodes.OK).json(user);
   }
+
+  
+
+
 
   return res.status(StatusCodes.BAD_REQUEST).json({message: 'Bad Request'})
 }
