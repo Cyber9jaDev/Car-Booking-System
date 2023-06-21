@@ -1,102 +1,104 @@
-.top-bar{
-  background: #fff;
-  position: relative;
-  padding: .5em 2em;
-  z-index: 999 !important;
-}
-
-.nav-link{
-  text-decoration: none;
-}
-
-.log-icons p {
-  font-size: 1.25em;
-  letter-spacing: 1px;
-  color: #333;
-  font-weight: 500;
-  font-family: initial;
-}
-
-.log-icons p i{
-  color: #ffc107;
-  margin-right: 6px;
-}
-
-.log-icons p a{
-  text-decoration: none;
-  color: inherit;
-  font-family: initial;
-  margin-right: 4px;
-}
-
-.logo i{
-  color: #ffc107;
-  text-shadow: none;
-}
-
-.navbar-brand{
-  font-size: 2.5em;
-	font-weight: bolder;
-  text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.36);
-	color: #202020;
-  letter-spacing: 2px;
-	text-transform: uppercase;
-}
-
-.top-forms{
-  display: flex;
-  justify-content: center;
-}
-
-.top-forms > .wrapper{
-  margin: 0 10px;
-}
-
-.top-forms > .wrapper > span > .nav-link{
-  font-size: 1em;
-  letter-spacing: 1px;
-  color: #555;
-  border: 1px dotted #555;
-  padding: 10px 20px;
-  border-radius: 3px;
-  font-weight: 600;
-  transition: all ease .6s;
-}
-
-.top-forms >.wrapper span .nav-link:hover{
-  background: #ffc107;
-  border: 1px dotted #fff;
-  color: #fff;
-}
-
-.top-forms > .wrapper > span > .nav-link:hover i{
-  color: #fff !important;
-  background: #ffc107;
-}
-
-.top-forms .nav-link i{
-  color: #ffc107;
-}
-
-
-
-@media screen and (max-width: 768px) {
-
-}
-
-@media screen and (max-width: 568px) {
-  .log-icons p { font-size: 1.075em }  
-  .logo i{ font-size: 1em }
-  .navbar-brand{ font-size: 2em }
-}
-
-@media screen and (max-width: 486px) {
-  .log-icons p { font-size: 1.125em }  
-}
-
-@media screen and (max-width: 375px) {
-  .log-icons p { font-size: 1em }  
-  .navbar-brand{ font-size: 1.8em }
-  .top-forms > .wrapper{ margin: 0 5px }
-  .top-forms > .wrapper > span > .nav-link{ font-size: .925em }
+#top-nav{
+  .top-bar{
+    background: #fff;
+    position: relative;
+    padding: .5em 2em;
+    z-index: 999 !important;
+  }
+  
+  .nav-link{
+    text-decoration: none;
+  }
+  
+  .log-icons p {
+    font-size: 1.25em;
+    letter-spacing: 1px;
+    color: #333;
+    font-weight: 500;
+    font-family: initial;
+  }
+  
+  .log-icons p i{
+    color: #ffc107;
+    margin-right: 6px;
+  }
+  
+  .log-icons p a{
+    text-decoration: none;
+    color: inherit;
+    font-family: initial;
+    margin-right: 4px;
+  }
+  
+  .logo i{
+    color: #ffc107;
+    text-shadow: none;
+  }
+  
+  .navbar-brand{
+    font-size: 2.5em;
+    font-weight: bolder;
+    text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.36);
+    color: #202020;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  .top-forms{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .top-forms > .wrapper{
+    margin: 0 10px;
+  }
+  
+  .top-forms > .wrapper > span > .nav-link{
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: #555;
+    border: 1px dotted #555;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 600;
+    transition: all ease .6s;
+  }
+  
+  .top-forms >.wrapper span .nav-link:hover{
+    background: #ffc107;
+    border: 1px dotted #fff;
+    color: #fff;
+  }
+  
+  .top-forms > .wrapper > span > .nav-link:hover i{
+    color: #fff !important;
+    background: #ffc107;
+  }
+  
+  .top-forms .nav-link i{
+    color: #ffc107;
+  }
+  
+  
+  
+  @media screen and (max-width: 768px) {
+  
+  }
+  
+  @media screen and (max-width: 568px) {
+    .log-icons p { font-size: 1.075em }  
+    .logo i{ font-size: 1em }
+    .navbar-brand{ font-size: 2em }
+  }
+  
+  @media screen and (max-width: 486px) {
+    .log-icons p { font-size: 1.125em }  
+  }
+  
+  @media screen and (max-width: 375px) {
+    .log-icons p { font-size: 1em }  
+    .navbar-brand{ font-size: 1.8em }
+    .top-forms > .wrapper{ margin: 0 5px }
+    .top-forms > .wrapper > span > .nav-link{ font-size: .925em }
+  }
 }
