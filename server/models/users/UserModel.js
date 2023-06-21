@@ -45,18 +45,18 @@ const UserSchema = new Schema({
 
 // Hash password before saving to the database
 
-UserSchema.statics.findUserByEmail = async function(email){
-  const user = await User.findOne({ email });
-  return user ? user : null;
+UserSchema.statics.findUserByEmail = function(email){
+  const user = User.findOne({ email });
+  return user ? user : null
 }
 
 UserSchema.pre('save', function(){ 
   if(!this.isModified('password')) return;
-  return this.password = bcrypt.hashSync(this.password, 10);
+  return this.password = bcrypt.hashSync(this.password, 10);;
 });
 
-// compare password before approval using
-UserSchema.methods.comparePassword = function(password){
+// compare password before approval
+UserSchema.methods.isCorrectPassword = function(password){
   if(!password) return;
   return bcrypt.compareSync(password, this.password); // returns true if passwords match and otherwise false
 }
