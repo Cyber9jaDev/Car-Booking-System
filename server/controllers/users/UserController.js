@@ -1,4 +1,4 @@
-import { BadRequestError, InternalServerError } from "../../errors/CustomAPIError.js";
+import { BadRequestError, InternalServerError, UnAuthorizedError } from "../../errors/CustomAPIError.js";
 import User from "../../models/users/UserModel.js";
 import { StatusCodes } from 'http-status-codes';
 
@@ -15,9 +15,22 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findUserByEmail(email);
-  if(!user){ return res.status(StatusCodes.NOT_FOUND).json({message: 'Email address not found'}) }
-  if(!user.isCorrectPassword(password)){ throw new BadRequestError('Password is incorrect') }
+  const isCorrectPassword = user.isCorrectPassword(password);
+
+  if(!isCorrectPassword){ throw new UnAuthorizedError('Password entered is incorrect!')}
+
+  if(user && isCorrectPassword){
+    return res.status(StatusCodes.OK).json(user);
+  }
+
+  // if(!user){ return res.status(StatusCodes.NOT_FOUND).json({message: 'User not found'}) }
+
+  if(!user.isCorrectPassword(password)){ 
+    
+    return res.status(StatusCodes.UNAUTHORIZED).json({message: "Passwords do not match"});
+    // throw new BadRequestError('Password is incorrect') 
+  }
   
-  return res.status(StatusCodes.OK).json(user);
+  // return res.status(StatusCodes.OK).json(user);
 
 }
