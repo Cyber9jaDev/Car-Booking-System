@@ -5,7 +5,6 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd ../client && npm run dev -- --host",
     "server": "nodemon server.js",
     "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
