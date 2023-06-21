@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
-    <main>
+    <main id='registration'>
       <div className="container d-flex align-items-center justify-content-center h-100 w-100">
         <form action="">
           <header>

@@ -31,8 +31,24 @@ const UserSchema = new Schema({
     type: String,
     required: [ true, 'Password is required'],
     minLength: [ 6, 'Password must bea at least 8 characters long']
+  },
+
+  token: {
+    type: String,
+    default: ''
   }
 }, { minimize: false, timestamps: true });
+
+
+// Hash password before saving to the database
+
+
+// Remove password from item
+
+
+// Create JWToken
+
+
 
 
 const User = mongoose.model('User', UserSchema);
