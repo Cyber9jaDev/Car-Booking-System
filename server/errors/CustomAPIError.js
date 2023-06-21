@@ -13,7 +13,7 @@ export class BadRequestError extends CustomAPIError{
   }
 }
 
-export class NotAuthorizedError extends CustomAPIError{
+export class UnAuthorizedError extends CustomAPIError{
   constructor(message){
     super(message);
     this.statusCode = StatusCodes.UNAUTHORIZED;
