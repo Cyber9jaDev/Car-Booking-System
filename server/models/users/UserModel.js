@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
 import { BadRequestError, NotFoundError } from "../../errors/CustomAPIError.js";
 
 const UserSchema = new Schema({
@@ -41,33 +42,32 @@ const UserSchema = new Schema({
   }
 }, { minimize: false, timestamps: true });
 
-
-
-
 // Hash password before saving to the database
+UserSchema.pre('save', function(){ 
+  if(!this.isModified('password')) return;
+  return this.password = bcrypt.hashSync(this.password, 10);;
+});
 
+// Check for an existing username
 UserSchema.statics.hasExistingUsername = async function(username){
   const foundUsername = await User.findOne( { username });
   if(foundUsername) throw new BadRequestError('Username is taken');
   return false;
 }
 
-UserSchema.statics.hasExistingEmail = async function(email){
+// Check for an existing email
+UserSchema.statics.isExistingUser = async function(email){
   const foundEmail = await User.findOne({ email });
   if(foundEmail) throw new BadRequestError('Email is in use');
   return false;
 }
 
+// Find single user
 UserSchema.statics.findUser = async function(email){
   const user = await User.findOne({ email });
   if(user) return user; 
   throw new NotFoundError('User does not exist');
 }
-
-UserSchema.pre('save', function(){ 
-  if(!this.isModified('password')) return;
-  return this.password = bcrypt.hashSync(this.password, 10);;
-});
 
 // compare password before approval
 UserSchema.methods.isCorrectPassword = function(password){
@@ -75,19 +75,16 @@ UserSchema.methods.isCorrectPassword = function(password){
   return bcrypt.compareSync(password, this.password); // returns true if passwords match and otherwise false
 }
 
-
-
-
-
-
+// Generate JWT
+UserSchema.methods.generateJWT = function(){
+  return jwt.sign({userId: this._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME })
+}
 
 // Remove password from item
-
-
-// Create JWToken
-
-
-
+UserSchema.methods.toJSON = function(){
+  const { password, ...rest } = this.toObject();
+  return rest;
+}
 
 const User = mongoose.model('User', UserSchema);
 
