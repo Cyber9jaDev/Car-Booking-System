@@ -7,15 +7,17 @@ export const register = async (req, res) => {
 
   if(!email || !username || !password){ throw new BadRequestError('Fill in all fields')};
 
-  const existingUsername = await User.hasExistingUsername(username);
-  const existingEmail = await User.isExistingUser(email);
+  const usernameAlreadyExists = await User.usernameAlreadyExists(username);
+  const emailAlreadyExists = await User.emailAlreadyExists(email);
     
-  if(!existingUsername && !existingEmail){
+  if(!usernameAlreadyExists && !emailAlreadyExists){
     const newUser = await User.create({ email, username, password });
     const token = await newUser.generateJWT();
     // if(newUser){ return res.status(StatusCodes.CREATED).json(newUser, token)}
     if(newUser){ return res.status(StatusCodes.CREATED).json({ 
-      email: newUser.email, username: newUser.username, token 
+      email: newUser.email, 
+      username: newUser.username, 
+      token 
     }) }
   }
   throw new InternalServerError('Something went wrong!');
@@ -33,7 +35,9 @@ export const login = async (req, res) => {
   if(foundUser && foundUser.isCorrectPassword(password)){
     const token = foundUser.generateJWT();
     return res.status(StatusCodes.OK).json({
-      email: foundUser.email, username: foundUser.username, token
+      email: foundUser.email, 
+      username: foundUser.username, 
+      token
     });
   }
 

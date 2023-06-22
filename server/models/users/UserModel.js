@@ -49,14 +49,14 @@ UserSchema.pre('save', function(){
 });
 
 // Check for an existing username
-UserSchema.statics.hasExistingUsername = async function(username){
+UserSchema.statics.usernameAlreadyExists = async function(username){
   const foundUsername = await User.findOne( { username });
   if(foundUsername) throw new BadRequestError('Username is taken');
   return false;
 }
 
 // Check for an existing email
-UserSchema.statics.isExistingUser = async function(email){
+UserSchema.statics.emailAlreadyExists = async function(email){
   const foundEmail = await User.findOne({ email });
   if(foundEmail) throw new BadRequestError('Email is in use');
   return false;
