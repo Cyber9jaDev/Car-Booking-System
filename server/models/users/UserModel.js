@@ -33,7 +33,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: [ true, 'Password is required'],
-    minLength: [ 6, 'Password must bea at least 8 characters long']
+    minLength: [ 8, 'Password must bea at least 8 characters long']
   },
 
   token: {
@@ -68,6 +68,9 @@ UserSchema.statics.findUser = async function(email){
   if(user) return user; 
   throw new NotFoundError('User does not exist');
 }
+
+// Validate password
+
 
 // compare password before approval
 UserSchema.methods.isCorrectPassword = function(password){

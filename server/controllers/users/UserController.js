@@ -1,11 +1,14 @@
 import { BadRequestError, InternalServerError, UnAuthorizedError } from "../../errors/CustomAPIError.js";
 import User from "../../models/users/UserModel.js";
 import { StatusCodes } from 'http-status-codes';
+import { validatePassword } from "../../utils/utils.js";
 
 export const register = async (req, res) => {
   const { email, username, password } = req.body;
 
   if(!email || !username || !password){ throw new BadRequestError('Fill in all fields')};
+  
+  validatePassword(password);
 
   const usernameAlreadyExists = await User.usernameAlreadyExists(username);
   const emailAlreadyExists = await User.emailAlreadyExists(email);
@@ -25,6 +28,10 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
+  if(!email || !password){
+    throw new BadRequestError("Please provide email and password");
+  }
 
   const foundUser = await User.findUser(email);
 
