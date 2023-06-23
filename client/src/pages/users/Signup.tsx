@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import '../../sass/signin.scss';
 import { FormEvent, useState } from 'react';
 import { Toast } from '../../utilities/utils';
+import UserService from '../../services/UserService';
+
+export type payloadType = {
+  username: string,
+  email: string,
+  password: string,
+}
 
 const Signup = () => {
 
@@ -19,11 +26,27 @@ const Signup = () => {
     e.preventDefault();
 
     if(formData.password !== formData.confirmPassword){ return Toast('fail', 'Passwords do not match') }
-    if(formData.password.length <= 6 ) { return Toast("fail", "Password length cannot be less than 6 characters")}
+    if(formData.password.length <= 8 ) { return Toast("fail", "Password length cannot be less than 6 characters")}
     
+    const payload: payloadType = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    }
 
-
+    try {
+      const { data } : any = await UserService.Register(payload);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+
+  
+
+
+
 
   return (
     <main id='registration'>
