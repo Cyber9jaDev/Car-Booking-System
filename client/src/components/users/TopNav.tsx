@@ -4,7 +4,8 @@ import '../../sass/topnav.css';
 
 const TopNav = () => {
   return (
-    <div className='top-bar container-fluid'>
+    <section id="top-nav">
+      <div className='top-bar container-fluid'>
       <div className="h-100">
         <div className="h-100 row justify-content-center align-items-center">
           <div className="col-md-4 col sm-6 log-icons d-flex align-items-center justify-content-center">
@@ -32,6 +33,7 @@ const TopNav = () => {
         </div>
       </div>
     </div>
+    </section>
   )
 }
 
