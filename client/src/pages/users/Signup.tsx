@@ -41,13 +41,11 @@ const Signup = () => {
     try {
       const data = await UserService.Register(payload);
       if(data){
-        console.log(data);
         Toast('success', 'Registration successful');
         return navigate('/');
       }
       
     } catch (error) {
-      console.error(error);
       return null;
     }
   }

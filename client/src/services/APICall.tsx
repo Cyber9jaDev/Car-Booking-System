@@ -5,7 +5,7 @@ export default async function APICall(
   url: string, 
   method: string, 
   data: Record<string, string | number>, 
-  timeout = 5000
+  timeout = 10000
   ): Promise<unknown> {
 
     const baseUrl = 'http://localhost:5000';
@@ -51,7 +51,7 @@ export default async function APICall(
         Toast('error', 'You are not authorized');
         localStorage.clear();
         window.location.href='/login';
-        return null
+        return null;
       }
 
       if(error.response.status >= 400 && error.response.status < 500){
