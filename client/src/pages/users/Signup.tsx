@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, NavigateFunction, useNavigate } from 'react-router-dom';
 import '../../sass/signin.scss';
 import { FormEvent, useState } from 'react';
 import { Toast } from '../../utilities/utils';
@@ -23,6 +23,8 @@ const Signup = () => {
     hasError: false
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -38,14 +40,14 @@ const Signup = () => {
 
     try {
       const data = await UserService.Register(payload);
-      console.log(data);
       if(data){
+        console.log(data);
         Toast('success', 'Registration successful');
+        return navigate('/');
       }
       
     } catch (error) {
-      console.log(error);
-      // Toast('error', `${}`);
+      console.error(error);
       return null;
     }
   }
