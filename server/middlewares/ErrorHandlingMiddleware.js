@@ -8,6 +8,6 @@ export default function ErrorHandlingMiddleware(err, req, res, next){
   // }
 
   // return res.status(defaultError.statusCode).json(err);
-  return res.status(statusCode).send({ message, statusCode });
+  return res.status(statusCode).send({ message });
   // return res.status(defaultError.statusCode).json({ message: defaultError.message });
 }
