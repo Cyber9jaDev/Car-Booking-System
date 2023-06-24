@@ -3,15 +3,16 @@ import '../../sass/signin.scss';
 import { FormEvent, useState } from 'react';
 import { Toast } from '../../utilities/utils';
 import UserService from '../../services/UserService';
+import { isValidPassword } from '../../utilities/regex';
 
 export type payloadType = {
   username: string,
   email: string,
   password: string,
+  token?: string
 }
 
 const Signup = () => {
-
   const [formData, setFormData] = useState({
     username: "",
     email: '',
@@ -26,7 +27,8 @@ const Signup = () => {
     e.preventDefault();
 
     if(formData.password !== formData.confirmPassword){ return Toast('fail', 'Passwords do not match') }
-    if(formData.password.length <= 8 ) { return Toast("fail", "Password length cannot be less than 6 characters")}
+    if(formData.password.length < 8 ) { return Toast("fail", "Password length cannot be less than 8 characters")}
+    if(!isValidPassword(formData.password)){ return }
     
     const payload: payloadType = {
       username: formData.username,
@@ -35,10 +37,16 @@ const Signup = () => {
     }
 
     try {
-      const { data } : any = await UserService.Register(payload);
+      const data = await UserService.Register(payload);
       console.log(data);
+      if(data){
+        Toast('success', 'Registration successful');
+      }
+      
     } catch (error) {
       console.log(error);
+      // Toast('error', `${}`);
+      return null;
     }
   }
 
@@ -75,7 +83,7 @@ const Signup = () => {
             </div>
 
             <div className="form-check my-4">
-              <input onChange={(e) => setFormData({ ...formData, terms: !formData.terms })} type="checkbox" className="form-check-input" id="form-check-label"/>
+              <input onChange={() => setFormData({ ...formData, terms: !formData.terms })} type="checkbox" className="form-check-input" id="form-check-label"/>
               <label className="form-check-label" htmlFor="form-check-label">I agree to the Terms & Conditions</label>
             </div>
 
