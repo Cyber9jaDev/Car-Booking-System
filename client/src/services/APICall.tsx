@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Toast } from '../utilities/utils';
 
+
 export default async function APICall(
   url: string, 
   method: string, 
@@ -35,15 +36,13 @@ export default async function APICall(
       // Handle timeout error
       if(error.code ==='ECONNABORTED'){
         Toast('error', 'The request took too long to complete, please check your network connection.');
-        return null
-        // throw new Error('The request took too long to complete.')
+        return Promise.reject(new Error('The request took too long to complete.'))
       }
 
       // Handle network connectivity error
       if(!error.response || error.response.status === 0){
-        Toast("error", "Unable to connect to the server. Please check your network connection.")
-        return null;
-        // throw new Error('Unable to connect to the server. Please check your network connection.');
+        Toast("error", "Unable to connect to the server. Please check your network connection.");
+        return Promise.reject(new Error('Unable to connect to the server. Please check your network connection.'));
       }
 
       // Handle other errors
@@ -51,24 +50,21 @@ export default async function APICall(
         Toast('error', 'You are not authorized');
         localStorage.clear();
         window.location.href='/login';
-        return null;
+        return Promise.reject(new Error('You are not authorized.'));
       }
 
       if(error.response.status >= 400 && error.response.status < 500){
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Toast("error", `${(error?.response?.data as any).message as string}`);
         window.location.reload();
-        return null;
+        return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
       }
 
       if(error.response.status >= 500){
         Toast("error", "Sorry your request cannot be processed at this moment please try again later");
         window.location.reload();
-        return null;
+        Promise.reject(new Error('Sorry your request cannot be processed at this moment please try again later'))
       }
-
-
-      // Promise.reject(error.response);
     }
   );
 
@@ -79,5 +75,5 @@ export default async function APICall(
     timeout 
   });
 
-  return response ? response : null;
+  return response;
 }

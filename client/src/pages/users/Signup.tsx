@@ -31,8 +31,6 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  console.log(useContext(UserContext));
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -50,12 +48,11 @@ const Signup = () => {
       const data = await UserService.Register(payload);
 
       if(data){
-
-        const responseData = data as AuthUser;
+        const _data = data as AuthUser;
         
         const user : AuthUser = {
-          email: responseData?.email,
-          username: responseData?.username,
+          email: _data.email,
+          username: _data.username,
         } 
 
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -63,10 +60,12 @@ const Signup = () => {
         Toast('success', 'Registration successful');
 
         return navigate('/');
-                
+
       }
       
     } catch (error) {
+      console.log(error);
+      console.error(error);
       return error;
     }
   }
