@@ -1,19 +1,24 @@
-import { Link, Navigate, NavigateFunction, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../sass/signin.scss';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { Toast } from '../../utilities/utils';
 import UserService from '../../services/UserService';
 import { isValidPassword } from '../../utilities/regex';
+import { UserContext } from '../../contexts/UserContext';
 
-export type payloadType = {
+export type StateType = {
   username: string,
   email: string,
   password: string,
-  token?: string
+  token?: string, 
+  terms?: boolean,
+  confirmPassword?: string,
+  isLoading?: boolean,
+  hasError?: boolean
 }
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<StateType>({
     username: "",
     email: '',
     password: "",
@@ -25,6 +30,8 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  console.log(useContext(UserContext));
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -32,7 +39,7 @@ const Signup = () => {
     if(formData.password.length < 8 ) { return Toast("fail", "Password length cannot be less than 8 characters")}
     if(!isValidPassword(formData.password)){ return }
     
-    const payload: payloadType = {
+    const payload: StateType = {
       username: formData.username,
       email: formData.email,
       password: formData.password,
@@ -49,12 +56,6 @@ const Signup = () => {
       return null;
     }
   }
-
-
-  
-
-
-
 
   return (
     <main id='registration'>
@@ -98,4 +99,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;
