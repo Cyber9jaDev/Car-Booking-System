@@ -17,6 +17,7 @@ export default async function APICall(
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${parsedCurrentUser.token}`;
       axios.defaults.headers.common['Content-Type'] = 'application/json';
+    
     }
 
     if(!url.startsWith('/')){
