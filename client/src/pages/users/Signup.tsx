@@ -4,7 +4,8 @@ import { FormEvent, useContext, useState } from 'react';
 import { Toast } from '../../utilities/utils';
 import UserService from '../../services/UserService';
 import { isValidPassword } from '../../utilities/regex';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthUser, UserContext } from '../../contexts/UserContext';
+
 
 export type StateType = {
   username: string,
@@ -36,7 +37,7 @@ const Signup = () => {
     e.preventDefault();
 
     if(formData.password !== formData.confirmPassword){ return Toast('fail', 'Passwords do not match') }
-    if(formData.password.length < 8 ) { return Toast("fail", "Password length cannot be less than 8 characters")}
+    if(formData.password.length < 8 ) { return Toast("error", "Password length cannot be less than 8 characters")}
     if(!isValidPassword(formData.password)){ return }
     
     const payload: StateType = {
@@ -47,13 +48,26 @@ const Signup = () => {
 
     try {
       const data = await UserService.Register(payload);
+
       if(data){
+
+        const responseData = data as AuthUser;
+        
+        const user : AuthUser = {
+          email: responseData?.email,
+          username: responseData?.username,
+        } 
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
         Toast('success', 'Registration successful');
+
         return navigate('/');
+                
       }
       
     } catch (error) {
-      return null;
+      return error;
     }
   }
 

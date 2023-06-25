@@ -34,7 +34,7 @@ export default async function APICall(
     (error: AxiosError) => {
       // Handle timeout error
       if(error.code ==='ECONNABORTED'){
-        Toast('error', 'The request took too long to complete.');
+        Toast('error', 'The request took too long to complete, please check your network connection.');
         return null
         // throw new Error('The request took too long to complete.')
       }
@@ -66,6 +66,9 @@ export default async function APICall(
         window.location.reload();
         return null;
       }
+
+
+      // Promise.reject(error.response);
     }
   );
 
