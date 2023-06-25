@@ -29,6 +29,10 @@
     padding: 1em;
   }
 
+  .form-group{
+    position : relative;
+  }
+
   label{
     font-weight: 600;
     font-size: 1em;
@@ -45,6 +49,13 @@
   input.form-control:focus, input.form-check-input:focus{
     outline: none !important;
     box-shadow: none;
+  }
+
+  .fa-eye-slash{
+    position: absolute;
+    top: 58%;
+    left: 94%;
+    cursor: pointer;
   }
 
   button[type='submit']{

@@ -14,12 +14,12 @@ export type AuthUserContextType = {
   setCurrentUser: Dispatch<SetStateAction<AuthUser | null>>
 }
 
-// export const UserContext = createContext({} as AuthUserContextType);
+const user: string | null = localStorage.getItem('currentUser');
+const parsedCurrentUser : AuthUser | null = user? JSON.parse(user) : null;
 export const UserContext = createContext<AuthUserContextType>({} as AuthUserContextType);
 
 export const UserContextProvider = ({ children } : ChildrenType) : ReactElement => {
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
-
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(parsedCurrentUser);
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       { children }

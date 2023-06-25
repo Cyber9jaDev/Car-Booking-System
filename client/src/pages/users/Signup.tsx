@@ -19,6 +19,11 @@ export type StateType = {
 }
 
 const Signup = () => {
+  const [toggleVisibility, setToggleVisibility] = useState({
+    passwordVisibility: false,
+    confirmPasswordVisibility: false,
+  });
+
   const [formData, setFormData] = useState<StateType>({
     username: "",
     email: '',
@@ -28,6 +33,8 @@ const Signup = () => {
     isLoading: true,
     hasError: false
   });
+
+  const { setCurrentUser }  = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -46,21 +53,16 @@ const Signup = () => {
 
     try {
       const data = await UserService.Register(payload);
-
       if(data){
         const _data = data as AuthUser;
-        
         const user : AuthUser = {
           email: _data.email,
           username: _data.username,
         } 
-
         localStorage.setItem('currentUser', JSON.stringify(user));
-
+        setCurrentUser(user);
         Toast('success', 'Registration successful');
-
         return navigate('/');
-
       }
       
     } catch (error) {
@@ -89,22 +91,20 @@ const Signup = () => {
             </div>
             <div className="form-group my-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
-              <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type="password" required />
+              <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.passwordVisibility ? 'text' : 'password'} required />
+              <i onClick={() => setToggleVisibility({ ...toggleVisibility, passwordVisibility: !toggleVisibility.passwordVisibility})} className="fa-regular fa-eye-slash"></i>
             </div>
             <div className="form-group my-4">
               <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
-              <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type="password" required />
+              <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.confirmPasswordVisibility ? 'text': 'password'} required />
+              <i onClick={() => setToggleVisibility({...toggleVisibility, confirmPasswordVisibility: !toggleVisibility.confirmPasswordVisibility})} className="fa-regular fa-eye-slash"></i>
             </div>
-
             <div className="form-check my-4">
               <input onChange={() => setFormData({ ...formData, terms: !formData.terms })} type="checkbox" className="form-check-input" id="form-check-label"/>
               <label className="form-check-label" htmlFor="form-check-label">I agree to the Terms & Conditions</label>
             </div>
-
             <button disabled={formData.terms === true} type="submit" className="btn w-100">Submit</button>
-
             <p className="my-4">Already have an account? <Link to='/signin'>Sign in</Link></p>
-
           </div>
         </form>
       </div>

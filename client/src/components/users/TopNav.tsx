@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import '../../sass/topnav.css';
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 
 const TopNav = () => {
+
+  const { currentUser }  = useContext(UserContext);
+
   return (
     <section id="top-nav">
       <div className='top-bar container-fluid'>
@@ -15,20 +20,22 @@ const TopNav = () => {
             <NavLink className="navbar-brand" to="/"> <i className="fas fa-taxi"></i> Taxi Cab</NavLink>
           </div>
           <div className="col-md-4 top-forms">
-            <div className="wrapper">
+            { !currentUser && <div className="wrapper">
               <span className="">
                 <NavLink className='nav-link' to="/login">
                   <i className="fas fa-lock me-2"></i>Sign in
                 </NavLink>
               </span>
-            </div>
-            <div className="wrapper">
+              </div>
+            }
+            { !currentUser && <div className="wrapper">
               <span className="">
                 <NavLink className='nav-link' to="/signup" >
                   <i className="fas fa-user me-2"></i>Sign up
                 </NavLink>
               </span>
-            </div>
+              </div> 
+            }
           </div>
         </div>
       </div>
