@@ -103,7 +103,7 @@ const Signup = () => {
               <input onChange={() => setFormData({ ...formData, terms: !formData.terms })} type="checkbox" className="form-check-input" id="form-check-label"/>
               <label className="form-check-label" htmlFor="form-check-label">I agree to the Terms & Conditions</label>
             </div>
-            <button disabled={formData.terms === true} type="submit" className="btn w-100">Submit</button>
+            <button disabled={!(!formData.terms && formData.email.length && formData.username.length && formData.password.length && (formData?.confirmPassword as string).length)} type="submit" className="btn w-100">Submit</button>
             <p className="my-4">Already have an account? <Link to='/signin'>Sign in</Link></p>
           </div>
         </form>
