@@ -11,7 +11,7 @@ export type StateType = {
   email: string,
   password: string,
   token?: string, 
-  terms?: boolean,
+  hasAgreedTerms?: boolean,
   confirmPassword?: string,
 }
 
@@ -21,9 +21,8 @@ const Signup = () => {
     passwordVisibility: false,
     confirmPasswordVisibility: false,
   });
-
   const [formData, setFormData] = useState<StateType>(
-    { username: "", email: "", password: "", confirmPassword: "", terms: true }
+    { username: "", email: "", password: "", confirmPassword: "", hasAgreedTerms: false }
   );
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ const Signup = () => {
       email: formData.email,
       password: formData.password,
     }
-
     setIsLoading(true);
     try {
       const { data } = await UserService.Register(payload);
@@ -94,15 +92,14 @@ const Signup = () => {
               </i>
             </div>
             <div className="form-check my-4">
-              <input onChange={() => setFormData({ ...formData, terms: !formData.terms })} type="checkbox" className="form-check-input" id="form-check-label"/>
-              <label className="form-check-label" htmlFor="form-check-label">I agree to the Terms & Conditions</label>
+              <input onChange={() => setFormData({ ...formData, hasAgreedTerms: !formData.hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
+              <label className="form-check-label" htmlFor="form-check-label">I agree to the hasAgreedTerms & Conditions</label>
             </div>
             <button 
-              // disabled={!(!formData.terms && formData.email.length && formData.username.length && formData.password.length && (formData?.confirmPassword as string).length) && !formData.isLoading} 
-              disabled = { isLoading } 
+              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading) } 
               type="submit" 
               className="btn w-100">
-              Submit
+              { isLoading ? 'Loading...' : 'Submit'  }
             </button>
             <p className="my-4">Already have an account? <Link to='/signin'>Sign in</Link></p>
           </div>
