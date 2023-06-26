@@ -7,17 +7,15 @@ export default async function APICall(
   method: string, 
   data: Record<string, string | number>, 
   timeout = 10000
-  ): Promise<unknown> {
+  ): Promise<AxiosResponse> {
 
     const baseUrl = 'http://localhost:5000';
     const currentUser: string | null = localStorage.getItem('currentUser');
     
     if(currentUser) {
       const parsedCurrentUser = JSON.parse(currentUser);
-
       axios.defaults.headers.common['Authorization'] = `Bearer ${parsedCurrentUser.token}`;
       axios.defaults.headers.common['Content-Type'] = 'application/json';
-    
     }
 
     if(!url.startsWith('/')){
@@ -25,15 +23,16 @@ export default async function APICall(
     }
 
   axios.interceptors.response.use(
-    (response: AxiosResponse) => {
+    async (response: AxiosResponse) => {
       if(response?.data){
         if(response?.data.token){
           localStorage.setItem('token', response.data.token)
         }
-        return response.data;
+        return response;
       }
+      return response
     },
-    (error: AxiosError) => {
+    async (error: AxiosError) => {
       // Handle timeout error
       if(error.code ==='ECONNABORTED'){
         Toast('error', 'The request took too long to complete, please check your network connection.');
@@ -41,31 +40,32 @@ export default async function APICall(
       }
 
       // Handle network connectivity error
-      if(!error.response || error.response.status === 0){
+      else if(!error.response){
         Toast("error", "Unable to connect to the server. Please check your network connection.");
         return Promise.reject(new Error('Unable to connect to the server. Please check your network connection.'));
       }
 
       // Handle other errors
-      if(error.response.status === 401){
+      else if(error.response.status === 401){
         Toast('error', 'You are not authorized');
         localStorage.clear();
-        window.location.href='/login';
+        window.location.reload();
         return Promise.reject(new Error('You are not authorized.'));
       }
 
-      if(error.response.status >= 400 && error.response.status < 500){
+      else if(error.response.status >= 400 && error.response.status < 500){
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Toast("error", `${(error?.response?.data as any).message as string}`);
-        window.location.reload();
+        // window.location.reload();
         return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
       }
 
-      if(error.response.status >= 500){
+      else if(error.response.status >= 500){
         Toast("error", "Sorry your request cannot be processed at this moment please try again later");
-        window.location.reload();
+        // window.location.reload();
         Promise.reject(new Error('Sorry your request cannot be processed at this moment please try again later'))
       }
+      return Promise.reject(error);
     }
   );
 
