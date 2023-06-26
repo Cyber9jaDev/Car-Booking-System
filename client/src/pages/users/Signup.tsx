@@ -55,7 +55,6 @@ const Signup = () => {
         return navigate('/');
       }
     } catch (error) {
-      console.log(error);
       return error;
     } finally{
       setIsLoading(false);

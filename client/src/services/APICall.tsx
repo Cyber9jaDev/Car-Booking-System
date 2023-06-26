@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Toast } from '../utilities/utils';
 
-
 export default async function APICall(
   url: string, 
   method: string, 
@@ -38,29 +37,21 @@ export default async function APICall(
         Toast('error', 'The request took too long to complete, please check your network connection.');
         return Promise.reject(new Error('The request took too long to complete.'))
       }
-
-      // Handle network connectivity error
-      else if(!error.response){
-        Toast("error", "Unable to connect to the server. Please check your network connection.");
-        return Promise.reject(new Error('Unable to connect to the server. Please check your network connection.'));
-      }
-
       // Handle other errors
-      else if(error.response.status === 401){
+      else if(error?.response?.status === 401){
         Toast('error', 'You are not authorized');
         localStorage.clear();
         window.location.reload();
         return Promise.reject(new Error('You are not authorized.'));
       }
 
-      else if(error.response.status >= 400 && error.response.status < 500){
+      else if((error?.response?.status as number) >= 400 && (error?.response?.status as number) < 500){
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Toast("error", `${(error?.response?.data as any).message as string}`);
-        // window.location.reload();
         return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
       }
 
-      else if(error.response.status >= 500){
+      else if((error?.response?.status as number) >= 500){
         Toast("error", "Sorry your request cannot be processed at this moment please try again later");
         // window.location.reload();
         Promise.reject(new Error('Sorry your request cannot be processed at this moment please try again later'))
