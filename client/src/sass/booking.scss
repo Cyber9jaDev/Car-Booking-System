@@ -11,10 +11,6 @@
       font-size: 1.75em;
   } 
 
-  .heading-top > div:last-child{
-    // flex-basis: 70%;
-  }
-
   .heading-top input{
     appearance: none;
     -moz-appearance: none;
@@ -30,6 +26,29 @@
   .heading-top input:checked{
     border: #1363c6 4px solid;
     background-color: #fff;
+  }
+
+  input:not([type="radio"]), select{
+    height: 50px;
+    padding: 0 10px;
+    color: #1363c6;
+    border: #1363c6 1px solid;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  option{
+    padding: 10px 0 !important;
+    margin: 10px 0 !important;
+    font-size: 1em;
+    color: #fff;
+    background-color: #679fe4;
+  }
+
+  .form-label{
+    color: #000 !important; 
+    font-weight: bold !important;
   }
 
   @media screen and (max-width: 768px) {
