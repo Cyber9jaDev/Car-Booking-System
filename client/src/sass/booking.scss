@@ -1,0 +1,45 @@
+#booking{
+  color: black;
+
+  .heading-top{
+    // flex-direction: row;
+  }
+
+  strong{
+      font-weight: 800;
+      color: #1363c6;
+      font-size: 1.75em;
+  } 
+
+  .heading-top > div:last-child{
+    // flex-basis: 70%;
+  }
+
+  .heading-top input{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    border: #1363c6 1px solid;
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
+    transition: 0.2s all linear;
+  }
+
+  .heading-top input:checked{
+    border: #1363c6 4px solid;
+    background-color: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+
+    .heading-top{
+      flex-direction: column;
+      // align-
+    }
+    .trip-wrapper, .heading{
+      flex-basis: 100% !important;
+    }
+  }
+}

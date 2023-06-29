@@ -5,7 +5,6 @@ import Signup from "./pages/users/Signup";
 import Login from "./pages/users/Login";
 import About from "./pages/users/About";
 import Services from "./pages/users/Services";
-import Booking from "./pages/users/Booking";
 import Contact from "./pages/users/Contact";
 
 
@@ -21,7 +20,6 @@ const RouterLinks = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
-          <Route path="/booking" element={<Booking/>} />
           <Route path="/contact" element = {<Contact/>} /> 
         </Routes>
       </BrowserRouter>
