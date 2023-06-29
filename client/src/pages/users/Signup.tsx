@@ -18,8 +18,8 @@ export type StateType = {
 const Signup = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [toggleVisibility, setToggleVisibility] = useState({
-    passwordVisibility: false,
-    confirmPasswordVisibility: false,
+    visiblePassword: false,
+    visibleConfirmPassword: false,
   });
   const [formData, setFormData] = useState<StateType>(
     { username: "", email: "", password: "", confirmPassword: "", hasAgreedTerms: false }
@@ -77,18 +77,18 @@ const Signup = () => {
             </div>
             <div className="form-group my-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
-              <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.passwordVisibility ? 'text' : 'password'} required />
+              <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.visiblePassword ? 'text' : 'password'} required />
               <i 
-                onClick={() => !formData.password.length ? null : setToggleVisibility({ ...toggleVisibility, passwordVisibility: !toggleVisibility.passwordVisibility })} 
-                className={`eye-icon fa-regular fa-eye${toggleVisibility.passwordVisibility && formData.password.length ? '' : '-slash'}`}>
+                onClick={() => !formData.password.length ? null : setToggleVisibility({ ...toggleVisibility, visiblePassword: !toggleVisibility.visiblePassword })} 
+                className={`eye-icon fa-regular fa-eye${toggleVisibility.visiblePassword && formData.password.length ? '' : '-slash'}`}>
               </i>
             </div>
             <div className="form-group my-4">
               <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
-              <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.confirmPasswordVisibility ? 'text': 'password'} required />
+              <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.visibleConfirmPassword ? 'text': 'password'} required />
               <i 
-                onClick={() => !formData.confirmPassword?.length ? null : setToggleVisibility({...toggleVisibility, confirmPasswordVisibility: !toggleVisibility.confirmPasswordVisibility})} 
-                className={`eye-icon fa-regular fa-eye${toggleVisibility.confirmPasswordVisibility ? '' : '-slash'}`}>
+                onClick={() => !formData.confirmPassword?.length ? null : setToggleVisibility({...toggleVisibility, visibleConfirmPassword: !toggleVisibility.visibleConfirmPassword})} 
+                className={`eye-icon fa-regular fa-eye${toggleVisibility.visibleConfirmPassword ? '' : '-slash'}`}>
               </i>
             </div>
             <div className="form-check my-4">
@@ -101,7 +101,7 @@ const Signup = () => {
               className="btn w-100">
               { isLoading ? 'Loading...' : 'Submit'  }
             </button>
-            <p className="my-4">Already have an account? <Link to='/signin'>Sign in</Link></p>
+            <p className="my-4">Already have an account? <Link to='/login'>Sign in</Link></p>
           </div>
         </form>
       </div>

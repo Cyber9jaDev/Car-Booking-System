@@ -27,7 +27,7 @@ const TopNav = () => {
             }
             { !currentUser && <div className="wrapper">
               <span className="">
-                <NavLink className='nav-link' to="/signup" >
+                <NavLink className='nav-link' to="/register" >
                   <i className="fas fa-user me-2"></i>Sign up
                 </NavLink>
               </span>
@@ -41,4 +41,4 @@ const TopNav = () => {
   )
 }
 
-export default TopNav
+export default TopNav;
