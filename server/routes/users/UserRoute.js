@@ -6,4 +6,4 @@ UserRouter.route('/register').post(register);
 UserRouter.route('/login').post(login);
 
 
-export default UserRouter
+export default UserRouter;

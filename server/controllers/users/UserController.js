@@ -34,18 +34,16 @@ export const login = async (req, res) => {
   }
 
   const foundUser = await User.findUser(email);
+  const hasCorrectPassword = foundUser.comparePassword(password);
 
-  if(!foundUser.isCorrectPassword(password)){ 
-    throw new BadRequestError('You have entered an incorrect password.')
+  if(!hasCorrectPassword){ 
+    throw new BadRequestError('You have entered an incorrect password.');
   }
 
-  if(foundUser && foundUser.isCorrectPassword(password)){
-    const token = foundUser.generateJWT();
-    return res.status(StatusCodes.OK).json({
-      email: foundUser.email, 
-      username: foundUser.username, 
-      token
-    });
-  }
-
+  const token = foundUser.generateJWT();
+  return res.status(StatusCodes.CREATED).json({
+    email: foundUser.email, 
+    username: foundUser.username, 
+    token
+  });
 }
