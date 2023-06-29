@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Toast } from '../utilities/utils';
+import { Toast } from './utils';
 
 export default async function APICall(
   url: string, 
   method: string, 
-  data: Record<string, string | number>, 
+  data: object, 
   timeout = 10000
   ): Promise<AxiosResponse> {
 
@@ -19,6 +19,7 @@ export default async function APICall(
 
     if(!url.startsWith('/')){
       url = '/' + url;
+      url = url.trim();
     }
 
   axios.interceptors.response.use(
@@ -62,7 +63,7 @@ export default async function APICall(
 
   const response = await axios({ 
     method, 
-    url: baseUrl + url.trim(), 
+    url: baseUrl + url, 
     data,
     timeout 
   });

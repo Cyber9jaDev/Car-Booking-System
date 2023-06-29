@@ -1,8 +1,18 @@
-import APICall from "./APICall";
-import { payloadType } from '../pages/users/Signup.tsx';
+import APICall from "../utilities/APICall.tsx";
+
+interface AuthUserPayload{
+  username?: string,
+  email: string,
+  password: string,
+}
 
 export default class UserService {
-  static Register = async (payload: payloadType) => {
-    return await APICall('api/v1/register', 'POST', payload);
+  static Register = async (data: AuthUserPayload) => {
+    return await APICall('api/v1/register', 'POST', data);
   }
+
+  static Login = async (data: AuthUserPayload) => {
+    return await APICall('api/v1/login', 'POST', data);
+  }
+
 }

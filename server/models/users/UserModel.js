@@ -73,7 +73,7 @@ UserSchema.statics.findUser = async function(email){
 
 
 // compare password before approval
-UserSchema.methods.isCorrectPassword = function(password){
+UserSchema.methods.comparePassword = function(password){
   if(!password) return;
   return bcrypt.compareSync(password, this.password); // returns true if passwords match and otherwise false
 }
