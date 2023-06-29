@@ -1,4 +1,8 @@
-const cities: { value: string; label: string }[] = [
+interface CitiesInterface{
+  value: string; label: string 
+}
+
+const cities: CitiesInterface[] = [
     {
       value: "Lagos",
       label: "Lagos",
@@ -260,4 +264,14 @@ const cities: { value: string; label: string }[] = [
       label: "mma"
     }  
 ]
-  export default cities;
+
+const sortedCities = () => {
+  return cities.sort((a: CitiesInterface, b: CitiesInterface) => {
+    const labelA = a.label.toUpperCase();
+    const labelB = b.label.toUpperCase();
+    if(labelA < labelB) return -1;
+    if(labelA > labelB) return 1
+    return 0
+  })
+}
+export default sortedCities;

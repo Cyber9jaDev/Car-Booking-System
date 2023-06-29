@@ -1,35 +1,39 @@
-const companies: { value: string, label: string }[] = [
+interface CompanyType{
+  value: string, label: string 
+}
+const companies: CompanyType[] = [
   {
-    label: 'All Companies',
-    value: 'all'
+    value: 'God sis God Motors',
+    label: 'gig'
   }, 
   {
-    label: 'God sis God Motors',
-    value: 'gig'
+    value: 'Agofure',
+    label: 'agofure'
   }, 
   {
-    label: 'Agofure',
-    value: 'agofure'
+    value: 'ABC Transport Services',
+    label: 'abc'
   }, 
   {
-    label: 'ABC Transport Services',
-    value: 'abc'
+    value: 'Chisco Transport Service Ltd',
+    label: 'chisco'
   }, 
   {
-    label: 'Chisco Transport Service Ltd',
-    value: 'chisco'
-  }, 
-  {
-    label: 'Efex Executive Travel',
-    value: 'efex'
+    value: 'Efex Executive Travel',
+    label: 'efex'
   }, 
 ]
 
 const sortedTransportCompany = () => {
-  return companies.sort((a, b) => {
-    const valueA = a.label.toUpperCase();
+  return companies.sort((a:CompanyType, b:CompanyType) => {
+    const valueA = a.value.toUpperCase();
+    const valueB = b.value.toUpperCase();
+
+    if(valueA < valueB) return -1;
+    if(valueA > valueB) return 1;
+    return 0;
   })
 }
 
 
-export default sortedTransportCompany
+export default sortedTransportCompany;

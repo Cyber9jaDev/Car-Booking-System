@@ -1,11 +1,7 @@
 import { FormEvent, useState } from "react";
 import '../../sass/booking.scss';
-import cities from "../../utilities/cities";
-
-interface SelectObj{
-  value: string,
-  label: string
-}
+import sortedCities from "../../utilities/cities";
+import sortedTransportCompany from "../../utilities/transportCompany";
 
 const Booking = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +11,6 @@ const Booking = () => {
     trip: 'round-trip'
   });
 
-  const sortedCities = () => {
-    return cities.sort((a: SelectObj, b:SelectObj) => {
-      const nameA = a.value.toUpperCase();
-      const nameB = b.value.toUpperCase();
-      if(nameA < nameB) return -1;
-      if(nameA > nameB) return 1;
-      return 0;
-    });
-  }
-
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
     return
@@ -32,11 +18,11 @@ const Booking = () => {
 
   return (
     <section id="booking" className="py-5">
-      <div className="container-lg">
+      <div className="container">
         <form onSubmit={handleSubmit}>
-          <div className="heading-top d-flex ">
+          <div className="heading-top d-flex">
             <strong>Book now</strong>
-            <div className="d-flex align-items-center ms-lg-4 ms-sm-2">
+            <div className="d-flex align-items-center ms-3">
               <div className="d-flex align-items-center">
                 <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='contact' type='radio' id="one-way" value='one-way' checked = { formData.trip === 'one-way' } />
                 <label className='my-auto' htmlFor="one-way">One way</label>
@@ -51,7 +37,7 @@ const Booking = () => {
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
               <select className="traveling-from d-block mt-0 w-100" name="" id="traveling-from">
-                { sortedCities().sort().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
+                { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
             </div>
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
@@ -70,16 +56,20 @@ const Booking = () => {
               </div>
             }
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="d-block mb-2 form-label" htmlFor="leaving">How many travellers?</label>
-              <input min={1} className='w-100' id="leaving" type="number" placeholder="1"/>
+              <label className="d-block mb-2 form-label" htmlFor="passengers">How many passengers?</label>
+              <input min={1} className='w-100' id="passengers" type="number" placeholder="1"/>
             </div>
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="transport-company">Select a Transport Company</label>
               <select className="transport-company d-block mt-0 w-100" name="" id="transport-company">
-                { sortedCities().sort().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
+                <option value="all">All Companies</option>
+                { sortedTransportCompany().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
             </div>
 
+          </div>
+          <div className="col-sm-12 mt-3">
+            <button className="btn w-100">Book Now</button>
           </div>
         </form>
       </div>
