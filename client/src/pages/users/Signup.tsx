@@ -61,21 +61,21 @@ const Signup = () => {
 
   return (
     <main id='registration'>
-      <div className="container d-flex align-items-center justify-content-center h-100 w-100">
+      <div className="container-lg d-flex align-items-center justify-content-center h-100 w-100">
         <form onSubmit={handleSubmit}>
           <header>
-            <h4 className='text-center'>Sign Up</h4>
+            <h4 className='text-center'>Create account</h4>
           </header>
-          <div className='wrapper'>
-            <div className="form-group my-4">
+          <div className='wrapper mt-3'>
+            <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="username">Username</label>
               <input onChange={(e) => setFormData({ ...formData, username: e.target.value})} className='d-block form-control' id='username' type="text" required />
             </div>
-            <div className="form-group my-4">
+            <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="email">Email</label>
               <input onChange={(e) => setFormData({ ...formData, email: e.target.value})} className='d-block form-control' id='email' type="email" required />
             </div>
-            <div className="form-group my-4">
+            <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
               <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.visiblePassword ? 'text' : 'password'} required />
               <i 
@@ -83,7 +83,7 @@ const Signup = () => {
                 className={`eye-icon fa-regular fa-eye${toggleVisibility.visiblePassword && formData.password.length ? '' : '-slash'}`}>
               </i>
             </div>
-            <div className="form-group my-4">
+            <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
               <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.visibleConfirmPassword ? 'text': 'password'} required />
               <i 
@@ -93,10 +93,10 @@ const Signup = () => {
             </div>
             <div className="form-check my-4">
               <input onChange={() => setFormData({ ...formData, hasAgreedTerms: !formData.hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
-              <label className="form-check-label" htmlFor="form-check-label">I agree to the hasAgreedTerms & Conditions</label>
+              <label className="form-check-label" htmlFor="form-check-label">I agree to the the terms & conditions</label>
             </div>
             <button 
-              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading) } 
+              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading && formData.username.length) } 
               type="submit" 
               className="btn w-100">
               { isLoading ? 'Loading...' : 'Submit'  }

@@ -2,8 +2,7 @@
 
   height: 100vh;
   width: 100%;
-  background-color: #e3e3e3 !important;
-
+  background-color: #ededed !important;
 
   form{
     border-radius: 5px;
@@ -11,18 +10,13 @@
     width: 500px;
   }
 
-  header{
-    background-color: #ffc107;
-    padding: 1.5em 4em;
-  }
-
   header > h4{
     margin: 0;
     height: 100%;
-    text-transform: uppercase;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 700;
-    color: #fff
+    color: #1a1a1a;
+    padding: 1em 2em 0 2em;
   }
 
   .wrapper{
@@ -33,16 +27,21 @@
     position : relative;
   }
 
-  label{
+  label:not(.form-check-label){
     font-weight: 600;
     font-size: 1em;
-    opacity: 0.5;
+    opacity: .6;
   }
 
-  input:not(:checked){
+  .form-check-label{
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  input:not([type="checkbox"]){
     outline: none !important;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
     font-weight: 600;
   }
 
@@ -59,22 +58,35 @@
   }
 
   button[type='submit']{
-    background-color: #ffc107 !important;
+    background-color: #009cff !important;
     border: none;
     outline: none;
-    padding: 10px;
+    padding: 15px;
     color: #fff;
     font-weight: 600;
   }
 
   button[type='submit']:hover{
-    // background: #e7b719 !important;
     color: #fff;
+  }
+
+  p{
+    font-weight: 600;
   }
   
   @media screen and (max-width: 768px) {
     form{
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 486px) {
+    input:not([type="checkbox"]){
+      padding: 10px;
+    }
+
+    .eye-icon{
+      left: 90%;
     }
   }
 }
