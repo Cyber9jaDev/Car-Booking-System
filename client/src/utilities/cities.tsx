@@ -1,9 +1,4 @@
-interface City {
-  value: string;
-  label: string
-}
-
-const cities: City[] = [
+const cities: { value: string; label: string }[] = [
     {
       value: "Lagos",
       label: "Lagos",
@@ -249,7 +244,19 @@ const cities: City[] = [
       label: "suleja"
     },
     {
-      value: 'Muritala Muhammed Airport',
+      value: "Akure",
+      label: "Akure"
+    },
+    {
+      value: "Ekiti",
+      label: "Ekiti"
+    },
+    {
+      value: "Osun",
+      label: "Osun"
+    },
+    {
+      value: 'Muritala Muhammed Intl Airport',
       label: "mma"
     }  
 ]
