@@ -1,10 +1,6 @@
 #booking{
   color: black;
-
-  .heading-top{
-    // flex-direction: row;
-  }
-
+  
   strong{
       font-weight: 800;
       color: #1363c6;
@@ -28,7 +24,7 @@
     background-color: #fff;
   }
 
-  input:not([type="radio"]), select{
+  input:not([type="radio"]), select, button.btn{
     height: 50px;
     padding: 0 10px;
     color: #1363c6;
@@ -38,12 +34,16 @@
     cursor: pointer;
   }
 
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  } 
+
   option{
-    padding: 10px 0 !important;
-    margin: 10px 0 !important;
     font-size: 1em;
-    color: #fff;
-    background-color: #679fe4;
+    color: #1363c6;
   }
 
   .form-label{
@@ -51,14 +51,20 @@
     font-weight: bold !important;
   }
 
-  @media screen and (max-width: 768px) {
+  button.btn{
+    font-size: 1em;
+    color: #fff;
+    background-color: #679fe4;
+  }
 
-    .heading-top{
-      flex-direction: column;
-      // align-
+  @media screen and (max-width: 480px) {
+    strong{
+      font-size: 1.35em;
     }
-    .trip-wrapper, .heading{
-      flex-basis: 100% !important;
+  }
+  @media screen and (max-width: 360px) {
+    strong{
+      font-size: 1.15em;
     }
   }
 }
