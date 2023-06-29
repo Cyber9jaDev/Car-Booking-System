@@ -17,8 +17,8 @@ const RouterLinks = () => {
           <Route path='/' element={<SharedLayout/>}>
             <Route index element={ <Homepage/> } />
           </Route>
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/signin" element={<Login/>} />
+          <Route path="/register" element={<Signup/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
           <Route path="/booking" element={<Booking/>} />
