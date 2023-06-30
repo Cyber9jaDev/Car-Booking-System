@@ -4,8 +4,6 @@ const UserRouter = express.Router();
 
 UserRouter.route('/register').post(register);
 UserRouter.route('/login').post(login);
-UserRouter.route('/book-appointment').post(Book);
-
-
+UserRouter.route('/book-ticket').post(Book);
 
 export default UserRouter;

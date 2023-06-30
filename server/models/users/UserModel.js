@@ -69,9 +69,6 @@ UserSchema.statics.findUser = async function(email){
   throw new NotFoundError('User does not exist');
 }
 
-// Validate password
-
-
 // compare password before approval
 UserSchema.methods.comparePassword = function(password){
   if(!password) return;
@@ -90,6 +87,5 @@ UserSchema.methods.toJSON = function(){
 }
 
 const User = mongoose.model('User', UserSchema);
-
 
 export default User;

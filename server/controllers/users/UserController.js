@@ -49,5 +49,5 @@ export const login = async (req, res) => {
 }
 
 export const Book = async (req, res) => {
-  return 
+  console.log(req.body);
 }

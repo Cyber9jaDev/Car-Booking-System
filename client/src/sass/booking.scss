@@ -2,9 +2,9 @@
   color: black;
   
   strong{
-      font-weight: 800;
-      color: #1363c6;
-      font-size: 1.75em;
+    font-weight: 800;
+    color: #1363c6;
+    font-size: 1.75em;
   } 
 
   .heading-top input{
@@ -33,6 +33,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-family: 'Open Sans', sans-serif; 
+    font-size: 1em;
   }
 
   input[type=number]::-webkit-inner-spin-button, 
@@ -43,7 +44,6 @@
   } 
 
   option{
-    font-size: 1.125em;
     color: #1363c6;
     font-family: 'Poppins', sans-serif;
   }
@@ -54,7 +54,7 @@
   }
 
   button.btn{
-    font-size: 1em;
+    font-size: 1.15em;
     color: #fff;
     background-color: #1363c6;
   }
@@ -63,22 +63,11 @@
     background-color: #14183e;
   }
 
-
-
-  @media screen and (max-width: 540px) {
-    option{
-      font-size: 1em;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    strong{
-      font-size: 1.35em;
-    }
+  @media screen and (max-width: 486px) {
+    strong{ font-size: 1.35em }
+    option{ font-size: .91em }
   }
   @media screen and (max-width: 360px) {
-    strong{
-      font-size: 1.15em;
-    }
+    strong{ font-size: 1.15em }
   }
 }
