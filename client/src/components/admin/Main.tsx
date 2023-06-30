@@ -11,33 +11,31 @@ const Main = () => {
   useEffect(() => {
     const time_ = setInterval(() => {
       setTime({ hour: new Date().getHours(), minute: new Date().getMinutes(), second: new Date().getSeconds()})
-    }, 1000)
-    return () => { clearInterval(time_) }
-  }, [time])
-  
-
-  // useEffect(() => {
-  //   const date__ = () => {
-  //     const _date = new Date();
-  //       setInterval(() => {
-  //         setDate({ hour: _date.getHours(), minute: _date.getMinutes(), second: _date.getSeconds()})
-  //       }, 1000);
-  //   }
-  //   date__();
-  //   return () => { date__() }
-  // }, [ date ]);
+    }, 1000);
+    return () => clearInterval(time_); 
+  }, [time]);
   
   const { hour, minute, second } = time;
   
-  // console.log(date);
   return (
-    <section id='main' className='col-sm-12 col-md-10'>
+    <section id='main' className='p-0 col-sm-12 col-md-10'>
       <header className='d-flex align-items-center h-100 w-100'>
-        <i className="me-auto fa-solid fa-bars-staggered"></i>
-        <div className="date p-2 ms-auto border border-1 border-black">
-          <span>{ hour }</span> : <span> { minute } </span> : <span> { second } </span>
+        <i className="ms-sm-2 ms-lg-3 me-auto fa-solid fa-bars-staggered"></i>
+        <div className="date py-2 px-3 me-sm-2 me-lg-3 ms-auto border border-1 border-black">
+          <span>{ hour }</span> <span>:</span> <span> { minute } </span> <span className=''>:</span> <span> { second } </span>
         </div>
       </header>
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lsm-12 col-md-6 col-lg-3">
+            
+          </div>
+          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
+          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
+          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
+        </div>
+      </div>
     </section>
   )
 }
