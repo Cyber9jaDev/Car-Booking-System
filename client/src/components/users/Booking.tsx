@@ -29,7 +29,7 @@ const Booking = () => {
   });
 
   const handleSubmit = async (e:FormEvent) => {
-    // e.preventDefault();
+    e.preventDefault();
     return
   }
   const { trip, passengers }: BookingType = formData;
@@ -93,10 +93,12 @@ const Booking = () => {
               <label className="form-label" htmlFor="bus-type">Select bus</label>
               <select onChange={ e => setFormData({ ...formData, bus: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
                 <option value="all"> All Buses </option>
-                <option value="coach">Coach</option>
-                <option value="hiace">Toyota Hiace</option>
-                <option value="minibus">Minibus</option>
-                <option value="mazda">Nissan Mazda</option>
+                <option value="mini-coach">Mini Coach</option>
+                <option value="hiace">Hiace / Hummer Boss</option>
+                <option value="mini-bus">Minibus</option>
+                <option value="mazda">Nissan Mazda Bus</option>
+                <option value="luxurious-bus">Luxurious Bus(Long Coach)</option>
+                <option value="sienna">Sienna</option>
               </select>
             </div>
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
