@@ -2,8 +2,45 @@ import '../../sass/admin/highlight.scss';
 
 const Highlight = () => {
   return (
-    <section className='bg-danger col-sm-12 col-md-2'>
-      Highlight
+    <section id='highlight' className='p-0 col-sm-12 col-md-2 h-100'>
+      <header className='d-flex align-items-center justify-content-center w-100'>
+        {/* <div className="logo"> */}
+          BusBus
+        {/* </div> */}  
+      </header>
+      
+      <div className="container-lg mt-4">
+        <div className="row ps-4">
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-chart-simple"></i></div>
+            <div className=""><h5 className='my-auto'>Dashboard</h5></div>
+          </div>
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-suitcase-rolling"></i></div>
+            <div className=""><h5 className='my-auto'>All Trips</h5></div>
+          </div>
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-circle-plus"></i></div>
+            <div className=""><h5 className='my-auto'>Add Trip</h5></div>
+          </div>
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-chart-simple"></i></div>
+            <div className=""><h5 className='my-auto'>All Bookings</h5></div>
+          </div>
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-chart-simple"></i></div>
+            <div className=""><h5 className='my-auto'>Dashboard</h5></div>
+          </div>
+          <div className="col-sm-12 d-flex align-items-center my-2">
+            <div className="icon"> <i className="fa-solid fa-chart-simple"></i></div>
+            <div className=""><h5 className='my-auto'>Dashboard</h5></div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      
     </section>
   )
 }

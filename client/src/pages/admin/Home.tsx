@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <section style={{ minHeight: '100vh', width: '100%' }} id='admin-homepage'>
       <div className="container-fluid">
-        <div className="row">
+        <div className="row gap-0" >
           <Highlight />
           <Main />
         </div>
