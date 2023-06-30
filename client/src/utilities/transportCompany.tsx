@@ -3,7 +3,7 @@ interface CompanyType{
 }
 const companies: CompanyType[] = [
   {
-    value: 'God sis God Motors',
+    value: 'God is God Motors',
     label: 'gig'
   }, 
   {
