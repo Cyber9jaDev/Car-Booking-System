@@ -1,5 +1,5 @@
-import Banner from '../../components/users/Banner'
-import Booking from '../../components/users/Booking'
+// import Banner from '../../components/users/Banner';
+import Booking from '../../components/users/Booking';
 // import Welcome from '../../components/users/Welcome';
 // import Why from '../../components/users/Why';
 // import Team from '../../components/users/Team';
@@ -8,7 +8,7 @@ import Booking from '../../components/users/Booking'
 const Homepage = () => {
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       <Booking />
       {/* <Welcome /> */}
       {/* <Why /> */}
@@ -18,4 +18,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default Homepage;
