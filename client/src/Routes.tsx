@@ -6,6 +6,7 @@ import Login from "./pages/users/Login";
 import About from "./pages/users/About";
 import Services from "./pages/users/Services";
 import Contact from "./pages/users/Contact";
+import Home from "./pages/admin/Home";
 
 
 const RouterLinks = () => {
@@ -20,7 +21,8 @@ const RouterLinks = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
-          <Route path="/contact" element = {<Contact/>} /> 
+          <Route path="/contact" element = {<Contact/>} />
+          <Route path="/admin/home" element={ <Home/>} /> 
         </Routes>
       </BrowserRouter>
     </>
