@@ -24,14 +24,15 @@
     background-color: #fff;
   }
 
-  input:not([type="radio"]), select, button.btn{
+  input:not([type=radio]), select, button.btn{
     height: 50px;
     padding: 0 10px;
     color: #1363c6;
     border: #1363c6 1px solid;
     outline: none;
-    border-radius: 2px;
+    border-radius: 10px;
     cursor: pointer;
+    font-family: 'Open Sans', sans-serif; 
   }
 
   input[type=number]::-webkit-inner-spin-button, 
@@ -42,19 +43,32 @@
   } 
 
   option{
-    font-size: 1em;
+    font-size: 1.125em;
     color: #1363c6;
+    font-family: 'Poppins', sans-serif;
   }
 
   .form-label{
     color: #000 !important; 
-    font-weight: bold !important;
+    font-weight: 600 !important;
   }
 
   button.btn{
     font-size: 1em;
     color: #fff;
-    background-color: #679fe4;
+    background-color: #1363c6;
+  }
+
+  button.btn:hover{
+    background-color: #14183e;
+  }
+
+
+
+  @media screen and (max-width: 540px) {
+    option{
+      font-size: 1em;
+    }
   }
 
   @media screen and (max-width: 480px) {
