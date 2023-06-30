@@ -112,7 +112,7 @@ const Booking = () => {
           <div className="col-sm-12">
             <div className="row">
               <div className="col col-sm-6 mt-3">
-                <button type='submit' className="btn w-100">Book Now</button>
+                <button type='submit' className="btn w-100">Search</button>
               </div>
               <div className="col col-sm-6 mt-3">
                 <button type='reset' className="btn w-100">Reset</button>

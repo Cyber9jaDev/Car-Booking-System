@@ -18,7 +18,8 @@ const BookingSchema = new Schema({
     required: true,
   },
   passengers: {
-    type: Number
+    type: Number,
+    default: 1
   },
   sortBy: {
     type: String,
