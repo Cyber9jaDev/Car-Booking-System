@@ -50,9 +50,6 @@ const Highlight = () => {
           </li>
         </ul>
       </div>
-
-      
-
       
     </section>
   )
