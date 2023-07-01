@@ -1,0 +1,35 @@
+#dashboard{
+
+  h2, h6, p, small{
+    font-family: 'Poppins', sans-serif;
+    color: #14183e;
+    opacity: 70.0%;
+  }
+
+  .content{
+    height: 150px;
+  }
+
+  .content > div{
+    box-shadow: rgba(0, 0, 0, 0.075) 2px 2px 0px 2px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding:  5px;
+  }
+
+  img{
+    width: 70px;
+    height: 70px;
+  }
+
+  small{
+    content: '';
+    height: 5px;
+    width: 95%;
+    background-color: #212529;
+  }
+
+  small > span:first-child{
+    background-color: #1363c6;
+  }
+}
