@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../sass/admin/main.scss';
+import Dashboard from './Dashboard';
 
 const Main = () => {
   const [time, setTime] = useState({ 
@@ -26,16 +27,7 @@ const Main = () => {
         </div>
       </header>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lsm-12 col-md-6 col-lg-3">
-            
-          </div>
-          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
-          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
-          <div className="col-lsm-12 col-md-6 col-lg-3"></div>
-        </div>
-      </div>
+      <Dashboard />
     </section>
   )
 }

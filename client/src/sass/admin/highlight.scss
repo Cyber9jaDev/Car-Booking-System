@@ -11,6 +11,24 @@
   }
 
   .icon{
-    width: 15%;
+    width: 17%;
+  }
+
+  .icon i{
+    font-size: 1.5em;
+    color: #1363c6;
+  }
+
+  li:hover{
+    background-color: #1363c6;
+  }
+
+  li:hover > .nav-link > div{
+    transform: translateX(20px);
+    transition: transform 1s linear;
+
+    & > i {
+      color: #14183e;
+    }
   }
 }
