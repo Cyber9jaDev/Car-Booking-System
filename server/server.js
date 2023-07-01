@@ -6,6 +6,7 @@ import connectDB from './db/connection.js';
 import UserRouter from './routes/users/UserRoute.js';
 import NotFoundErrorMiddleware from './middlewares/NotFoundErrorMiddleware.js';
 import ErrorHandlingMiddleware from './middlewares/ErrorHandlingMiddleware.js';
+import AdminRouter from './routes/admin/AdminRoute.js';
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json({limit: '50mb'}));
 
 app.use('/api/v1', UserRouter);
+app.use('/api/v1/admin', AdminRouter);
 
 // Error Handling Middlewares
 app.use(ErrorHandlingMiddleware);

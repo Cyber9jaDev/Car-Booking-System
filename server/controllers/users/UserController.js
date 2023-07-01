@@ -1,4 +1,4 @@
-import { BadRequestError, InternalServerError, UnAuthorizedError } from "../../errors/CustomAPIError.js";
+import { BadRequestError, InternalServerError } from "../../errors/CustomAPIError.js";
 import User from "../../models/users/UserModel.js";
 import { StatusCodes } from 'http-status-codes';
 import { validatePassword } from "../../utils/utils.js";
