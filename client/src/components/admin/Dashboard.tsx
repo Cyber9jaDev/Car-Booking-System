@@ -23,8 +23,8 @@ const Dashboard = () => {
               <div className="d-flex align-items-center h-100 w-100">
                 <div className="img"> <img src={img2} alt="img" /> </div>
                 <div className='ms-4 d-flex flex-column justify-content-center w-100'>
-                  <h6 className='my-auto'>Total Trip</h6>
-                  <h2 className='my-auto fs-2 mt-1'>100</h2>
+                  <h6 className='my-auto'>Total Ticket Booking</h6>
+                  <h2 className='my-auto fs-2 mt-1'>10</h2>
                   <small className='d-inline-block my-auto mt-1 position-relative'><span className='h-100 w-75 d-inline-block position-absolute'></span> </small>
                   <p className='my-auto mt-2'><i className="fa-solid fa-caret-down"></i> <span>Today</span></p>
                 </div>
@@ -34,8 +34,8 @@ const Dashboard = () => {
               <div className="d-flex align-items-center h-100 w-100">
                 <div className="img"> <img src={img3} alt="img" /> </div>
                 <div className='ms-4 d-flex flex-column justify-content-center w-100'>
-                  <h6 className='my-auto'>Total Trip</h6>
-                  <h2 className='my-auto mt-1 fs-2'>100</h2>
+                  <h6 className='my-auto'>Total Booking Amount</h6>
+                  <h2 className='my-auto mt-1 fs-2'>12</h2>
                   <small className='d-inline-block my-auto mt-1 position-relative'><span className='h-100 w-75 d-inline-block position-absolute'></span> </small>
                   <p className='my-auto mt-2'><i className="fa-solid fa-caret-down"></i> <span>Today</span></p>
                 </div>
@@ -45,8 +45,8 @@ const Dashboard = () => {
               <div className="d-flex align-items-center h-100 w-100">
                 <div className="img"> <img src={img4} alt="img" /> </div>
                 <div className='ms-4 d-flex flex-column justify-content-center w-100'>
-                  <h6 className='my-auto'>Total Trip</h6>
-                  <h2 className='my-auto mt-1 fs-2'>100</h2>
+                  <h6 className='my-auto'>Total Passenger</h6>
+                  <h2 className='my-auto mt-1 fs-2'>0</h2>
                   <small className='d-inline-block my-auto mt-1 position-relative'><span className='h-100 w-75 d-inline-block position-absolute'></span> </small>
                   <p className='my-auto mt-2'><i className="fa-solid fa-caret-down"></i> <span>Today</span></p>
                 </div>
