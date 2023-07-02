@@ -2,28 +2,26 @@ import { FormEvent } from "react";
 import '../../sass/booking.scss';
 import sortedCities from "../../utilities/cities";
 
-type BookingType = {
-  trip: string,
+export type BookingType = {
+  // trip: string,
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
   price: number,
-  bus: string,
+  busType: string,
 }
 
 type FormDataType = {
   formData: BookingType,
   setFormData: React.Dispatch<React.SetStateAction<BookingType>>
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
 }
 
-const Booking = ({ formData, setFormData }: FormDataType ) => {
+const Booking = ({ formData, setFormData, handleSubmit }: FormDataType ) => {
 
-  const handleSubmit = async (e:FormEvent) => {
-    e.preventDefault();
-    return
-  }
+  const { price, busType }: BookingType = formData;
 
-  const { trip, price }: BookingType = formData;
+  // console.log(formData);
 
   return (
     <section id="booking" className="py-5">
@@ -34,8 +32,9 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
             <strong>New Trip</strong>
             <div className="d-flex align-items-center ms-3">
               <div className="d-flex align-items-center">
-                <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked={trip==='one-way'} />
-                <label className='my-auto' htmlFor="one-way">One way</label>
+                {/* <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked={trip==='one-way'} /> */}
+                <input className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked />
+                <label className='my-auto' htmlFor="one-way">One way trip</label>
               </div>
               {/* <div className="d-flex align-items-center">
                 <input onChange={() => setFormData({...formData, trip: 'round-trip'})} className='ms-2 my-auto' name="trip" type='radio' id="round-trip" value='round-trip' checked={trip==='round-trip'} />
@@ -106,9 +105,9 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
             {/* Select Bus */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="bus-type">Select bus</label>
-              <select onChange={ e => setFormData({ ...formData, bus: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
+              <select defaultValue={busType} onChange={ e => setFormData({ ...formData, busType: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
                 {/* <option value="all"> All Buses </option> */}
-                <option defaultValue="mini-coach">Mini Coach (32 Seats) </option>
+                <option value="mini-coach">Mini Coach (32 Seats) </option>
                 <option value="hiace">Hummer Bus (16 Seats) </option>
                 <option value="mini-bus">Minibus (12 Seats) </option>
                 <option value="mazda">Nissan Mazda Bus (14 Seats) </option>

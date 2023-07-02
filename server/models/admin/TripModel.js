@@ -13,18 +13,22 @@ const TripSchema = new Schema({
     type: String,
     required: true,
   },
-  departureTime:{
-    type: String,
-    required: true
-  },
-  seats: {
-    type: Array,
-    required: true,
-  },
+  // departureTime:{
+  //   type: String,
+  //   required: true
+  // },
+  // seats: {
+  //   type: Array,
+  //   required: true,
+  // },
   busType: {
     type: String,
     required: true,
   },
+  price:{
+    type: Number,
+    required: true
+  }
 }, { timestamps: true, minimize: false });
 
 const Trip = mongoose.model('Trip', TripSchema);

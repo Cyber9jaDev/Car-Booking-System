@@ -1,27 +1,53 @@
 import { useEffect, useState, FormEvent } from 'react';
 import '../../sass/admin/main.scss';
-import Dashboard from './Dashboard';
+// import Dashboard from './Dashboard';
 import Booking from '../users/Booking';
 import Time from './Time';
+import { Toast } from '../../utilities/utils';
+import AdminService from '../../services/AdminService';
 
-type BookingType = {
-  trip: string,
+
+export type BookingType = {
+  // trip: string,
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
   price: number,
-  bus: string,
+  busType: string,
 }
 
 const Main = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [formData, setFormData] = useState<BookingType>({
-    trip: 'one-way',
+    // trip: 'one-way',
     travellingFrom: '',
     travellingTo: '',
     departureDate: '',
     price: 1,
-    bus: 'all',
+    busType: 'mini-coach',
   });
+
+  const handleSubmit = async (e:FormEvent) => {
+    e.preventDefault();
+    const { price, busType, travellingTo, travellingFrom, departureDate }: BookingType = formData;
+    if(!travellingFrom || !travellingTo || !departureDate || !busType || !price) {
+      return Toast('error', 'Please provide all fields');
+    }
+
+    setIsLoading(true);
+    setHasError(false);
+
+    try {
+      const { data } = await AdminService.NewTrip(formData);
+      console.log(data);
+    } catch (error) {
+      setHasError(true);
+      return error;
+    } finally{
+      setIsLoading(false);
+    }
+  }
   
   return (
     <section id='main' className='p-0 col-sm-12 col-md-8 col-lg-10'>
@@ -33,7 +59,8 @@ const Main = () => {
       {/* <Dashboard /> */}
       <Booking 
         formData={formData} 
-        setFormData={setFormData} 
+        setFormData={setFormData}
+        handleSubmit={handleSubmit}
       />
     </section>
   )
