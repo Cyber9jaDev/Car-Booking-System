@@ -3,6 +3,7 @@ import { createContext, useState, ReactElement, SetStateAction, Dispatch, ReactN
 type ChildrenType = {
   children? : ReactNode
 }
+
 export interface AuthUserDataType {
   username: string,
   email: string,

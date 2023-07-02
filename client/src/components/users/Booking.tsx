@@ -14,15 +14,16 @@ export type BookingType = {
 type FormDataType = {
   formData: BookingType,
   setFormData: React.Dispatch<React.SetStateAction<BookingType>>
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void,
+  isLoading: boolean,
+  hasError: boolean,
 }
 
-const Booking = ({ formData, setFormData, handleSubmit }: FormDataType ) => {
+const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: FormDataType ) => {
 
   const { price, busType }: BookingType = formData;
 
   // console.log(formData);
-
   return (
     <section id="booking" className="py-5">
       <div className="container">
@@ -126,7 +127,7 @@ const Booking = ({ formData, setFormData, handleSubmit }: FormDataType ) => {
           <div className="col-sm-12">
             <div className="row">
               <div className="col col-sm-6 mt-3">
-                <button type='submit' className="btn w-100">Add </button>
+                <button type='submit' className="btn w-100"> { isLoading? 'Loading' : 'Add New Trip'} </button>
               </div>
               <div className="col col-sm-6 mt-3">
                 <button type='reset' className="btn w-100">Reset</button>
