@@ -7,9 +7,7 @@ type BookingType = {
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
-  returnDate: string,
-  passengers: number,
-  sortBy: string,
+  price: number,
   bus: string,
 }
 
@@ -25,9 +23,7 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
     return
   }
 
-  const { trip, passengers }: BookingType = formData;
-  
-  console.log(formData);
+  const { trip, price }: BookingType = formData;
 
   return (
     <section id="booking" className="py-5">
@@ -41,13 +37,15 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
                 <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked={trip==='one-way'} />
                 <label className='my-auto' htmlFor="one-way">One way</label>
               </div>
-              <div className="d-flex align-items-center">
+              {/* <div className="d-flex align-items-center">
                 <input onChange={() => setFormData({...formData, trip: 'round-trip'})} className='ms-2 my-auto' name="trip" type='radio' id="round-trip" value='round-trip' checked={trip==='round-trip'} />
                 <label className='ms-2 my-auto' htmlFor="round-trip">Round trip</label>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row mt-3">
+
+            {/* Travelling From*/}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
               <select onChange={e => setFormData({ ...formData, travellingFrom : e.target.value })} className="d-block mt-0 w-100" name="from" id="travelling-from">
@@ -55,6 +53,8 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
                 { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
             </div>
+
+            {/* Travelling To */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
               <select onChange={e => setFormData({ ...formData, travellingTo : e.target.value })} className="d-block mt-0 w-100" name="to" id="traveling-to">
@@ -62,39 +62,58 @@ const Booking = ({ formData, setFormData }: FormDataType ) => {
                 { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
             </div>
+
+            {/* Departure Date and Time */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date</label>
-              <input onChange={e => setFormData({ ...formData, departureDate: e.target.value})} name='departure' className='w-100' id="departure-date" type="date" min="2020-01-01" max="2023-12-31"/>
+              <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
+              <input onChange={e => setFormData({ ...formData, departureDate: e.target.value})} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
             </div>
-            { formData.trip === 'round-trip' && <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
+
+            {/* Return Date and Time */}
+            {/* { formData.trip === 'round-trip' && <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
                 <label className="d-block mb-2 form-label" htmlFor="return-date">Return Date</label>
                 <input onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })} name='return' className='w-100' id="return-date" type="date"/>
               </div>
-            }
-            <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
+            }  */}
+
+            {/* Passengers */}
+            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="d-block mb-2 form-label" htmlFor="passengers">How many passengers?</label>
               <input 
                 onChange={(e) => { setFormData({ ...formData, passengers: Number(e.target.value)})}} 
                 value={passengers} min={1} className='w-100' name='passengers' id="passengers" type="number" placeholder='1'
               />
-            </div>
+            </div> */}
+
+            {/* Ticket Price */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
+              <label className="d-block mb-2 form-label" htmlFor="price">Ticket Price (₦)</label>
+              <input 
+                onChange={(e) => { setFormData({ ...formData, price: Number(e.target.value)})}} 
+                value={price} min={1} className='w-100' name='price' id="price" type="number" placeholder='1'
+              />
+            </div>
+
+            {/* Sort By */}
+            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="sort-by">Sort by</label>
               <select onChange={e => setFormData({ ...formData, sortBy: e.target.value })} className="d-block mt-0 w-100" name="sortBy" id="sort-by">
                 <option value="price">Price</option>
                 <option value="time">Departure Time</option>
               </select>
-            </div>
+            </div> */}
+
+            {/* Select Bus */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="bus-type">Select bus</label>
               <select onChange={ e => setFormData({ ...formData, bus: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
-                <option value="all"> All Buses </option>
-                <option value="mini-coach">Mini Coach</option>
-                <option value="hiace">Hiace / Hummer Boss</option>
-                <option value="mini-bus">Minibus</option>
-                <option value="mazda">Nissan Mazda Bus</option>
-                <option value="luxurious-bus">Luxurious Bus(Long Coach)</option>
-                <option value="sienna">Sienna</option>
+                {/* <option value="all"> All Buses </option> */}
+                <option defaultValue="mini-coach">Mini Coach (32 Seats) </option>
+                <option value="hiace">Hummer Bus (16 Seats) </option>
+                <option value="mini-bus">Minibus (12 Seats) </option>
+                <option value="mazda">Nissan Mazda Bus (14 Seats) </option>
+                <option value="luxurious-bus">Luxurious Bus (32 Seats)</option>
+                <option value="sienna">Sienna (7 Seats) </option>
               </select>
             </div>
             {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
