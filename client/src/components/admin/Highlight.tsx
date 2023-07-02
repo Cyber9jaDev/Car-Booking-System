@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import '../../sass/admin/highlight.scss';
 
 const Highlight = () => {
+
   return (
-    <section id='highlight' className='p-0 col-sm-12 col-md-2 h-100'>
+    <section id='highlight' className='p-0 col-sm-12 col-md-4 col-lg-2 h-100'>
       <header className='d-flex align-items-center justify-content-center w-100'>
         {/* <div className="logo"> */}
           BusBus
