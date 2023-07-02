@@ -34,7 +34,7 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             <div className="d-flex align-items-center ms-3">
               <div className="d-flex align-items-center">
                 {/* <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked={trip==='one-way'} /> */}
-                <input className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked />
+                <input className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' />
                 <label className='my-auto' htmlFor="one-way">One way trip</label>
               </div>
               {/* <div className="d-flex align-items-center">

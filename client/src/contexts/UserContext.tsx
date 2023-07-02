@@ -16,6 +16,7 @@ export type AuthUserContextType = {
 
 const user: string | null = localStorage.getItem('currentUser');
 const parsedCurrentUser : AuthUserDataType | null = user? JSON.parse(user) : null;
+
 export const UserContext = createContext<AuthUserContextType>({} as AuthUserContextType);
 
 export const UserContextProvider = ({ children } : ChildrenType) : ReactElement => {

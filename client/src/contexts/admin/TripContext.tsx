@@ -10,29 +10,29 @@ export type TripStateType = {
 }
 
 const initTripState: TripStateType = {
-  travellingFrom: '',
-  travellingTo: '',
-  departureDate: '',
+  travellingFrom: 'uyuyu',
+  travellingTo: 'yyuy',
+  departureDate: 'yyytyt',
   price: 1,
   busType: 'mini-coach',
 }
 
-type ChildrenType = {  children: ReactElement | ReactElement[] }
+type ChildrenType = {  children?: ReactElement | ReactElement[] }
 
-type TripContextType = {
+export type TripContextType = {
   addNewTrip: () => Promise<unknown>,
   cancelTrip: () => Promise<unknown>
   setState: React.Dispatch<React.SetStateAction<TripStateType>>
   updateState: (e:React.FormEvent<HTMLInputElement>) => void
 }
 
-export const TripContext = createContext<TripContextType | undefined>(undefined);
+export const TripContext = createContext<TripContextType>({} as TripContextType);
 
 export const TripContextProvider = ({children}: ChildrenType) => {
   const [state, setState] = useState<TripStateType>(initTripState);
 
   const updateState = (e:React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.target as HTMLInputElement;
     setState(prevState => ( { ...prevState, [name]: value }) );
   }
 
@@ -54,7 +54,7 @@ export const TripContextProvider = ({children}: ChildrenType) => {
     }
   }
 
-  const contextValue: TripContextType = { addNewTrip, cancelTrip, ...state, setState, updateState };
+  const contextValue = { addNewTrip, cancelTrip, ...state, setState, updateState };
 
   return (
     <TripContext.Provider value={ contextValue }>
@@ -63,7 +63,5 @@ export const TripContextProvider = ({children}: ChildrenType) => {
   )
 }
 
-// export const useTripContext = (): TripContextType => {
 
-// }
 
