@@ -1,10 +1,11 @@
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, FormEvent, useContext } from 'react';
 import '../../sass/admin/main.scss';
 // import Dashboard from './Dashboard';
 import Booking from '../users/Booking';
 import Time from './Time';
 import { Toast } from '../../utilities/utils';
 import AdminService from '../../services/AdminService';
+import { TripContext } from '../../contexts/admin/TripContext';
 
 
 export type BookingType = {
@@ -16,6 +17,11 @@ export type BookingType = {
 }
 
 const Main = () => {
+
+  const tripContext =  useContext(TripContext);
+
+  console.log(tripContext);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [formData, setFormData] = useState<BookingType>({
