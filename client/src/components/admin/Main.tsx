@@ -8,7 +8,6 @@ import AdminService from '../../services/AdminService';
 
 
 export type BookingType = {
-  // trip: string,
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
@@ -39,7 +38,7 @@ const Main = () => {
     setHasError(false);
 
     try {
-      const { data } = await AdminService.NewTrip(formData);
+      const { data } = await AdminService.AddNewTrip(formData);
       console.log(data);
     } catch (error) {
       setHasError(true);

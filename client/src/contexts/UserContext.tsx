@@ -8,6 +8,7 @@ export interface AuthUserDataType {
   username: string,
   email: string,
 }
+
 export type AuthUserContextType = {
   currentUser : AuthUserDataType | null,
   setCurrentUser: Dispatch<SetStateAction<AuthUserDataType | null>>
@@ -19,6 +20,7 @@ export const UserContext = createContext<AuthUserContextType>({} as AuthUserCont
 
 export const UserContextProvider = ({ children } : ChildrenType) : ReactElement => {
   const [currentUser, setCurrentUser] = useState<AuthUserDataType | null>(parsedCurrentUser);
+
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       { children }
