@@ -1,7 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import '../../sass/booking.scss';
 import sortedCities from "../../utilities/cities";
-import sortedTransportCompany from "../../utilities/transportCompany";
 
 type BookingType = {
   trip: string,
@@ -12,34 +11,31 @@ type BookingType = {
   passengers: number,
   sortBy: string,
   bus: string,
-  transportCompany: string
 }
 
-const Booking = () => {
-  const [formData, setFormData] = useState<BookingType>({
-    trip: 'round-trip',
-    travellingFrom: '',
-    travellingTo: '',
-    departureDate: '',
-    returnDate: '',
-    passengers: 1,
-    sortBy: 'price',
-    bus: 'all',
-    transportCompany: 'all'
-  });
+type FormDataType = {
+  formData: BookingType,
+  setFormData: React.Dispatch<React.SetStateAction<BookingType>>
+}
+
+const Booking = ({ formData, setFormData }: FormDataType ) => {
 
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
     return
   }
+
   const { trip, passengers }: BookingType = formData;
+  
+  console.log(formData);
 
   return (
     <section id="booking" className="py-5">
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className="heading-top d-flex">
-            <strong>Book now</strong>
+            {/* <strong>Book now</strong> */}
+            <strong>New Trip</strong>
             <div className="d-flex align-items-center ms-3">
               <div className="d-flex align-items-center">
                 <input onChange={() => setFormData({...formData, trip: 'one-way'})} className='me-2 my-auto' name='trip' type='radio' id="one-way" value='one-way' checked={trip==='one-way'} />
@@ -101,18 +97,18 @@ const Booking = () => {
                 <option value="sienna">Sienna</option>
               </select>
             </div>
-            <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
+            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="transport-company">Select a Transport Company</label>
               <select onChange={(e) => { setFormData({ ...formData, transportCompany: e.target.value })}} className="d-block mt-0 w-100" name="transportCompany" id="transport-company">
                 <option value="all">All Companies</option>
                 { sortedTransportCompany().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
-            </div>
+            </div> */}
           </div>
           <div className="col-sm-12">
             <div className="row">
               <div className="col col-sm-6 mt-3">
-                <button type='submit' className="btn w-100">Search</button>
+                <button type='submit' className="btn w-100">Add </button>
               </div>
               <div className="col col-sm-6 mt-3">
                 <button type='reset' className="btn w-100">Reset</button>
