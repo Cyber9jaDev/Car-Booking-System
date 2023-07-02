@@ -61,6 +61,8 @@ const Main = () => {
         formData={formData} 
         setFormData={setFormData}
         handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        hasError={hasError}
       />
     </section>
   )
