@@ -3,10 +3,11 @@ import img1 from '../../assets/insurance.png';
 import img2 from '../../assets/choices.png';
 import img3 from '../../assets/smartphone.png';
 import img4 from '../../assets/smartphone.png';
+
 const Dashboard = () => {
   return (
     <section id="dashboard" className='mt-4'>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-sm-12 col-md-6 col-lg-3 content d-block my-2">
               <div className="d-flex align-items-center h-100 w-100">

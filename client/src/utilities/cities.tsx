@@ -44,10 +44,6 @@ const cities: CitiesInterface[] = [
       label: "Shagamu",
     }, 
     {
-      value: "Ikare",
-      label: "Ikare",
-    }, 
-    {
       value: "Ogbomoso",
       label: "Ogbomoso",
     }, 
@@ -70,11 +66,7 @@ const cities: CitiesInterface[] = [
     {
       value: "Sokoto",
       label: "Sokoto",
-    }, 
-    {
-      value: "Somolu",
-      label: "Somolu",
-    }, 
+    },  
     {
       value: "Nnewi",
       label: "Nnewi",
@@ -86,30 +78,10 @@ const cities: CitiesInterface[] = [
     {
       value: "Minna",
       label: "Minna",
-    }, 
-    {
-      value: "Apapa",
-      label: "Apapa",
-    }, 
-    {
-      value: "Bida",
-      label: "Bida",
-    }, 
-    {
-      value: "Ilobu",
-      label: "Ilobu",
-    }, 
-    {
-      value: "Ajegunle",
-      label: "Ajegunle",
-    }, 
+    },  
     {
       value: "Oshodi",
       label: "Oshodi",
-    }, 
-    {
-      value: "Ifako",
-      label: "Ifako",
     }, 
     {
       value: "Surulere",
@@ -118,131 +90,19 @@ const cities: CitiesInterface[] = [
     {
       value: "Mushin",
       label: "Mushin",
-    }, 
-    {
-      value: "Ebute-Metta",
-      label: "Ebute-Metta",
-    }, 
+    },  
     {
       value: "Ojota",
       label: "Ojota",
-    }, 
-    {
-      value: "Ikotun",
-      label: "Ikotun",
-    }, 
-    {
-      value: "Makera",
-      label: "Makera",
-    }, 
-    {
-      value: "Umundugba",
-      label: "Umundugba",
-    }, 
-    {
-      value: "Ojo",
-      label: "Ojo",
-    }, 
-    {
-      value: "Okrika",
-      label: "Okrika",
-    }, 
-    {
-      value: "Uselu",
-      label: "Uselu",
-    }, 
-    {
-      value: "Kpor",
-      label: "Kpor",
-    }, 
-    {
-      value: "Neni",
-      label: "Neni",
-    }, 
-    {
-      value: "Ozubulu",
-      label: "Ozubulu",
-    }, 
-    {
-      value: "Festac Town",
-      label: "Festac Town",
-    }, 
-    {
-      value: "Buguma",
-      label: "Buguma",
-    }, 
-    {
-      value: "Hadejia",
-      label: "Hadejia",
-    }, 
-    {
-      value: "Amaigbo",
-      label: "Amaigbo",
-    }, 
-    {
-      value: "Ungogo",
-      label: "Ungogo",
-    }, 
+    },  
     {
       value: "Ikoyi",
       label: "Ikoyi",
     }, 
     {
-      value: "Effurun",
-      label: "Effurun",
-    }, 
-    {
-      value: "Dikenafai",
-      label: "Dikenafai",
-    }, 
-    {
-      value: "Kumbotso",
-      label: "Kumbotso",
-    }, 
-    {
-      value: "Nnenasa",
-      label: "Nnenasa",
-    }, 
-    {
-      value: "Ojoto",
-      label: "Ojoto",
-    }, 
-    {
-      value: "Rumuodomaya",
-      label: "Rumuodomaya",
-    }, 
-    {
-      value: "Itu",
-      label: "Itu",
-    }, 
-    {
-      value: "Afor-Oru",
-      label: "Afor-Oru",
-    }, 
-    {
-      value: "Isinweke",
-      label: "Isinweke",
-    }, 
-    {
-      value: "Ogu",
-      label: "Ogu",
-    }, 
-    {
-      value: "Nchia",
-      label: "Nchia",
-    }, 
-    {
-      value: "Egbeda",
-      label: "Egbeda",
-    }, 
-    {
-      value: "Ukpo",
-      label: "Ukpo",
-    }, 
-    {
-      value: "Abagana",
-      label: "Abagana",
-    }, 
+      value: "Warri",
+      label: "Warri",
+    },  
     {
       value: "Suleja",
       label: "suleja"
