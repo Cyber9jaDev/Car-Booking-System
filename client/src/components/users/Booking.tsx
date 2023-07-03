@@ -1,6 +1,7 @@
-import { FormEvent } from "react";
+import { useContext } from "react";
 import '../../sass/booking.scss';
 import sortedCities from "../../utilities/cities";
+import { TripContext } from "../../contexts/admin/TripContext";
 
 export type BookingType = {
   // trip: string,
@@ -11,23 +12,15 @@ export type BookingType = {
   busType: string,
 }
 
-type FormDataType = {
-  formData: BookingType,
-  setFormData: React.Dispatch<React.SetStateAction<BookingType>>
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void,
-  isLoading: boolean,
-  hasError: boolean,
-}
+const Booking = () => {
+  const { tripState, setTripState, addNewTrip } = useContext( TripContext );
+  const { price, busType, isLoading } = tripState;
 
-const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: FormDataType ) => {
-
-  const { price, busType }: BookingType = formData;
-
-  // console.log(formData);
   return (
     <section id="booking" className="py-5">
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={addNewTrip} >
+        {/* <form onSubmit={handleSubmit}> */}
           <div className="heading-top d-flex">
             {/* <strong>Book now</strong> */}
             <strong>New Trip</strong>
@@ -48,7 +41,8 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             {/* Travelling From*/}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
-              <select onChange={e => setFormData({ ...formData, travellingFrom : e.target.value })} className="d-block mt-0 w-100" name="from" id="travelling-from">
+              <select onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
+                className="d-block mt-0 w-100" name="travellingFrom" id="travelling-from">
                 <option value="none">---Please choose a city---</option>
                 { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
@@ -57,7 +51,8 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             {/* Travelling To */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
-              <select onChange={e => setFormData({ ...formData, travellingTo : e.target.value })} className="d-block mt-0 w-100" name="to" id="traveling-to">
+              <select onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
+                className="d-block mt-0 w-100" name="to" id="traveling-to">
                 <option value="none">---Please choose a city---</option>
                 { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
               </select>
@@ -66,7 +61,7 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             {/* Departure Date and Time */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
-              <input onChange={e => setFormData({ ...formData, departureDate: e.target.value})} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
+              <input onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
             </div>
 
             {/* Return Date and Time */}
@@ -89,7 +84,7 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="d-block mb-2 form-label" htmlFor="price">Ticket Price (₦)</label>
               <input 
-                onChange={(e) => { setFormData({ ...formData, price: Number(e.target.value)})}} 
+                onChange={(e) => { setTripState({ ...tripState, price: Number(e.target.value)})}} 
                 value={price} min={1} className='w-100' name='price' id="price" type="number" placeholder='1'
               />
             </div>
@@ -106,16 +101,17 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
             {/* Select Bus */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="bus-type">Select bus</label>
-              <select defaultValue={busType} onChange={ e => setFormData({ ...formData, busType: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
-                {/* <option value="all"> All Buses </option> */}
-                <option value="mini-coach">Mini Coach (32 Seats) </option>
-                <option value="hiace">Hummer Bus (16 Seats) </option>
-                <option value="mini-bus">Minibus (12 Seats) </option>
-                <option value="mazda">Nissan Mazda Bus (14 Seats) </option>
-                <option value="luxurious-bus">Luxurious Bus (32 Seats)</option>
-                <option value="sienna">Sienna (7 Seats) </option>
+              <select defaultValue={busType} onChange={ e => setTripState({ ...tripState, busType: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
+                <option value="all"> All Buses </option> 
+                <option value="mini-coach">Mini Coach (32 Seats) </option> 
+                <option value="hiace">Hummer Bus (16 Seats) </option> 
+                <option value="mini-bus">Minibus (12 Seats) </option> 
+                <option value="mazda">Nissan Mazda Bus (14 Seats) </option> 
+                <option value="luxurious-bus">Luxurious Bus (32 Seats)</option> 
+                <option value="sienna">Sienna (7 Seats) </option> 
               </select>
             </div>
+            
             {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="transport-company">Select a Transport Company</label>
               <select onChange={(e) => { setFormData({ ...formData, transportCompany: e.target.value })}} className="d-block mt-0 w-100" name="transportCompany" id="transport-company">
@@ -127,7 +123,7 @@ const Booking = ({ formData, setFormData, handleSubmit, isLoading, hasError }: F
           <div className="col-sm-12">
             <div className="row">
               <div className="col col-sm-6 mt-3">
-                <button type='submit' className="btn w-100"> { isLoading? 'Loading' : 'Add New Trip'} </button>
+                <button type='submit' className="btn w-100"> { isLoading? 'Loading...' : 'Add New Trip'} </button>
               </div>
               <div className="col col-sm-6 mt-3">
                 <button type='reset' className="btn w-100">Reset</button>
