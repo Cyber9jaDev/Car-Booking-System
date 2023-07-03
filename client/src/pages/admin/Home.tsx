@@ -1,13 +1,7 @@
-import { useContext } from 'react';
 import Main from '../../components/admin/Main'
-import { TripContext, TripContextProvider, TripContextType } from '../../contexts/admin/TripContext'
-// import Highlight from '../../components/admin/Highlight';
+import { TripContextProvider } from '../../contexts/admin/TripContext'
 
 const Home = () => {
-  // const tripContext =  useContext(TripContext);
-
-  // console.log(tripContext);
-
   return (
     <>
     <TripContextProvider>
