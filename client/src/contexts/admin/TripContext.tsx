@@ -13,8 +13,8 @@ export type TripStateType = {
 }
 
 const initTripState: TripStateType = {
-  travellingFrom: '',
-  travellingTo: '',
+  travellingFrom: 'none',
+  travellingTo: 'none',
   departureDate: '',
   price: 1,
   busType: 'mini-coach',
@@ -29,18 +29,12 @@ export type TripContextType = {
   addNewTrip: (e:FormEvent) => Promise<unknown>,
   cancelTrip: (e:FormEvent) => Promise<unknown>
   setTripState: React.Dispatch<React.SetStateAction<TripStateType>>
-  // updateTripData: (e:React.FormEvent<HTMLInputElement>) => void
 }
 
 export const TripContext = createContext<TripContextType>({} as TripContextType);
 
 export const TripContextProvider = ({children}: ChildrenType) => {
   const [tripState, setTripState] = useState<TripStateType>(initTripState);
-
-  // const updateTripData = (e:React.FormEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target as HTMLInputElement;
-  //   setTripState(prevState => ( { ...prevState, [name]: value }) );
-  // }
 
   const addNewTrip = async (e:FormEvent) => { 
     e.preventDefault();
@@ -49,19 +43,19 @@ export const TripContextProvider = ({children}: ChildrenType) => {
       return Toast('error', 'Please fill all fields')
     }
 
-    setTripState((prevState) => ({ ...prevState, isLoading: true }));
-    setTripState((prevState) => ({ ...prevState, hasError: false }));
-
+    setTripState((prevState) => ({ ...prevState, isLoading: true, hasError: false }));
     try {
-      console.log(tripState);
-      // const data = await AdminService.AddNewTrip({ ...tripState });
-      // console.log(data);
-      // return data;
+      const body: Omit<TripStateType, 'isLoading' | 'hasError'> = { travellingFrom, travellingTo, departureDate, price, busType  }
+      const {data} = await AdminService.AddNewTrip(body);
+      if(data){
+        Toast('success', 'Trip updated successfully')
+        setTripState({...initTripState });
+        window.location.reload();
+      }
     } catch (error) {
+      setTripState((prevState) => ({ ...prevState, hasError: true }));
       return error;
-    } finally{
-      setTripState((prevState) => ({ ...prevState, isLoading: false }));
-    }
+    } 
   }
 
   const cancelTrip = async () => { 
