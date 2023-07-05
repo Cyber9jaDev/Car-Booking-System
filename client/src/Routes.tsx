@@ -7,6 +7,7 @@ import About from "./pages/users/About";
 import Services from "./pages/users/Services";
 import Contact from "./pages/users/Contact";
 import Home from "./pages/admin/Home";
+import Tickets from "./pages/users/Tickets";
 
 
 const RouterLinks = () => {
@@ -22,6 +23,7 @@ const RouterLinks = () => {
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
           <Route path="/contact" element = {<Contact/>} />
+          <Route path="/booking" element = {<Tickets/>} />
           <Route path="/admin/home" element={ <Home/>} /> 
         </Routes>
       </BrowserRouter>

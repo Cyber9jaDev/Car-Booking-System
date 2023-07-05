@@ -1,6 +1,6 @@
 import '../../sass/admin/main.scss';
-// import Dashboard from './Dashboard';
-import Booking from '../users/Booking';
+import Dashboard from './Dashboard';
+import Booking from './Booking';
 import Time from './Time';
 
 const Main = () => {  
@@ -11,7 +11,7 @@ const Main = () => {
         <Time />
       </header>
 
-      {/* <Dashboard /> */}
+      <Dashboard />
       <Booking/>
     </section>
   )

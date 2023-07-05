@@ -39,7 +39,7 @@ export const TripContextProvider = ({children}: ChildrenType) => {
   const addNewTrip = async (e:FormEvent) => { 
     e.preventDefault();
     const {travellingFrom, travellingTo, busType, price, departureDate} = tripState;
-    if(!travellingFrom || !travellingTo || !busType || !price || !departureDate ){
+    if( travellingFrom === 'none' || travellingTo === 'none' || !price || !departureDate ){
       return Toast('error', 'Please fill all fields')
     }
 
