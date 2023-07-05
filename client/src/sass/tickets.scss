@@ -5,7 +5,7 @@
 #bus__selection{
   
   color: #000;
-  background-color: rgb(234, 233, 233);
+  background-color: rgb(238, 238, 238);
 
   .bus__selection-wrapper{
     margin: 1em 0;
@@ -36,7 +36,7 @@
     font-weight: 500;
   }
   button{
-    height: 40px;
+    height: 55px;
     border: none;
     background-color: #1363c6;
     color: #ffffff;
@@ -53,6 +53,59 @@
     .fee-wrapper > p{
       margin-left: auto;
       font-size: 1.125em;
+    }
+  }
+}
+
+#seat__modal{
+  top: 0;
+  position: fixed;
+  min-height: 100vh;
+  z-index: 999;
+  background-color: black;
+  color:  white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .test{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 10px;
+    width: 500px !important;
+    background-color: blue;
+    align-self: center;
+    padding: 10px;
+  }
+
+  .test__wrapper{
+    width: 100%;
+    margin: 10px 2px;
+    grid-column: span 3;
+  }
+
+  .test1{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .test1 > span{
+    // margin: auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    .test{
+      display: grid;
+      width: 100% !important;
     }
   }
 }
