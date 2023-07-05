@@ -1,6 +1,4 @@
 import Banner from '../../components/users/Banner';
-import BookingTicket from '../../components/users/BookingTicket';
-// import Booking from '../../components/users/Booking';
 // import Welcome from '../../components/users/Welcome';
 // import Why from '../../components/users/Why';
 // import Team from '../../components/users/Team';
@@ -10,8 +8,6 @@ const Homepage = () => {
   return (
     <>
       <Banner />
-      <BookingTicket />
-      {/* <Booking /> */}
       {/* <Welcome /> */}
       {/* <Why /> */}
       {/* <Team /> */}
