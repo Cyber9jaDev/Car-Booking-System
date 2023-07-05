@@ -1,137 +1,137 @@
-interface CitiesInterface{
-  value: string; label: string 
+export interface CitiesInterface{
+  label: string; value: string 
 }
 
 const cities: CitiesInterface[] = [
     {
-      value: "Lagos",
       label: "Lagos",
+      value: "lagos",
     }, 
     {
-      value: "Kano",
       label: "Kano",
+      value: "kano",
     }, 
     {
-      value: "Abuja",
       label: "Abuja",
+      value: "abuja",
     }, 
     {
-      value: "Ibadan",
       label: "Ibadan",
+      value: "ibadan",
     }, 
     {
-      value: "Port Harcourt",
       label: "Port Harcourt",
+      value: "ph",
     }, 
     {
-      value: "Aba",
       label: "Aba",
+      value: "aba",
     }, 
     {
-      value: "Onitsha",
       label: "Onitsha",
+      value: "onitsha",
     }, 
     {
-      value: "Maiduguri",
       label: "Maiduguri",
+      value: "maiduguri",
     }, 
     {
-      value: "Benin",
       label: "Benin",
+      value: "benin",
     }, 
     {
-      value: "Shagamu",
       label: "Shagamu",
+      value: "shagamu",
     }, 
     {
-      value: "Ogbomoso",
       label: "Ogbomoso",
+      value: "ogbomoso",
     }, 
     {
-      value: "Owerri",
       label: "Owerri",
+      value: "owerri",
     }, 
     {
-      value: "Ikeja",
       label: "Ikeja",
+      value: "ikeja",
     }, 
     {
-      value: "Osogbo",
       label: "Osogbo",
+      value: "osogbo",
     }, 
     {
-      value: "Agege",
       label: "Agege",
+      value: "gege",
     }, 
     {
-      value: "Sokoto",
       label: "Sokoto",
+      value: "sokoto",
     },  
     {
-      value: "Nnewi",
       label: "Nnewi",
+      value: "nnewi",
     }, 
     {
-      value: "Ilesa",
       label: "Ilesa",
+      value: "ilesa",
     }, 
     {
-      value: "Minna",
       label: "Minna",
+      value: "minna",
     },  
     {
-      value: "Oshodi",
       label: "Oshodi",
+      value: "oshodi",
     }, 
     {
-      value: "Surulere",
       label: "Surulere",
+      value: "surulere",
     }, 
     {
-      value: "Mushin",
       label: "Mushin",
+      value: "mushin",
     },  
     {
-      value: "Ojota",
       label: "Ojota",
+      value: "ojota",
     },  
     {
-      value: "Ikoyi",
       label: "Ikoyi",
+      value: "ikoyi",
     }, 
     {
-      value: "Warri",
       label: "Warri",
+      value: "warri",
     },  
     {
-      value: "Suleja",
-      label: "suleja"
+      label: "Suleja",
+      value: "suleja"
     },
     {
-      value: "Akure",
-      label: "Akure"
+      label: "Akure",
+      value: "akure"
     },
     {
-      value: "Ekiti",
-      label: "Ekiti"
+      label: "Ekiti",
+      value: "ekiti"
     },
     {
-      value: "Osun",
-      label: "Osun"
+      label: "Osun",
+      value: "osun"
     },
     {
-      value: 'Muritala Muhammed Intl Airport',
-      label: "mma"
+      label: 'Muritala Muhammed Intl Airport',
+      value: "mma"
     }  
 ]
 
-const sortedCities = () => {
+const Cities = (): CitiesInterface[] => {
   return cities.sort((a: CitiesInterface, b: CitiesInterface) => {
-    const labelA = a.label.toUpperCase();
-    const labelB = b.label.toUpperCase();
-    if(labelA < labelB) return -1;
-    if(labelA > labelB) return 1
+    const valueA = a.value.toUpperCase();
+    const valueB = b.value.toUpperCase();
+    if(valueA < valueB) return -1;
+    if(valueA > valueB) return 1
     return 0
   })
 }
-export default sortedCities;
+export default Cities;

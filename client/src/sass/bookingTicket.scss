@@ -1,0 +1,60 @@
+#booking__ticket-wrapper{
+  color: black;
+  background-color: #fefbfb;
+  background: url('../assets/car.jpg') #fefbfb no-repeat ;
+  background-position: center;
+  background-size: cover;
+
+  form{
+    background-color: #fff;
+    box-shadow: #d0def0 0px 0px 1px 1px;
+  }
+
+  input:not([type=radio]), select, button{
+    height: 40px;
+    padding: 0 10px;
+    color: #1363c6;
+    border: #1363c6 1px solid;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 1em;
+  }
+
+  option{
+    color: #1363c6;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .form-label{
+    color: #000 !important; 
+    font-weight: 500 !important;
+  }
+  
+  .form-label.form-submit{
+    visibility: hidden !important;
+  }
+
+  button{
+    font-size: 1em;
+    color: #fff;
+    background-color: #1363c6;
+    border: none !important;
+    transition: background-color .5s ease-in-out;
+  }
+
+  button:hover{
+    background-color: #14183e;
+  }
+
+  @media screen and (max-width: 768px) {
+    .form-label.form-submit{
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 486px) {
+    option{ font-size: .91em }
+  }
+  @media screen and (max-width: 360px) {
+  }
+}
