@@ -59,51 +59,73 @@
 
 #seat__modal{
   top: 0;
-  position: fixed;
+  position: sticky;
   min-height: 100vh;
   z-index: 999;
-  background-color: black;
-  color:  white;
+  background-color: rgb(238, 238, 238);
+  color:  black;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 
-  .test{
+  
+  .seat__modal-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .seat__sample{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+
+  .available__seat{
+    background-color: green;
+  }
+  .selected__seat{
+    background-color: #1363c6;
+  }
+  .booked__seat{
+    background-color: #646464;
+  }
+
+  .seats__container{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: 10px;
+    grid-gap: 20px;
     width: 500px !important;
-    background-color: blue;
+    // background-color: blue;
     align-self: center;
     padding: 10px;
   }
 
-  .test__wrapper{
+  .seats__wrapper{
     width: 100%;
-    margin: 10px 2px;
     grid-column: span 3;
   }
 
-  .test1{
+  .seats{
     width: 50px;
     height: 50px;
-    background-color: red;
+    background-color: green;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
-  }
-
-  .test1 > span{
-    // margin: auto;
+    font-size: 1em;
+    font-weight: 600;
   }
 
   @media screen and (max-width: 768px) {
-    .test{
+    .seats__container{
       display: grid;
       width: 100% !important;
     }
