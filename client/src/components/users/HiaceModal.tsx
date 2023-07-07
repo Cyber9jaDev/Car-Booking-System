@@ -30,6 +30,9 @@ const HiaceModal = () => {
             </div>
         </div>
         <div className='seats__container my-3'>
+        <div className='seats__wrapper'>
+              <div className="seats"> 1 </div>
+            </div>
           { createSeats().map(number => {
             return (
               <div className='seats__wrapper'>
