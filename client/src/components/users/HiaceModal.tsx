@@ -1,6 +1,6 @@
 import '../../sass/tickets.scss';
-const SeatModal = () => {
 
+const HiaceModal = () => {
   const createSeats = (): number[] => {
     const elements: number[] = [];
     for (let index = 1; index <= 20; index++) {
@@ -44,4 +44,4 @@ const SeatModal = () => {
   )
 }
 
-export default SeatModal
+export default HiaceModal
