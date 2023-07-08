@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { buses, cities } from "./constants";
+import { buses, cities } from "./Constants";
 
 export const Toast = ( type: string, text : string) => {
   if(type === 'success') return toast.success(text);

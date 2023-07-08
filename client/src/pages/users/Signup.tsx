@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import '../../sass/signin.scss';
 import { FormEvent, useContext, useState } from 'react';
-import { Toast } from '../../utilities/utils';
+import { Toast } from '../../utilities/Functions';
 import UserService from '../../services/UserService';
-import { isValidPassword } from '../../utilities/regex';
+import { isValidPassword } from '../../utilities/Regex';
 import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
 
 export type StateType = {

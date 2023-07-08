@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../sass/bookingTicket.scss';
-import { Cities } from '../../utilities/utils';
+import { Cities } from '../../utilities/Functions';
 
 export type BookingType = {
   travellingFrom: string,

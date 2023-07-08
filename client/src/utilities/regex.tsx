@@ -1,4 +1,4 @@
-import { Toast } from "./utils";
+import { Toast } from "./Functions";
 
 export const isValidPassword = (password: string) : boolean =>  {
   const hasWhitespace = /^(?=.*\s)/;
