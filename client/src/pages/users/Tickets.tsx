@@ -5,7 +5,7 @@ import '../../sass/tickets.scss';
 const Tickets = () => {
   return (
     <main id='tickets' className='position-relative'>
-      <SeatModal />
+      {/* <SeatModal /> */}
       <BookingTicket />
       <BusSelection />
     </main>

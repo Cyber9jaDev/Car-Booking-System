@@ -1,9 +1,9 @@
 import express from 'express';
-import { Book, login, register } from '../../controllers/users/UserController.js';
+import { getAllTrips, login, register } from '../../controllers/users/UserController.js';
 const UserRouter = express.Router();
 
 UserRouter.route('/register').post(register);
 UserRouter.route('/login').post(login);
-UserRouter.route('/book-ticket').post(Book);
+UserRouter.route('/all').get(getAllTrips);
 
 export default UserRouter;

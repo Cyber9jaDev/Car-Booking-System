@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import '../../sass/booking.scss';
 import sortedCities from "../../utilities/cities";
-import { TripContext } from "../../contexts/admin/TripContext";
+import { AdminContext } from "../../contexts/admin/AdminContext";
+import sortedBuses from "../../utilities/buses";
 
 export type BookingType = {
   travellingFrom: string,
@@ -12,7 +13,7 @@ export type BookingType = {
 }
 
 const Booking = () => {
-  const { tripState, setTripState, addNewTrip } = useContext( TripContext );
+  const { tripState, setTripState, addNewTrip } = useContext( AdminContext );
   const { price, busType, isLoading, departureDate, travellingFrom, travellingTo } = tripState;
   
   return (
@@ -43,7 +44,7 @@ const Booking = () => {
               <select defaultValue={travellingFrom} onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
                 className="d-block mt-0 w-100" name="travellingFrom" id="travelling-from">
                 <option value="none">---Please choose a city---</option>
-                { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
+                { sortedCities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
@@ -53,7 +54,7 @@ const Booking = () => {
               <select defaultValue={travellingTo} onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
                 className="d-block mt-0 w-100" name="to" id="traveling-to">
                 <option value="none">---Please choose a city---</option>
-                { sortedCities().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
+                { sortedCities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
@@ -101,12 +102,7 @@ const Booking = () => {
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="bus-type">Select bus</label>
               <select defaultValue={busType} onChange={ e => setTripState({ ...tripState, busType: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
-                <option value="mini-coach">Mini Coach (32 Seats) </option> 
-                <option value="hiace">Hummer Bus (16 Seats) </option> 
-                <option value="mini-bus">Minibus (12 Seats) </option> 
-                <option value="mazda">Nissan Mazda Bus (14 Seats) </option> 
-                <option value="luxurious-bus">Luxurious Bus (32 Seats)</option> 
-                <option value="sienna">Sienna (7 Seats) </option> 
+                { sortedBuses().map(bus => <option key={bus.value}>{bus.label}</option>) }
               </select>
             </div>
             
