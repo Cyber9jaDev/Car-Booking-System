@@ -2,18 +2,17 @@ import { createContext, ReactElement, useState } from 'react';
 import UserService from '../services/UserService';
 
 type ChildrenType = { children?: ReactElement | ReactElement[]} 
-interface TicketType {
+
+export type TicketType = {
   _id: string,
   busType: string,
-  createdAt: string, 
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
   price: number,
   seats: number[],
-  updatedAt: string,
-  __v:  string
 }
+
 type BookingStateType = {
   isOpenModal: boolean,
   trips: TicketType[]
