@@ -25,7 +25,6 @@ const Tickets = () => {
     try {
       const { data } = await UserService.GetAllTrips();
       setTrips(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +41,7 @@ const Tickets = () => {
       <section id='bus__selection' className='py-5'>
         <div className="container-lg">
           <div className="row">
-            { trips.map((trip:TripDataType) => <BusSelection { ...trip } /> ) }
+            { trips.map(( trip:TripDataType ) => <BusSelection key={trip._id} { ...trip } /> ) }
           </div>
         </div>
       </section>
