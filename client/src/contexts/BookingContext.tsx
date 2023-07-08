@@ -1,0 +1,54 @@
+import { createContext, ReactElement, useState } from 'react';
+import UserService from '../services/UserService';
+
+type ChildrenType = { children?: ReactElement | ReactElement[]} 
+interface TicketType {
+  _id: string,
+  busType: string,
+  createdAt: string, 
+  travellingFrom: string,
+  travellingTo: string,
+  departureDate: string,
+  price: number,
+  seats: number[],
+  updatedAt: string,
+  __v:  string
+}
+type BookingStateType = {
+  isOpenModal: boolean,
+  trips: TicketType[]
+}
+const initBookingState: BookingStateType = {
+  isOpenModal: false,
+  trips: []
+}
+
+type BookingContextType = {
+  bookingState: BookingStateType,
+  setBookingState: React.Dispatch<React.SetStateAction<BookingStateType>>
+  getTicketsList: () => Promise<void>
+} 
+
+export const BookingContext = createContext<BookingContextType>( {} as BookingContextType );
+
+export const BookingContextProvider = ({ children }: ChildrenType) : ReactElement => {
+  const [bookingState, setBookingState] = useState<BookingStateType>(initBookingState);
+  
+  const getTicketsList = async() => {
+    try {
+      const { data } = await UserService.GetAllTrips()
+      setBookingState(prev => ({ ...prev, trips: [ ...data ] }))
+      return data;
+    } catch (error) {
+      return error
+    } 
+  }
+
+  const contextValue = { bookingState, setBookingState, getTicketsList }
+  
+  return(
+    <BookingContext.Provider value={contextValue}>
+      { children }
+    </BookingContext.Provider>
+  )
+}

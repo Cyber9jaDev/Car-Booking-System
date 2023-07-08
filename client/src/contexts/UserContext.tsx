@@ -1,8 +1,6 @@
 import { createContext, useState, ReactElement, SetStateAction, Dispatch, ReactNode } from 'react';
 
-type ChildrenType = {
-  children? : ReactNode
-}
+type ChildrenType = { children? : ReactNode }
 
 export interface AuthUserDataType {
   username: string,

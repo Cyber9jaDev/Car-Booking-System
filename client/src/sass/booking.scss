@@ -1,73 +1,157 @@
-#booking{
-  color: black;
+#tickets{
+
+}
+
+#bus__selection{
   
-  strong{
-    font-weight: 800;
-    color: #1363c6;
-    font-size: 1.75em;
-  } 
+  color: #000;
+  background-color: rgb(238, 238, 238);
 
-  .heading-top input{
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    border-radius: 50%;
-    border: #1363c6 1px solid;
-    width: 1em;
-    height: 1em;
-    cursor: pointer;
-    transition: 0.2s all linear;
-  }
-
-  .heading-top input:checked{
-    border: #1363c6 4px solid;
+  .bus__selection-wrapper{
+    margin: 1em 0;
+    box-shadow: #ffffff 0px 0px 1px 1px;
     background-color: #fff;
+
   }
 
-  input:not([type=radio]), select, button.btn{
-    height: 50px;
-    padding: 0 10px;
+  img.bus-img{
+    width:100%;
+    height: 100%;
+  }
+
+  i{
     color: #1363c6;
-    border: #1363c6 1px solid;
-    outline: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Open Sans', sans-serif; 
+  }
+
+  h1{
+    font-weight: bolder;
+  }
+
+  h6{
+    font-weight: 600;
+  }
+
+  p{
     font-size: 1em;
+    font-weight: 500;
   }
-
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  } 
-
-  option{
-    color: #1363c6;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .form-label{
-    color: #000 !important; 
-    font-weight: 600 !important;
-  }
-
-  button.btn{
-    font-size: 1.15em;
-    color: #fff;
+  button{
+    height: 55px;
+    border: none;
     background-color: #1363c6;
+    color: #ffffff;
   }
 
-  button.btn:hover{
-    background-color: #14183e;
+  @media screen and (max-width: 768px) {
+    .info{
+      margin-top: 2em;
+    }
+    .fee-wrapper{
+      margin-top: 1.5em;
+    }
+
+    .fee-wrapper > p{
+      margin-left: auto;
+      font-size: 1.125em;
+    }
+  }
+}
+
+#seat__modal{
+  top: 0;
+  position: fixed;
+  min-height: 100vh;
+  z-index: 999;
+  background-color: rgb(238, 238, 238);
+  color:  black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+
+  .close__modal > i{ cursor: pointer }
+  
+  .seat__modal-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  @media screen and (max-width: 486px) {
-    strong{ font-size: 1.35em }
-    option{ font-size: .91em }
+  .seat__sample{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
   }
-  @media screen and (max-width: 360px) {
-    strong{ font-size: 1.15em }
+
+  .available__seat{
+    background-color: green;
+  }
+  .selected__seat{
+    background-color: #383434;
+  }
+
+  .booked__seat{
+    background-color: #df1010;
+  }
+
+  .seats__container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 40px 30px;
+    width: 500px !important;
+    align-self: center;
+    padding: 10px;
+  }
+
+  .seats__wrapper{
+    width: 100%;
+    grid-column: span 3;
+  }
+
+  .seats, .steering{
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+  .steering{
+    background-color: transparent;
+    cursor: initial;
+  }
+
+  .steering > img{
+    width: 50px;
+    height: 50px;
+  }
+
+  .hidden{
+    visibility: hidden;
+  }
+
+  form > button{
+    background-color: #1363c6;
+    color: #fff;
+    outline: none;
+    border: none;
+    height: 45px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .seats__container{
+      display: grid;
+      width: 100% !important;
+    }
   }
 }

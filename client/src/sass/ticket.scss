@@ -1,0 +1,73 @@
+#ticket{
+  color: black;
+  
+  strong{
+    font-weight: 800;
+    color: #1363c6;
+    font-size: 1.75em;
+  } 
+
+  .heading-top input{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    border: #1363c6 1px solid;
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
+    transition: 0.2s all linear;
+  }
+
+  .heading-top input:checked{
+    border: #1363c6 4px solid;
+    background-color: #fff;
+  }
+
+  input:not([type=radio]), select, button.btn{
+    height: 50px;
+    padding: 0 10px;
+    color: #1363c6;
+    border: #1363c6 1px solid;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 1em;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  } 
+
+  option{
+    color: #1363c6;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .form-label{
+    color: #000 !important; 
+    font-weight: 600 !important;
+  }
+
+  button.btn{
+    font-size: 1.15em;
+    color: #fff;
+    background-color: #1363c6;
+  }
+
+  button.btn:hover{
+    background-color: #14183e;
+  }
+
+  @media screen and (max-width: 486px) {
+    strong{ font-size: 1.35em }
+    option{ font-size: .91em }
+  }
+  @media screen and (max-width: 360px) {
+    strong{ font-size: 1.15em }
+  }
+}

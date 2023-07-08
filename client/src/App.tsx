@@ -8,7 +8,7 @@ function App() {
       <main>
         <Toaster />
         <RouterLinks />
-    </main>
+      </main>
     </UserContextProvider>
   )
 }

@@ -5,7 +5,6 @@ import { AdminContextProvider } from '../../contexts/admin/AdminContext';
 
 const Home = () => {
   return (
-    <>
     <AdminContextProvider>
       <section style={{ minHeight: '100vh', width: '100%', backgroundColor: '#f4f7fe' }} id='admin-homepage'>
         <div className="container-fluid">
@@ -16,7 +15,6 @@ const Home = () => {
         </div>
       </section>
     </AdminContextProvider>
-    </>
   )
 }
 
