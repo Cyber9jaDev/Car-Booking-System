@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import '../../sass/booking.scss';
-import { Cities, Buses } from "../../utilities/utils";
+import { Cities, Buses } from "../../utilities/Functions";
 import { AdminContext } from "../../contexts/admin/AdminContext";
 
 export type BookingType = {

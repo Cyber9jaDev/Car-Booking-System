@@ -1,6 +1,6 @@
 import { ReactElement, createContext, useState, FormEvent } from "react";
 import AdminService from "../../services/AdminService";
-import { Toast } from "../../utilities/utils";
+import { Toast } from "../../utilities/Functions";
 
 export type TripStateType = {
   travellingFrom: string,

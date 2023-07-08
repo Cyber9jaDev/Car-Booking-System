@@ -1,8 +1,8 @@
 import { FormEvent, useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserService from '../../services/UserService';
-import { Toast } from '../../utilities/utils';
-import { isValidPassword } from '../../utilities/regex';
+import { Toast } from '../../utilities/Functions';
+import { isValidPassword } from '../../utilities/Regex';
 import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
 
 type AuthLoginType = {
