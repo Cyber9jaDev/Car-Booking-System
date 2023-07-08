@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../sass/bookingTicket.scss';
-import Cities, { CitiesInterface } from '../../utilities/cities';
+import { Cities } from '../../utilities/utils';
 
 export type BookingType = {
   travellingFrom: string,
@@ -28,8 +28,7 @@ const BookingTicket = () => {
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
               <select defaultValue={travellingFrom} onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
                 className="d-block mt-0 w-100" name="travellingFrom" id="travelling-from">
-                <option value="none">---Please choose a city---</option>
-                { Cities().map((city: CitiesInterface) => <option key={city.value} value={city.value}>{city.label}</option>) }
+                { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
@@ -38,8 +37,7 @@ const BookingTicket = () => {
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
               <select defaultValue={travellingTo} onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
                 className="d-block mt-0 w-100" name="to" id="traveling-to">
-                <option value="none">---Please choose a city---</option>
-                { Cities().map((city : CitiesInterface) => <option key={city.value} value={city.value}>{city.label}</option>) }
+                { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
