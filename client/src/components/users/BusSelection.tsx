@@ -2,8 +2,6 @@ import '../../sass/tickets.scss';
 import img from '../../assets/toyota.jpg';
 import { BusName, CityName } from '../../utilities/utils';
 
-
-
 interface TripDataType {
   busType: string,
   travellingFrom: string,
