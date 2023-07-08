@@ -2,6 +2,7 @@ import { BadRequestError, InternalServerError } from "../../errors/CustomAPIErro
 import User from "../../models/users/UserModel.js";
 import { StatusCodes } from 'http-status-codes';
 import { validatePassword } from "../../utils/utils.js";
+import Trip from "../../models/admin/TripModel.js";
 
 export const register = async (req, res) => {
   const { email, username, password } = req.body;
@@ -48,6 +49,10 @@ export const login = async (req, res) => {
   });
 }
 
-export const Book = async (req, res) => {
-  console.log(req.body);
+export const getAllTrips = async (req, res) => {
+  const foundAllTrips = await Trip.find({});
+  if(!foundAllTrips){
+    throw new InternalServerError('An error occurred, please try again');
+  }
+  return res.status(StatusCodes.OK).json(foundAllTrips);
 }
