@@ -1,4 +1,4 @@
-import '../../sass/tickets.scss';
+import '../../sass/booking.scss';
 import img from '../../assets/toyota.jpg';
 import { BusName, CityName } from '../../utilities/Functions';
 
@@ -11,7 +11,8 @@ interface TripDataType {
   seats: number[],
 }
 
-const BusSelection = ({ busType, travellingFrom, travellingTo, seats, price }: TripDataType) => {
+const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price }: TripDataType) => {
+
   return (
     <div className="bus__selection-wrapper col-12 p-3">
       <div className="row">
@@ -33,4 +34,4 @@ const BusSelection = ({ busType, travellingFrom, travellingTo, seats, price }: T
   )
 }
 
-export default BusSelection;
+export default TicketSelect;

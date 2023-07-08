@@ -7,7 +7,7 @@ import About from "./pages/users/About";
 import Services from "./pages/users/Services";
 import Contact from "./pages/users/Contact";
 import Home from "./pages/admin/Home";
-import Tickets from "./pages/users/Tickets";
+import Tickets from "./pages/users/Bookings";
 
 
 const RouterLinks = () => {

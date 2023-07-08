@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import '../../sass/booking.scss';
+import '../../sass/ticket.scss';
 import { Cities, Buses } from "../../utilities/Functions";
 import { AdminContext } from "../../contexts/admin/AdminContext";
 
-export type BookingType = {
+export type TicketType = {
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
@@ -11,12 +11,12 @@ export type BookingType = {
   busType: string,
 }
 
-const Booking = () => {
+const Ticket = () => {
   const { tripState, setTripState, addNewTrip } = useContext( AdminContext );
   const { price, busType, isLoading, departureDate, travellingFrom, travellingTo } = tripState;
   
   return (
-    <section id="booking" className="py-5">
+    <section id="ticket" className="py-5">
       <div className="container">
         <form onSubmit={addNewTrip} >
         {/* <form onSubmit={handleSubmit}> */}
@@ -95,4 +95,4 @@ const Booking = () => {
   )
 }
 
-export default Booking;
+export default Ticket;
