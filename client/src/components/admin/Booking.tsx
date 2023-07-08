@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import '../../sass/booking.scss';
-import sortedCities from "../../utilities/cities";
+import { Cities, Buses } from "../../utilities/utils";
 import { AdminContext } from "../../contexts/admin/AdminContext";
-import sortedBuses from "../../utilities/buses";
 
 export type BookingType = {
   travellingFrom: string,
@@ -43,8 +42,7 @@ const Booking = () => {
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
               <select defaultValue={travellingFrom} onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
                 className="d-block mt-0 w-100" name="travellingFrom" id="travelling-from">
-                <option value="none">---Please choose a city---</option>
-                { sortedCities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
+                { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
@@ -53,8 +51,7 @@ const Booking = () => {
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
               <select defaultValue={travellingTo} onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
                 className="d-block mt-0 w-100" name="to" id="traveling-to">
-                <option value="none">---Please choose a city---</option>
-                { sortedCities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
+                { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
@@ -63,22 +60,6 @@ const Booking = () => {
               <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
               <input onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
             </div>
-
-            {/* Return Date and Time */}
-            {/* { formData.trip === 'round-trip' && <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-                <label className="d-block mb-2 form-label" htmlFor="return-date">Return Date</label>
-                <input onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })} name='return' className='w-100' id="return-date" type="date"/>
-              </div>
-            }  */}
-
-            {/* Passengers */}
-            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="d-block mb-2 form-label" htmlFor="passengers">How many passengers?</label>
-              <input 
-                onChange={(e) => { setFormData({ ...formData, passengers: Number(e.target.value)})}} 
-                value={passengers} min={1} className='w-100' name='passengers' id="passengers" type="number" placeholder='1'
-              />
-            </div> */}
 
             {/* Ticket Price */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
@@ -89,30 +70,13 @@ const Booking = () => {
               />
             </div>
 
-            {/* Sort By */}
-            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="form-label" htmlFor="sort-by">Sort by</label>
-              <select onChange={e => setFormData({ ...formData, sortBy: e.target.value })} className="d-block mt-0 w-100" name="sortBy" id="sort-by">
-                <option value="price">Price</option>
-                <option value="time">Departure Time</option>
-              </select>
-            </div> */}
-
             {/* Select Bus */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="bus-type">Select bus</label>
               <select defaultValue={busType} onChange={ e => setTripState({ ...tripState, busType: e.target.value }) } className="d-block mt-0 w-100" name="busType" id="bus-type">
-                { sortedBuses().map(bus => <option key={bus.value}>{bus.label}</option>) }
+                { Buses().map(bus => <option value={bus.value} key={bus.value}>{bus.label}</option>) }
               </select>
             </div>
-            
-            {/* <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="form-label" htmlFor="transport-company">Select a Transport Company</label>
-              <select onChange={(e) => { setFormData({ ...formData, transportCompany: e.target.value })}} className="d-block mt-0 w-100" name="transportCompany" id="transport-company">
-                <option value="all">All Companies</option>
-                { sortedTransportCompany().map((city) => <option key={city.label} value={city.label}>{city.value}</option>) }
-              </select>
-            </div> */}
           </div>
 
           <div className="col-sm-12">

@@ -15,4 +15,8 @@ export default class UserService {
     return await APICall('api/v1/login', 'POST', data);
   }
 
+  static GetAllTrips = async () => {
+    return await APICall('api/v1/all-trips', 'GET', {});
+  }
+
 }

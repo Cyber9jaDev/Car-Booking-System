@@ -13,11 +13,11 @@ export type TripStateType = {
 }
 
 const initTripState: TripStateType = {
-  travellingFrom: 'none',
-  travellingTo: 'none',
+  travellingFrom: 'aba',
+  travellingTo: 'aba',
   departureDate: '',
   price: 1,
-  busType: 'mini-coach',
+  busType: 'mini-bus',
   isLoading: false,
   hasError: false,
 }

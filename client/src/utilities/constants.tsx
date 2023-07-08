@@ -1,8 +1,19 @@
-export interface CitiesInterface{
-  label: string; value: string 
-}
+export const buses: { label: string; value: string }[] = [
+  {
+    value: 'toyota-hiace',
+    label: 'Toyota Hiace (16 Seats)'
+  }, 
+  {
+    value: 'mini-bus',
+    label: 'Minibus (12 Seats)'
+  }, 
+  {
+    value: 'sienna',
+    label: 'Sienna (7 Seats)'
+  },  
+]
 
-const cities: CitiesInterface[] = [
+export const cities: { label: string; value: string }[] = [
     {
       label: "Lagos",
       value: "lagos",
@@ -125,13 +136,3 @@ const cities: CitiesInterface[] = [
     }  
 ]
 
-const Cities = (): CitiesInterface[] => {
-  return cities.sort((a: CitiesInterface, b: CitiesInterface) => {
-    const valueA = a.value.toUpperCase();
-    const valueB = b.value.toUpperCase();
-    if(valueA < valueB) return -1;
-    if(valueA > valueB) return 1
-    return 0
-  })
-}
-export default Cities;
