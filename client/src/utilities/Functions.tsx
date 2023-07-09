@@ -37,3 +37,8 @@ export const CityName = (value: string): string => {
   return city ? city.label : '' 
 }
 
+export const BusImage: { [index: string]: string } = {
+  sienna: new URL('../assets/sienna.jpg', import.meta.url).href,
+  toyota: new URL('../assets/toyota.jpg', import.meta.url).href,
+  minibus: new URL('../assets/minibus.jpg', import.meta.url).href,
+}
