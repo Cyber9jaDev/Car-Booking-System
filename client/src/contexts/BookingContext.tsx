@@ -16,7 +16,7 @@ export type TicketType = {
 type BookingStateType = {
   isOpenModal: boolean,
   trips: TicketType[],
-  selectedBus: TicketType | null
+  selectedBus:Pick< TicketType, 'busType' | 'seats'> | null
 }
 const initBookingState: BookingStateType = {
   isOpenModal: false,

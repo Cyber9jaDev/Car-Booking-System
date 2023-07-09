@@ -1,18 +1,19 @@
+import { useContext } from "react";
 import BookingTicket from '../../components/users/BookingTicket';
-import { BookingContextProvider } from '../../contexts/BookingContext';
+import { BookingContext } from '../../contexts/BookingContext';
 import TicketsList from '../../components/users/TicketsList';
-// import SeatModal from '../../components/users/modals/SeatModal';
+import SeatModal from '../../components/users/modals/SeatModal';
 import '../../sass/booking.scss';
 
-const Bookings = () => {    
+const Bookings = () => {   
+  const { bookingState: { isOpenModal } } = useContext(BookingContext); 
+
   return (
-    <BookingContextProvider>
-      <main id='booking' className='position-relative'>
-        {/* <SeatModal /> */}
-        <BookingTicket />
-        <TicketsList />
-      </main>
-    </BookingContextProvider>
+    <main id='booking' className='position-relative'>
+      { isOpenModal && <SeatModal /> }
+      <BookingTicket />
+      <TicketsList />
+    </main>
   )
 }
 
