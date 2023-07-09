@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../sass/bookingTicket.scss';
+import '../../sass/BookingForm.scss';
 import { Cities } from '../../utilities/Functions';
 
 export type BookingType = {
@@ -10,7 +10,7 @@ export type BookingType = {
   busType: string,
 }
 
-const BookingTicket = () => {
+const BookingForm = () => {
   const [tripState, setTripState] = useState({
     travellingFrom: 'none',
     travellingTo: 'none',
@@ -20,7 +20,7 @@ const BookingTicket = () => {
   const { travellingFrom, travellingTo } = tripState;
 
   return (
-    <section id='booking__ticket-wrapper' className='booking__ticket-wrapper py-5'>
+    <section id='booking__form-wrapper' className='py-5'>
       <div className="container">
         <form className="container">
           <div className="row">
@@ -58,4 +58,4 @@ const BookingTicket = () => {
   )
 }
 
-export default BookingTicket;
+export default BookingForm;

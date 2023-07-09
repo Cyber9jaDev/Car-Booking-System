@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import BookingTicket from '../../components/users/BookingTicket';
+import BookingForm from '../../components/users/BookingForm';
 import { BookingContext } from '../../contexts/BookingContext';
 import TicketsList from '../../components/users/TicketsList';
 import SeatModal from '../../components/users/modals/SeatModal';
@@ -11,7 +11,7 @@ const Bookings = () => {
   return (
     <main id='booking' className='position-relative'>
       { isOpenModal && <SeatModal /> }
-      <BookingTicket />
+      <BookingForm />
       <TicketsList />
     </main>
   )
