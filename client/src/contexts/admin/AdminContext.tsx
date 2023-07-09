@@ -17,7 +17,7 @@ const initTripState: TripStateType = {
   travellingTo: 'aba',
   departureDate: '',
   price: 1,
-  busType: 'mini-bus',
+  busType: 'minibus',
   isLoading: false,
   hasError: false,
 }

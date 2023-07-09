@@ -25,7 +25,7 @@ const initBookingState: BookingStateType = {
 type BookingContextType = {
   bookingState: BookingStateType,
   setBookingState: React.Dispatch<React.SetStateAction<BookingStateType>>
-  getTicketsList: () => Promise<void>
+  getTicketsList: () => void
 } 
 
 export const BookingContext = createContext<BookingContextType>( {} as BookingContextType );
@@ -35,9 +35,8 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
   
   const getTicketsList = async() => {
     try {
-      const { data } = await UserService.GetAllTrips()
+      const { data } = await UserService.GetAllTrips();
       setBookingState(prev => ({ ...prev, trips: [ ...data ] }))
-      return data;
     } catch (error) {
       return error
     } 

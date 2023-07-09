@@ -24,9 +24,9 @@ const TripSchema = new Schema({
   seats: {
     type: Array,
     default: function(){
-      if(this.busType === 'toyota-hiace'){
+      if(this.busType === 'toyota'){
         return generateSeatNos(16);
-      } else if(this.busType === 'mini-bus'){
+      } else if(this.busType === 'minibus'){
         return generateSeatNos(12);
       } else if(this.busType === 'sienna'){
         return generateSeatNos(7);
