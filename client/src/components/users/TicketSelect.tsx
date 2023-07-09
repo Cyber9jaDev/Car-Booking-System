@@ -1,6 +1,5 @@
 import '../../sass/booking.scss';
-import img from '../../assets/toyota.jpg';
-import { BusName, CityName } from '../../utilities/Functions';
+import { BusImage, BusName, CityName } from '../../utilities/Functions';
 
 interface TripDataType {
   busType: string,
@@ -17,7 +16,7 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price }: T
     <div className="bus__selection-wrapper col-12 p-3">
       <div className="row">
         <div className="col-sm-12 col-md-4 col-lg-4">
-          <img src={img} alt="bus-img" className="bus-img" />
+          <img src={BusImage[busType]} alt="bus-img" className="bus-img" />
         </div>
         <div className="info col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-self-center">
           <h1>{BusName(busType)}</h1>

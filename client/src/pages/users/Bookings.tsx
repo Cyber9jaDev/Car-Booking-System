@@ -1,8 +1,8 @@
 import BookingTicket from '../../components/users/BookingTicket';
-// import SeatModal from '../../components/users/SeatModal';
-import '../../sass/booking.scss';
 import { BookingContextProvider } from '../../contexts/BookingContext';
 import TicketsList from '../../components/users/TicketsList';
+// import SeatModal from '../../components/users/modals/SeatModal';
+import '../../sass/booking.scss';
 
 const Bookings = () => {    
   return (
