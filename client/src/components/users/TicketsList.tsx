@@ -4,12 +4,11 @@ import BusSelection from './TicketSelect';
 import { BookingContext, TicketType } from '../../contexts/BookingContext';
 
 const TicketsList = () => {
-  const { bookingState, getTicketsList } = useContext(BookingContext);
-  const { trips } = bookingState;
+  const { bookingState:{ trips }, getTicketsList } = useContext(BookingContext);
 
   const memoizedTicketLists = useCallback( () => { getTicketsList() }, [getTicketsList] );
 
-  useEffect(() => { memoizedTicketLists()}, []);
+  useEffect(() => { memoizedTicketLists() }, []);
 
   return (
     <section id='bus__selection' className='py-5'>
