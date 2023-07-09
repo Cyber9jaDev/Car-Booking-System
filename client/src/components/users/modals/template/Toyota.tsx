@@ -8,7 +8,7 @@ export interface BusSeatObject{
 
 export const ToyotaSeat: BusSeatObject[] = [
   {
-    className: '',
+    className: 'steering',
     seatNo: 0,
     element: <div className="steering"> 
               <img src={ new URL('../../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 

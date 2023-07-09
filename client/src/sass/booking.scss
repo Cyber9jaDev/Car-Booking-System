@@ -90,6 +90,7 @@
   .available__seat{
     background-color: green;
   }
+  
   .selected__seat{
     background-color: #383434;
   }
@@ -110,12 +111,12 @@
   .seats__wrapper{
     width: 100%;
     grid-column: span 3;
+    // background-color: green;
   }
 
   .seats, .steering{
     width: 50px;
     height: 50px;
-    background-color: green;
     color: #fff;
     display: flex;
     align-items: center;
@@ -128,7 +129,7 @@
   }
 
   .steering{
-    background-color: transparent;
+    background-color: transparent !important;
     cursor: initial;
   }
 
