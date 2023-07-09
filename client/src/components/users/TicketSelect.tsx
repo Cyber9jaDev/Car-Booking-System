@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import '../../sass/booking.scss';
 import { BusImage, BusName, CityName } from '../../utilities/Functions';
+import { BookingContext } from '../../contexts/BookingContext';
 
 interface TripDataType {
   busType: string,
@@ -11,6 +13,8 @@ interface TripDataType {
 }
 
 const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price }: TripDataType) => {
+  const { setBookingState  } = useContext(BookingContext);
+
 
   return (
     <div className="bus__selection-wrapper col-12 p-3">
@@ -26,7 +30,7 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price }: T
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">
           <p className='fee'>N{price}</p>
-          <button className='w-100'>View Seats</button>
+          <button onClick={ () => setBookingState(prev => ({...prev, isOpenModal: true, selectedBus: { busType: busType, seats: seats }})) } className='w-100'>View Seats</button>
         </div>
       </div>
     </div>

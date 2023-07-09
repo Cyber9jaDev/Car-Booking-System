@@ -1,16 +1,18 @@
+import { useContext } from 'react';
 import '../../../sass/booking.scss';
 import MinibusSeatModal from './MinibusSeatModal';
 import SiennaSeatModal from './SiennaSeatModal';
 import ToyotaSeatModal from './ToyotaSeatModal';
-
-type BusType = 'toyota' | 'sienna' | 'minibus'
+import { BookingContext } from '../../../contexts/BookingContext';
 
 const SeatModal = () => {
+  const { bookingState: { selectedBus }, setBookingState } = useContext(BookingContext);
+  
   return (
     <section id="seat__modal">
       <div className="seat__modal-wrapper">
         <div className="close__modal ms-auto">
-          <i className="fs-1 fa-solid fa-circle-xmark"></i>
+          <i onClick={() => setBookingState(prev => ({ ...prev, isOpenModal:false }))} className="fs-1 fa-solid fa-circle-xmark"></i>
         </div>
         <h3 className='my-3'>Select Seat</h3>
         <div className="container my-3">
@@ -30,9 +32,9 @@ const SeatModal = () => {
             </div>
         </div>
 
-        <ToyotaSeatModal />
-        {/* <SiennaSeatModal /> */}
-        {/* <MinibusSeatModal /> */}
+        { selectedBus?.busType === 'toyota' && <ToyotaSeatModal />}
+        { selectedBus?.busType === 'sienna' && <SiennaSeatModal />}
+        { selectedBus?.busType === 'minibus' && <MinibusSeatModal />}
 
         <form className='bg-danger w-100 mt-4'>
           <button className="btn w-100">Continue</button>
