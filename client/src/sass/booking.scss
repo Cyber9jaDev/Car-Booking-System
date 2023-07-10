@@ -89,14 +89,17 @@
 
   .available__seat{
     background-color: green;
+    cursor: pointer;
   }
   
   .selected__seat{
     background-color: #383434;
+    cursor: pointer;
   }
 
   .booked__seat{
     background-color: #df1010;
+    cursor: none !important;
   }
 
   .seats__container{
@@ -111,7 +114,6 @@
   .seats__wrapper{
     width: 100%;
     grid-column: span 3;
-    // background-color: green;
   }
 
   .seats, .steering{
@@ -121,7 +123,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     border-radius: 5px;
     width: 100%;
     font-size: 1em;
@@ -130,7 +131,7 @@
 
   .steering{
     background-color: transparent !important;
-    cursor: initial;
+    cursor: none;
   }
 
   .steering > img{

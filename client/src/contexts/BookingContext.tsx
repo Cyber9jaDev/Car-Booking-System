@@ -10,13 +10,14 @@ export type TicketType = {
   travellingTo: string,
   departureDate: string,
   price: number,
-  seats: number[],
+  bookedSeats: number[],
+  availableSeats: number[],
 }
 
 type BookingStateType = {
   isOpenModal: boolean,
   trips: TicketType[],
-  selectedBus:Pick< TicketType, 'busType' | 'seats' | '_id'> | null
+  selectedBus:Pick< TicketType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null
 }
 const initBookingState: BookingStateType = {
   isOpenModal: false,
