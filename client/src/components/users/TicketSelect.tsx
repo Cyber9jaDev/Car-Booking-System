@@ -10,10 +10,11 @@ interface TripDataType {
   travellingTo: string,
   departureDate: string,
   price: number,
-  seats: number[],
+  availableSeats: number[],
+  bookedSeats: number[]
 }
 
-const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price, _id }: TripDataType) => {
+const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, bookedSeats, price, _id }: TripDataType) => {
   const { setBookingState } = useContext(BookingContext);
 
   return (
@@ -25,13 +26,13 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, seats, price, _id
         <div className="info col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-self-center">
           <h1>{BusName(busType)}</h1>
           <h6 className='mt-1 fs-5'>{CityName(travellingFrom)} <i className="fa-solid fa-right-long mx-2"></i>{CityName(travellingTo)}</h6>
-          <p className='mt-2'><i className="fa-solid fa-couch me-1"></i> {seats.length} seats (available) </p>
+          <p className='mt-2'><i className="fa-solid fa-couch me-1"></i> {availableSeats.length} seats (available) </p>
           <p className='my-auto'><i className="fa-solid fa-person-walking-luggage"></i> Adult: 1 <i className="fa-solid fa-clock ms-3"></i> 7: 30am</p>
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">
           <p className='fee'>N{price}</p>
           <button onClick={ () => {
-            setBookingState(prev => ({...prev, isOpenModal: true, selectedBus: { busType, seats, _id }}))
+            setBookingState(prev => ({...prev, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))
             // alert(_id);
           } } className='w-100'>View Seats</button>
         </div>
