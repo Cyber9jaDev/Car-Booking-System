@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BusSeatObject, ToyotaSeat } from './template/Toyota';
+import { BusSeatObject, ToyotaSeat } from './template/SeatArrangement';
 import { BookingContext } from '../../../contexts/BookingContext';
 import '../../../sass/booking.scss';
 

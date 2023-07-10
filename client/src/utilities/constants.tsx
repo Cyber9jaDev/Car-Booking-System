@@ -1,7 +1,7 @@
 export const buses: { label: string; value: string }[] = [
   {
     value: 'toyota',
-    label: 'Toyota Hiace (16 Seats)'
+    label: 'Toyota Hiace (14 Seats)'
   }, 
   {
     value: 'minibus',
