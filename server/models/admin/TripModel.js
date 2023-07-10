@@ -35,15 +35,7 @@ const TripSchema = new Schema({
   },
   bookedSeats: {
     type: Array,
-    default: function(){
-      if(this.busType === 'toyota'){
-        return generateSeatNos(14);
-      } else if(this.busType === 'minibus'){
-        return generateSeatNos(12);
-      } else if(this.busType === 'sienna'){
-        return generateSeatNos(7);
-      }
-    }
+    default: []
   },
   busType: {
     type: String,
