@@ -9,6 +9,7 @@ import Contact from "./pages/users/Contact";
 import Home from "./pages/admin/Home";
 import Bookings from "./pages/users/Bookings";
 import { BookingContextProvider } from "./contexts/BookingContext";
+import PassengerDetails from "./pages/users/PassengerDetails";
 
 
 const RouterLinks = () => {
@@ -24,7 +25,7 @@ const RouterLinks = () => {
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
           <Route path="/contact" element = {<Contact/>} />
-          
+          <Route path="/passenger-details" element = {<PassengerDetails/>} />
           <Route path="/booking" element = {
             <BookingContextProvider>
               <Bookings/>
