@@ -10,6 +10,7 @@ import Home from "./pages/admin/Home";
 import Bookings from "./pages/users/Bookings";
 import { BookingContextProvider } from "./contexts/BookingContext";
 import PassengerDetails from "./pages/users/PassengerDetails";
+import PaymentModal from "./components/users/modals/PaymentModal";
 
 
 const RouterLinks = () => {
@@ -26,6 +27,7 @@ const RouterLinks = () => {
           <Route path="/services" element={<Services/>} />
           <Route path="/contact" element = {<Contact/>} />
           <Route path="/passenger-details" element = {<PassengerDetails/>} />
+          <Route path="/modal" element = {<PaymentModal/>} />
           <Route path="/booking" element = {
             <BookingContextProvider>
               <Bookings/>
