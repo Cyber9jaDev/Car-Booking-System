@@ -7,9 +7,10 @@ import { isValidPassword } from '../../utilities/Regex';
 import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
 
 export type StateType = {
-  username: string,
+  fullName: string,
   email: string,
   password: string,
+  phone: string,
   token?: string, 
   hasAgreedTerms?: boolean,
   confirmPassword?: string,
@@ -22,7 +23,7 @@ const Signup = () => {
     visibleConfirmPassword: false,
   });
   const [formData, setFormData] = useState<StateType>(
-    { username: "", email: "", password: "", confirmPassword: "", hasAgreedTerms: false }
+    { fullName: "", email: "", phone: '', password: "", confirmPassword: "", hasAgreedTerms: false }
   );
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -35,9 +36,10 @@ const Signup = () => {
     if(!isValidPassword(formData.password)){ return }
     
     const payload: StateType = {
-      username: formData.username,
+      fullName: formData.fullName,
       email: formData.email,
       password: formData.password,
+      phone: formData.phone
     }
     setIsLoading(true);
     try {
@@ -45,7 +47,8 @@ const Signup = () => {
       if(data){
         const user : AuthUserDataType = {
           email: data.email,
-          username: data.username,
+          fullName: data.fullName,
+          phone: formData.phone
         } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);
@@ -67,14 +70,26 @@ const Signup = () => {
             <h4 className='text-center'>Create account</h4>
           </header>
           <div className='wrapper mt-3'>
+
+            {/* Full name */}
             <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="username">Username</label>
-              <input onChange={(e) => setFormData({ ...formData, username: e.target.value})} className='d-block form-control' id='username' type="text" required />
+              <label className='d-block my-1' htmlFor="fullName">Full Name</label>
+              <input onChange={(e) => setFormData({ ...formData, fullName: e.target.value})} className='d-block form-control' id='fullName' type="text" required />
             </div>
+
+            {/* Email */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="email">Email</label>
               <input onChange={(e) => setFormData({ ...formData, email: e.target.value})} className='d-block form-control' id='email' type="email" required />
             </div>
+
+            {/* Phone */}
+            <div className="form-group mb-4">
+              <label className='d-block my-1' htmlFor="phone">Phone Number</label>
+              <input onChange={(e) => setFormData({ ...formData, phone: e.target.value})} className='d-block form-control' id='phone' type="tel" required />
+            </div>
+
+            {/* Password */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
               <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.visiblePassword ? 'text' : 'password'} required />
@@ -83,6 +98,8 @@ const Signup = () => {
                 className={`eye-icon fa-regular fa-eye${toggleVisibility.visiblePassword && formData.password.length ? '' : '-slash'}`}>
               </i>
             </div>
+
+            {/* Confirm Password */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
               <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.visibleConfirmPassword ? 'text': 'password'} required />
@@ -91,12 +108,16 @@ const Signup = () => {
                 className={`eye-icon fa-regular fa-eye${toggleVisibility.visibleConfirmPassword ? '' : '-slash'}`}>
               </i>
             </div>
+
+            {/* Terms and Condition */}
             <div className="form-check my-4">
               <input onChange={() => setFormData({ ...formData, hasAgreedTerms: !formData.hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
               <label className="form-check-label" htmlFor="form-check-label">I agree to the the terms & conditions</label>
             </div>
+
+            {/* Submit */}
             <button 
-              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading && formData.username.length) } 
+              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading && formData.fullName.length) } 
               type="submit" 
               className="btn w-100">
               { isLoading ? 'Loading...' : 'Submit'  }

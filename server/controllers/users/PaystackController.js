@@ -9,11 +9,11 @@ export const initializeTransaction = async(req, res) => {
       amount: 500000, 
       email: 'john.doe@example.com', 
       callback_url: 'http://localhost:5173/paystack/callback', 
-      callback: function(response) {
-        let reference = response.reference;
-        alert('Payment complete! Reference: ' + reference);
-        // Make an AJAX call to your server with the reference to verify the transaction
-      },
+      // callback: function(response) {
+      //   let reference = response.reference;
+      //   alert('Payment complete! Reference: ' + reference);
+      //   // Make an AJAX call to your server with the reference to verify the transaction
+      // },
     },
     {
       headers: {
