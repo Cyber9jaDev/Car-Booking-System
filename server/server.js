@@ -17,7 +17,7 @@ app.use(express.json({limit: '50mb'}));
 
 app.use('/api/v1', UserRouter);
 app.use('/api/v1/admin/trips', TripRouter);
-app.use('/api/v1/payment', PaystackRouter);
+app.use('/api/v1/paystack', PaystackRouter);
 
 // Error Handling Middlewares
 app.use(ErrorHandlingMiddleware);
