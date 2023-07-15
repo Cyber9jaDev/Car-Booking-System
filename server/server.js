@@ -7,6 +7,7 @@ import UserRouter from './routes/users/UserRoute.js';
 import NotFoundErrorMiddleware from './middlewares/NotFoundErrorMiddleware.js';
 import ErrorHandlingMiddleware from './middlewares/ErrorHandlingMiddleware.js';
 import TripRouter from './routes/admin/TripRoute.js';
+import PaystackRouter from './routes/users/PaystackRoute.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json({limit: '50mb'}));
 
 app.use('/api/v1', UserRouter);
 app.use('/api/v1/admin/trips', TripRouter);
+app.use('/api/v1/payment', PaystackRouter);
 
 // Error Handling Middlewares
 app.use(ErrorHandlingMiddleware);
