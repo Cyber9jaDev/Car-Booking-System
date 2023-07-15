@@ -3,8 +3,9 @@ import { createContext, useState, ReactElement, SetStateAction, Dispatch, ReactN
 type ChildrenType = { children? : ReactNode }
 
 export interface AuthUserDataType {
-  username: string,
+  fullName: string,
   email: string,
+  phone: string
 }
 
 export type AuthUserContextType = {

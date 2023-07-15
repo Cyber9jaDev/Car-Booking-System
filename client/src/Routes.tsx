@@ -29,7 +29,7 @@ const RouterLinks = () => {
           <Route path="/contact" element = {<Contact/>} />
           <Route path="/passenger-details" element = {<PassengerDetails/>} />
           <Route path="/modal" element = {<PaymentModal/>} />
-          <Route path="/thanks" element = {<Thanks/>} />
+          <Route path="/paystack/callback" element = {<Thanks/>} />
           <Route path="/booking" element = {
             <BookingContextProvider>
               <Bookings/>

@@ -5,11 +5,18 @@ import jwt from 'jsonwebtoken';
 import { BadRequestError, NotFoundError } from "../../errors/CustomAPIError.js";
 
 const UserSchema = new Schema({
-  username: {
+  fullName: {
     type: String,
     required: true,
     trim: true,
-    minLength: [4, 'Username cannot be less than 4 characters ']
+    minLength: [4, 'Name cannot be less than 4 characters ']
+  },
+
+  phone: {
+    type: String,
+    required: true,
+    trim: true,
+    minLength: [11, 'Username cannot be less than 11 characters']
   },
 
   email: {
@@ -36,10 +43,6 @@ const UserSchema = new Schema({
     minLength: [ 8, 'Password must bea at least 8 characters long']
   },
 
-  token: {
-    type: String,
-    default: ''
-  }
 }, { minimize: false, timestamps: true });
 
 // Hash password before saving to the database
@@ -48,10 +51,10 @@ UserSchema.pre('save', function(){
   return this.password = bcrypt.hashSync(this.password, 10);;
 });
 
-// Check for an existing username
-UserSchema.statics.usernameAlreadyExists = async function(username){
-  const foundUsername = await User.findOne( { username });
-  if(foundUsername) throw new BadRequestError('Username is taken');
+// Check for an existing phone number
+UserSchema.statics.phoneNumberAlreadyExists = async function(phone){
+  const foundPhoneNumber = await User.findOne( { phone });
+  if(foundPhoneNumber) throw new BadRequestError('Phone number is taken');
   return false;
 }
 

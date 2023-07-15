@@ -5,10 +5,8 @@ import { Toast } from '../../utilities/Functions';
 import { isValidPassword } from '../../utilities/Regex';
 import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
 
-type AuthLoginType = {
-  email: string, 
-  password: string
-}
+type AuthLoginType = { email: string,  password: string }
+
 const Login = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ visiblePassword, setVisiblePassword ] = useState<boolean>(false);
@@ -24,6 +22,7 @@ const Login = () => {
   const handleSubmit = async(e: FormEvent) => {
     e.preventDefault();
     if(!isValidPassword(formData.password)) return
+
     const payload : AuthLoginType = {
       email: formData.email,
       password: formData.password,
@@ -35,7 +34,8 @@ const Login = () => {
       if(data){
         const user : AuthUserDataType = {
           email: data.email,
-          username: data.username,
+          fullName: data.fullName,
+          phone: data.phone
         } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);
@@ -43,9 +43,9 @@ const Login = () => {
         return navigate('/');
       }
     } catch (error) {
-      return error;
+        return error;
     } finally{
-      setIsLoading(false);
+        setIsLoading(false);
     }
   }
 

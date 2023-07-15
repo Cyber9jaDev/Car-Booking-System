@@ -9,8 +9,7 @@ const PaymentModal = () => {
       // const { data: { data : { authorization_url } } } = await UserService.PayWithPaystack();
       const { data: { data } } = await UserService.InitializeTransaction();
       if (data) {
-        console.log(data);
-        // window.location.href = data?.authorization_url;
+        window.location.href = data?.authorization_url;
       }
     } catch (error) {
       console.log(error);

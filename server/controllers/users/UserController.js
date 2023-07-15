@@ -5,24 +5,26 @@ import { validatePassword } from "../../utils/utils.js";
 import Trip from "../../models/admin/TripModel.js";
 
 export const register = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, fullName, password, phone } = req.body;
 
-  if(!email || !username || !password){ throw new BadRequestError('Fill in all fields')};
+  if(!email || !fullName || !password || !phone){ throw new BadRequestError('Fill in all fields')};
   
   validatePassword(password);
 
-  const usernameAlreadyExists = await User.usernameAlreadyExists(username);
+  const phoneNumberAlreadyExists = await User.phoneNumberAlreadyExists(phone);
+
   const emailAlreadyExists = await User.emailAlreadyExists(email);
     
-  if(!usernameAlreadyExists && !emailAlreadyExists){
-    const newUser = await User.create({ email, username, password });
+  if(!phoneNumberAlreadyExists && !emailAlreadyExists){
+    const newUser = await User.create({ email, phone, password, fullName });
     const token = await newUser.generateJWT();
     // if(newUser){ return res.status(StatusCodes.CREATED).json(newUser, token)}
     if(newUser){ return res.status(StatusCodes.CREATED).json({ 
-      email: newUser.email, 
-      username: newUser.username, 
+      email: newUser?.email, 
+      fullName: newUser?.fullName, 
+      phone: newUser?.phone,
       token 
-    }) }
+    })}
   }
   throw new InternalServerError('Something went wrong!');
 }
@@ -44,7 +46,8 @@ export const login = async (req, res) => {
   const token = foundUser.generateJWT();
   return res.status(StatusCodes.CREATED).json({
     email: foundUser.email, 
-    username: foundUser.username, 
+    fullName: foundUser.fullName, 
+    phone: foundUser.phone,
     token
   });
 }

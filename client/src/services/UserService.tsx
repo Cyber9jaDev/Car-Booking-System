@@ -20,11 +20,11 @@ export default class UserService {
   }
 
   static InitializeTransaction = async () => {
-    return await APICall('api/v1/transaction/initialize', 'GET', {});
+    return await APICall('api/v1/paystack/transaction/initialize', 'GET', {});
   }
 
   static VerifyTransaction = async () => {
-    return await APICall('api/v1/transaction/verify/   ', 'GET', {});
+    return await APICall('api/v1/paystack/transaction/verify/   ', 'GET', {});
   }
 
 }
