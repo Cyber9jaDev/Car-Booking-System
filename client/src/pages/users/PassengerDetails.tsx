@@ -4,13 +4,13 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const PassengerDetails = () => {
-  const {currentUser, nextOfKin, setNextOfKin} = useContext(UserContext);
+  const {currentUser, setNextOfKin} = useContext(UserContext);
 
   return (
     <main id='passenger-details' className='py-5'>
       <div className="container-lg">
         
-        <h4 className="text-center">Hi Name Name, we just need few details about you</h4>
+        <h4 className="text-center">Hi {currentUser?.fullName}, we just need few details about you</h4>
 
         <div className="row mt-3">
           <div className="col-sm-12 col-md-6">

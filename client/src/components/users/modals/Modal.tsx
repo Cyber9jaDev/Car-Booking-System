@@ -4,13 +4,24 @@ import MinibusSeatModal from './MinibusSeatModal';
 import SiennaSeatModal from './SiennaSeatModal';
 import ToyotaSeatModal from './ToyotaSeatModal';
 import { BookingContext } from '../../../contexts/BookingContext';
+import { useNavigate } from 'react-router-dom';
 
 const SeatModal = () => {
-  const { bookingState: { selectedBus }, setBookingState } = useContext(BookingContext);
-  
+  const { bookingState: { selectedBus, selectedSeatNo }, setBookingState } = useContext(BookingContext);
+  const navigate = useNavigate();
+
+  const handleTrip = () => {
+    if(selectedSeatNo === 0 ){
+      // ;
+
+      navigate('/passenger-details')
+    }
+  }
+
+
   return (
-    <section id="seat__modal">
-      <div className="seat__modal-wrapper">
+    <section id="modal">
+      <div className="modal-wrapper">
         <div className="close__modal ms-auto">
           <i onClick={() => setBookingState(prev => ({ ...prev, isOpenModal:false }))} className="fs-1 fa-solid fa-circle-xmark"></i>
         </div>
@@ -32,13 +43,13 @@ const SeatModal = () => {
             </div>
         </div>
 
-        { selectedBus?.busType === 'toyota' && <ToyotaSeatModal />}
-        { selectedBus?.busType === 'sienna' && <SiennaSeatModal />}
-        { selectedBus?.busType === 'minibus' && <MinibusSeatModal />}
+        { selectedBus?.busType === 'toyota' && <ToyotaSeatModal /> }
+        { selectedBus?.busType === 'sienna' && <SiennaSeatModal /> }
+        { selectedBus?.busType === 'minibus' && <MinibusSeatModal /> }
 
-        <form className='bg-danger w-100 mt-4'>
-          <button className="btn w-100">Continue</button>
-        </form>
+        <div className='w-100 mt-4'>
+          <button onClick={handleTrip} className="btn w-100 continue">Continue</button>
+        </div>
       </div>
     </section>
   )

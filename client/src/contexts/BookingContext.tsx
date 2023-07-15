@@ -15,7 +15,7 @@ export type TicketType = {
 }; 
 
 type BookingStateType = {
-  selectedSeat: number,
+  selectedSeatNo: number,
   isOpenModal: boolean,
   trips: TicketType[],
   selectedBus:Pick< TicketType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null
@@ -24,7 +24,7 @@ const initBookingState: BookingStateType = {
   isOpenModal: false,
   trips: [],
   selectedBus: null,
-  selectedSeat: 0
+  selectedSeatNo: 0
 }
 
 type BookingContextType = {
@@ -63,7 +63,7 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
 
     if(bookedSeats?.includes(seatNo)){ return }
     else if(availableSeats?.includes(seatNo)) {
-      setBookingState(previousState => ({ ...previousState, selectedSeat: seatNo}));
+      setBookingState(previousState => ({ ...previousState, selectedSeatNo: seatNo}));
     }
     return
   }
