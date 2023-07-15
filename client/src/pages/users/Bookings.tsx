@@ -2,7 +2,7 @@ import { useContext } from "react";
 import BookingForm from '../../components/users/BookingForm';
 import { BookingContext } from '../../contexts/BookingContext';
 import TicketsList from '../../components/users/TicketsList';
-import SeatModal from '../../components/users/modals/SeatModal';
+import SeatModal from '../../components/users/modals/Modal';
 import '../../sass/booking.scss';
 
 const Bookings = () => {   
