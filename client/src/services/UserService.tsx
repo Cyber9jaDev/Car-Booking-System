@@ -19,8 +19,12 @@ export default class UserService {
     return await APICall('api/v1/all-trips', 'GET', {});
   }
 
-  static PayWithPaystack = async () => {
-    return await APICall('api/v1/payment/paystack', 'GET', {});
+  static InitializeTransaction = async () => {
+    return await APICall('api/v1/transaction/initialize', 'GET', {});
+  }
+
+  static VerifyTransaction = async () => {
+    return await APICall('api/v1/transaction/verify/   ', 'GET', {});
   }
 
 }
