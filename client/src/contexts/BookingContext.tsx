@@ -33,6 +33,8 @@ type BookingContextType = {
   getTicketsList: () => void,
   getSeatInfo : (id: string) => Promise<unknown>
   handleSeatSelect:(seatNo: number) => void
+  openModal: () => void
+  closeModal: () => void
 } 
 
 export const BookingContext = createContext<BookingContextType>( {} as BookingContextType );
@@ -40,6 +42,9 @@ export const BookingContext = createContext<BookingContextType>( {} as BookingCo
 export const BookingContextProvider = ({ children }: ChildrenType) : ReactElement => {
   const [bookingState, setBookingState] = useState<BookingStateType>(initBookingState);
   
+  const openModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: true }))}
+  const closeModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: false }))}
+
   const getTicketsList = async() => {
     try {
       const { data } = await UserService.GetAllTrips();
@@ -68,7 +73,7 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
     return
   }
 
-  const contextValue = { bookingState, setBookingState, getTicketsList, getSeatInfo, handleSeatSelect }
+  const contextValue = { openModal, closeModal, bookingState, setBookingState, getTicketsList, getSeatInfo, handleSeatSelect }
   
   return(
     <BookingContext.Provider value={contextValue}>

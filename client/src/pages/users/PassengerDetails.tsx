@@ -1,44 +1,18 @@
 import { Link } from 'react-router-dom';
 import '../../sass/passenger-details.scss';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-// import Modal from '../../components/modal/Modal';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
-import { Modal } from '@mui/material';
+import Modal from '../../components/modal/Modal';
+import { BookingContext } from '../../contexts/BookingContext';
 
 const PassengerDetails = () => {
   const {currentUser, setNextOfKin} = useContext(UserContext);
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-      setOpen(false);
-  };
-
-  const handleOpen = () => {
-      setOpen(true);
-  };
-
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+  const {bookingState, setBookingState, openModal, closeModal} = useContext(BookingContext);
 
   return (
     <main id='passenger-details' className='py-5'>
       <div className="container-lg">
-        
         <h4 className="text-center">Hi {currentUser?.fullName}, we just need few details about you</h4>
-
         <div className="row mt-3">
           <div className="col-sm-12 col-md-6">
             <div className="row">
@@ -109,7 +83,7 @@ const PassengerDetails = () => {
                 <p className='w-100 d-flex'> <span>Passenger</span> <span className='ms-auto fw-bold opacity-75'>1</span></p>
                 <p className='w-100 d-flex'> <span>Seat Number</span> <span className='ms-auto fw-bold opacity-75'>2</span></p>
                 <p className='w-100 d-flex'> <span>Amount</span> <span className='ms-auto fw-bold opacity-75'>N20000</span></p>
-                <button className="btn w-100 pay">Pay</button>
+                <button onClick={openModal} className="btn w-100 pay">Pay</button>
               </div>
             </div>
           </div>
@@ -117,26 +91,7 @@ const PassengerDetails = () => {
 
         </div>
       </div>
-
-      {/* <Modal>test</Modal> */}
-      <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </div>
+      <Modal> Test </Modal>
     </main>
   )
 }
