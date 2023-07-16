@@ -6,16 +6,14 @@ import ToyotaSeatModal from './ToyotaSeatModal';
 import { BookingContext } from '../../../contexts/BookingContext';
 import { useNavigate } from 'react-router-dom';
 
-const SeatModal = () => {
+const Modal = () => {
   const { bookingState: { selectedBus, selectedSeatNo }, setBookingState } = useContext(BookingContext);
   const navigate = useNavigate();
 
   const handleTrip = () => {
-    if(selectedSeatNo === 0 ){
-      // ;
-
-      navigate('/passenger-details')
-    }
+    if(selectedSeatNo === 0 ){ return  }
+    
+    navigate('/passenger-details');
   }
 
 
@@ -55,4 +53,4 @@ const SeatModal = () => {
   )
 }
 
-export default SeatModal
+export default Modal;
