@@ -141,10 +141,11 @@ export const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '100%',
+  maxWidth: 'sm',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 12,
+  border: '1px solid #000',
+  boxShadow: 1,
   p: 4,
 }
 

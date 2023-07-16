@@ -1,5 +1,5 @@
-import { FormEvent, useEffect } from "react";
-import UserService from "../../../services/UserService";
+import { FormEvent } from "react";
+import UserService from "../../services/UserService";
 
 const PaymentModal = () => {
   
