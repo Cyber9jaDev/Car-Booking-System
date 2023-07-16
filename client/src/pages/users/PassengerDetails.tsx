@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import Modal from '../../components/modal/Modal';
 import { BookingContext } from '../../contexts/BookingContext';
+import PaymentModal from '../../components/modal/PaymentModal';
 
 const PassengerDetails = () => {
   const {currentUser, setNextOfKin} = useContext(UserContext);
@@ -91,7 +92,9 @@ const PassengerDetails = () => {
 
         </div>
       </div>
-      <Modal> Test </Modal>
+      <Modal> 
+        <PaymentModal />
+      </Modal>
     </main>
   )
 }

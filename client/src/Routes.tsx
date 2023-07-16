@@ -9,7 +9,7 @@ import Contact from "./pages/users/Contact";
 import Home from "./pages/admin/Home";
 import Bookings from "./pages/users/Bookings";
 import PassengerDetails from "./pages/users/PassengerDetails";
-import PaymentModal from "./components/users/modals/PaymentModal";
+import PaymentModal from "./components/modal/PaymentModal";
 import Thanks from "./pages/users/Thanks";
 
 
