@@ -1,18 +1,19 @@
 import { useContext } from 'react';
-import '../../sass/seatmodal.scss';
 import MinibusSeatModal from './template/MinibusSeatModal';
 import SiennaSeatModal from './template/SiennaSeatModal';
 import ToyotaSeatModal from './template/ToyotaSeatModal';
 import { BookingContext } from '../../contexts/BookingContext';
 import { useNavigate } from 'react-router-dom';
+import '../../sass/modal.scss';
+
 
 const SeatModal = () => {
-  const { bookingState: { selectedBus, selectedSeatNo } } = useContext(BookingContext);
+  const { bookingState: { selectedBus, selectedSeatNo }, closeModal } = useContext(BookingContext);
   const navigate = useNavigate();
 
   const handleTrip = () => {
-    if(selectedSeatNo === 0 ){ return  }
-    
+    if(selectedSeatNo === 0 ){ return }
+    closeModal();
     navigate('/passenger-details');
   }
 
@@ -44,7 +45,12 @@ const SeatModal = () => {
         { selectedBus?.busType === 'minibus' && <MinibusSeatModal /> }
 
         <div className='w-100 mt-4'>
-          <button onClick={handleTrip} className="btn w-100 continue">Continue</button>
+          <button 
+            className="btn w-100 continue"
+            disabled={selectedSeatNo === 0 ? true : false } 
+            onClick={handleTrip} 
+            > Continue
+          </button>
         </div>
       </div>
     </section>

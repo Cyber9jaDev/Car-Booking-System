@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import UserService from "../../services/UserService";
+import '../../sass/modal.scss';
 
 const PaymentModal = () => {
   

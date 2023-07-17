@@ -8,8 +8,9 @@ import PaymentModal from '../../components/modal/PaymentModal';
 
 const PassengerDetails = () => {
   const {currentUser, setNextOfKin} = useContext(UserContext);
-  const {openModal} = useContext(BookingContext);
-
+  const {openModal, bookingState} = useContext(BookingContext);
+  console.log(bookingState);
+  
   return (
     <main id='passenger-details' className='py-5'>
       <div className="container-lg">
