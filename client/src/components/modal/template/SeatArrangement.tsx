@@ -11,7 +11,7 @@ export const ToyotaSeat: BusSeatObject[] = [
     className: 'seats__wrapper steering',
     seatNo: 0,
     element: <div className="steering"> 
-              <img src={ new URL('../../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
+              <img src={ new URL('../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
             </div>
   },
   {
@@ -116,7 +116,7 @@ export const SiennaSeat: BusSeatObject[] = [
     className: 'seats__wrapper steering',
     seatNo: 0,
     element: <div className="steering"> 
-              <img src={ new URL('../../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
+              <img src={ new URL('../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
             </div>
   },
   {
@@ -184,7 +184,7 @@ export const MinibusSeat: BusSeatObject[] = [
     className: 'seats__wrapper steering',
     seatNo: 0,
     element: <div className="steering"> 
-              <img src={ new URL('../../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
+              <img src={ new URL('../../../assets/steering-black.svg',  import.meta.url).href } alt="steering" /> 
             </div>
   },
   {

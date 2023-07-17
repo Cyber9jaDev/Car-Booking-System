@@ -32,11 +32,11 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">
           <p className='fee'>N{price}</p>
-          <button onClick={() => {
-            setBookingState(prev => ({...prev, selectedSeat: 0, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))
-            // alert(_id);
-          }} className='w-100'>
-            View Seats</button>
+          <button 
+            className='w-100'
+            onClick={() => { setBookingState(prev => ({...prev, selectedSeatNo: 0, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))}}> 
+            View Seats
+          </button>
         </div>
       </div>
     </div>

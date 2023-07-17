@@ -34,7 +34,7 @@ type BookingContextType = {
   getSeatInfo : (id: string) => Promise<unknown>
   handleSeatSelect:(seatNo: number) => void
   openModal: () => void
-  closeModal: () => void
+  closeModal: (option?: boolean) => void
 } 
 
 export const BookingContext = createContext<BookingContextType>( {} as BookingContextType );
@@ -43,7 +43,14 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
   const [bookingState, setBookingState] = useState<BookingStateType>(initBookingState);
   
   const openModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: true }))}
-  const closeModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: false }))}
+  
+  const closeModal = (option?: boolean) => {
+    if(option){
+      setBookingState(prev => ({ ...prev, isOpenModal: false, selectedSeatNo: 0 }))
+    } else{
+      setBookingState(prev => ({ ...prev, isOpenModal: false }))
+    }
+  }
 
   const getTicketsList = async() => {
     try {

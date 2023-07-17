@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BookingContext } from '../../../contexts/BookingContext';
 import { BusSeatObject, MinibusSeat } from './SeatArrangement';
+import '../../../sass/modal.scss';
 
 
 const MinibusSeatModal = () => {
