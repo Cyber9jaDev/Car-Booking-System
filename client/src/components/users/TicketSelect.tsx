@@ -3,6 +3,7 @@ import '../../sass/booking.scss';
 import { BusImage, BusName, CityName } from '../../utilities/Functions';
 import { BookingContext } from '../../contexts/BookingContext';
 
+
 interface TripDataType {
   _id: string,
   busType: string,
@@ -34,7 +35,8 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
           <button onClick={() => {
             setBookingState(prev => ({...prev, selectedSeat: 0, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))
             // alert(_id);
-          } } className='w-100'>View Seats</button>
+          }} className='w-100'>
+            View Seats</button>
         </div>
       </div>
     </div>
