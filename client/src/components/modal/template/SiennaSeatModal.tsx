@@ -1,7 +1,7 @@
-import { BusSeatObject, SiennaSeat } from './template/SeatArrangement';
+import { BusSeatObject, SiennaSeat } from './SeatArrangement';
 import { useContext } from 'react';
 import { BookingContext } from '../../../contexts/BookingContext';
-import '../../../sass/booking.scss';
+
 
 
 const SiennaSeatModal = () => {

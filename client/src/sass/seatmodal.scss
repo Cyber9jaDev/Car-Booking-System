@@ -1,0 +1,86 @@
+#seat__modal{
+
+  .modal-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .seat__sample{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+
+  .available__seat{
+    background-color: green;
+    cursor: pointer;
+  }
+  
+  .selected__seat{
+    background-color: #383434;
+    cursor: pointer;
+  }
+
+  .booked__seat{
+    background-color: #df1010;
+    cursor: none !important;
+  }
+
+  .seats__container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 40px 30px;
+    width: 500px !important;
+    align-self: center;
+    padding: 10px;
+  }
+
+  .seats__wrapper{
+    width: 100%;
+    grid-column: span 3;
+  }
+
+  .seats, .steering{
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+  .steering{
+    background-color: transparent !important;
+    cursor: none;
+  }
+
+  .steering > img{
+    width: 50px;
+    height: 50px;
+  }
+
+  .hidden{
+    visibility: hidden;
+  }
+
+  button.continue{
+    background-color: #1363c6;
+    color: #fff;
+    outline: none;
+    border: none;
+    height: 50px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .seats__container{
+      display: grid;
+      width: 100% !important;
+    }
+  }
+}
