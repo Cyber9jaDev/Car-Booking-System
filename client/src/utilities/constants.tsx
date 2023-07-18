@@ -144,8 +144,8 @@ export const modalStyle = {
   width: '100%',
   maxWidth: 'sm',
   bgcolor: 'background.paper',
-  border: '1px solid #000',
-  boxShadow: 1,
+  border: '1px solid #009cff',
   p: 4,
 }
+
 
