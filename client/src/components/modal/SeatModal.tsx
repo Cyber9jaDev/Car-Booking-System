@@ -5,13 +5,19 @@ import ToyotaSeatModal from './template/ToyotaSeatModal';
 import { BookingContext } from '../../contexts/BookingContext';
 import { useNavigate } from 'react-router-dom';
 import '../../sass/modal.scss';
+import { UserContext } from '../../contexts/UserContext';
+import { Toast } from '../../utilities/Functions';
 
 
 const SeatModal = () => {
   const { bookingState: { selectedBus, selectedSeatNo }, closeModal } = useContext(BookingContext);
+  const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleTrip = () => {
+    if(!currentUser){
+      return Toast('error', 'Please log in to book this seat');
+    }
     if(selectedSeatNo === 0 ){ return }
     closeModal();
     navigate('/passenger-details');
