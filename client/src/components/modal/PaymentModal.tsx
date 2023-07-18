@@ -19,12 +19,12 @@ const PaymentModal = () => {
   
   return (
     <section id="payment__modal">
-      <h1 className="trip-payment text-center my-3"> Trip Payment </h1>
-      <p className="text-center my-3">You are about to fund this trip</p>
-      <p className="text-center my-3">Amount</p>
-      <p className="text-center amount my-3">N20000</p>
-      <p className="text-center my-3 icon d-block"> <i className="fa-solid fa-exclamation"></i> <span>Selecting any of the payment method will redirect you to their payment platform.</span></p>
-      <h4 className="text-center my-3" >Select payment method</h4>
+      <h2 className="trip-payment text-center my-4"> Trip Payment </h2>
+      <p className="text-center my-4">You are about to fund this trip</p>
+      <p className="text-center my-4">Amount</p>
+      <p className="text-center amount my-4">N20000</p>
+      <h4 className="text-center my-4" >Select payment method</h4>
+      <p className="text-center my-4 icon"> <i className="fa-solid fa-exclamation"></i> <span>Selecting any of the payment method will redirect you to their payment platform.</span></p>
 
       <div className="row">
         <div className="col-sm-12 col-md-6 d-flex justify-content-center align-items-center my-3">
