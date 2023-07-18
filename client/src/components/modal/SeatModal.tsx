@@ -18,7 +18,7 @@ const SeatModal = () => {
     if(!currentUser){
       return Toast('error', 'Please log in to book this seat');
     }
-    if(selectedSeatNo === 0 ){ return }
+    if(selectedSeatNo === null ){ return }
     closeModal();
     navigate('/passenger-details');
   }

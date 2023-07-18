@@ -35,7 +35,10 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
           <button 
             className='w-100'
             onClick={() => { 
-              setBookingState(prev => ({...prev, selectedSeatNo: 0, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))}}> 
+              localStorage.setItem('selectedSeatNo', JSON.stringify(null));
+              localStorage.setItem('selectedBus', JSON.stringify({ busType, availableSeats, _id, bookedSeats }));
+              setBookingState(prev => ({...prev, selectedSeatNo: null, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))
+              }}> 
             View Seats
           </button>
         </div>

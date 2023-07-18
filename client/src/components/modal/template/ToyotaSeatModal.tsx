@@ -20,7 +20,10 @@ const ToyotaSeatModal = () => {
           <div
             key={index}
             className={seatClassName}
-            onClick={() => handleSeatSelect(seat.seatNo)} 
+            onClick={() => {
+              handleSeatSelect(seat.seatNo);
+              localStorage.setItem('selectedSeatNo', JSON.stringify(seat.seatNo));
+            }} 
             > { seat.element }
           </div>
         )
