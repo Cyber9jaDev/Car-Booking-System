@@ -3,8 +3,7 @@ import UserService from '../services/UserService';
 
 type ChildrenType = { children?: ReactElement | ReactElement[]} 
 
-
-export type TicketType = {
+export type BookingType = {
   _id: string,
   busType: string,
   travellingFrom: string,
@@ -18,21 +17,26 @@ export type TicketType = {
 type BookingStateType = {
   selectedSeatNo: number | null,
   isOpenModal: boolean,
-  trips: TicketType[],
-  selectedBus:Pick< TicketType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null
+  trips: BookingType[],
+  selectedBus:Pick<BookingType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null,
+  bookedData: Pick<BookingType, 'travellingFrom' | 'travellingTo' | 'price' | 'departureDate'> | null
 }
 
 const selectedBus: string | null = localStorage.getItem('selectedBus');
-const parsedSelectedBus : Pick< TicketType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null = selectedBus ? JSON.parse(selectedBus) : null;
+const parsedSelectedBus : Pick<BookingType, 'busType' | 'bookedSeats' | 'availableSeats' | '_id'> | null = selectedBus ? JSON.parse(selectedBus) : null;
 
 const selectedSeatNo : string | null = localStorage.getItem("selectedSeatNo");
 const parsedSelectedSeatNo : number | null = selectedSeatNo ? JSON.parse(selectedSeatNo) : null;
+
+const bookedData: string | null = localStorage.getItem("bookedData");
+const parsedBookedData : Pick<BookingType, 'travellingFrom' | 'travellingTo' | 'price' | 'departureDate'> | null = bookedData ? JSON.parse(bookedData) : null
 
 const initBookingState: BookingStateType = {
   isOpenModal: false,
   trips: [],
   selectedBus: parsedSelectedBus,
   selectedSeatNo: parsedSelectedSeatNo as number | null,
+  bookedData: parsedBookedData
 }
 
 type BookingContextType = {
@@ -52,16 +56,7 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
   
   const openModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: true }))}
   
-  // const closeModal = (option?: boolean) => {
-  //   if(option){
-  //     setBookingState(prev => ({ ...prev, isOpenModal: false, selectedSeatNo: null }))
-  //   } else{
-  //     setBookingState(prev => ({ ...prev, isOpenModal: false }))
-  //   }
-  // }
-
   const closeModal = () => { setBookingState(prev => ({ ...prev, isOpenModal: false }))}
-
 
   const getTicketsList = async() => {
     try {
