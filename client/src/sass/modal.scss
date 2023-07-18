@@ -1,34 +1,33 @@
-#seat__modal{
-
-  .modal-wrapper{
+#seat__modal {
+  .modal-wrapper {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
   }
 
-  .seat__sample{
+  .seat__sample {
     width: 40px;
     height: 40px;
     border-radius: 5px;
   }
 
-  .available__seat{
+  .available__seat {
     background-color: green;
     cursor: pointer;
   }
-  
-  .selected__seat{
+
+  .selected__seat {
     background-color: #383434;
     cursor: pointer;
   }
 
-  .booked__seat{
+  .booked__seat {
     background-color: #df1010;
     cursor: none !important;
   }
 
-  .seats__container{
+  .seats__container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 40px 30px;
@@ -37,12 +36,13 @@
     padding: 10px;
   }
 
-  .seats__wrapper{
+  .seats__wrapper {
     width: 100%;
     grid-column: span 3;
   }
 
-  .seats, .steering{
+  .seats,
+  .steering {
     width: 50px;
     height: 50px;
     color: #fff;
@@ -55,21 +55,21 @@
     font-weight: 600;
   }
 
-  .steering{
+  .steering {
     background-color: transparent !important;
     cursor: none;
   }
 
-  .steering > img{
+  .steering > img {
     width: 50px;
     height: 50px;
   }
 
-  .hidden{
+  .hidden {
     visibility: hidden;
   }
 
-  button.continue{
+  button.continue {
     background-color: #1363c6;
     color: #fff;
     outline: none;
@@ -78,13 +78,50 @@
   }
 
   @media screen and (max-width: 768px) {
-    .seats__container{
+    .seats__container {
       display: grid;
       width: 100% !important;
     }
   }
 }
 
-#payment__modal{
+#payment__modal {
+
+  p.amount{
+    border: 1px solid #a2cde9;
+    border-radius: 5px;
+    padding: .2em 1em;
+    margin:  0 auto;
+    width: fit-content;
+    font-weight: bolder;
+    font-size: xx-large;
+  }
+
+  .icon{
+    font-size: smaller;
+    display: flex;
+    // background-color: blue;
+    align-items: center;
+    justify-content: center;
+  }
+
+  i.fa-exclamation{
+    color: white;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    font-size: 1em;
+    background-color: red;
+    padding: .25em .5em;
+  }
   
+  svg {
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 768px) {
+    svg {
+      padding: 0 3em;
+    }
+  }
 }
