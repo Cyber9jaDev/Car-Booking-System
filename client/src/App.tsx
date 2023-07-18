@@ -7,7 +7,6 @@ function App() {
   return (
     <UserContextProvider>
       <BookingContextProvider>
-        
         <Toaster />
         <RouterLinks />
       </BookingContextProvider>

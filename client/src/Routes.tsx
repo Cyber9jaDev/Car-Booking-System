@@ -11,6 +11,8 @@ import Bookings from "./pages/users/Bookings";
 import PassengerDetails from "./pages/users/PassengerDetails";
 import PaymentModal from "./components/modal/PaymentModal";
 import Thanks from "./pages/users/Thanks";
+import PrivateRoute from "./utilities/PrivateRoute";
+import PublicRoute from "./utilities/PublicRoute";
 
 
 const RouterLinks = () => {
@@ -20,12 +22,12 @@ const RouterLinks = () => {
         <Route path='/' element={<SharedLayout/>}>
           <Route index element={ <Homepage/> } />
         </Route>
-        <Route path="/register" element={<Signup/>} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={ <PublicRoute><Signup/></PublicRoute>} />
+        <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
         <Route path="/about" element={<About/>} />
         <Route path="/services" element={<Services/>} />
         <Route path="/contact" element = {<Contact/>} />
-        <Route path="/passenger-details" element = {<PassengerDetails/>} />
+        <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
         <Route path="/paystack/callback" element = {<Thanks/>} />
         <Route path="/booking" element = { <Bookings/> } />

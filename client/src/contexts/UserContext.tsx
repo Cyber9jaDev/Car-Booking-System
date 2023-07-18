@@ -8,13 +8,11 @@ export interface AuthUserDataType {
   phone: string,
 }
 
-// type NextOfKinType = Pick<AuthUserDataType, 'fullName' | 'phone'>
-
 export type AuthUserContextType = {
   currentUser : AuthUserDataType | null,
   setCurrentUser: Dispatch<SetStateAction<AuthUserDataType | null>>
   nextOfKin: Pick<AuthUserDataType, 'fullName' | 'phone'>,
-  setNextOfKin:  Dispatch<SetStateAction<Pick<AuthUserDataType, "fullName" | "phone">>>
+  setNextOfKin: Dispatch<SetStateAction<Pick<AuthUserDataType, "fullName" | "phone">>>
 }
 
 const user: string | null = localStorage.getItem('currentUser');
