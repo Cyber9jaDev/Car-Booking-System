@@ -1,8 +1,10 @@
-import { FormEvent } from "react";
+import { FormEvent, useContext } from "react";
 import UserService from "../../services/UserService";
 import '../../sass/modal.scss';
+import { BookingContext } from "../../contexts/BookingContext";
 
 const PaymentModal = () => {
+  const {bookingState : { bookedData } } = useContext(BookingContext)
   
   const makePayment = async(e:FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const PaymentModal = () => {
       <h2 className="trip-payment text-center my-4"> Trip Payment </h2>
       <p className="text-center my-4">You are about to fund this trip</p>
       <p className="text-center my-4">Amount</p>
-      <p className="text-center amount my-4">N20000</p>
+      <p className="text-center amount my-4">{bookedData?.price}</p>
       <h4 className="text-center my-4" >Select payment method</h4>
       <p className="text-center my-4 icon"> <i className="fa-solid fa-exclamation"></i> <span>Selecting any of the payment method will redirect you to their payment platform.</span></p>
 
