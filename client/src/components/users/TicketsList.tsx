@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect } from 'react';
 import '../../sass/booking.scss';
 import TicketSelect from './TicketSelect';
-import { BookingContext, TicketType } from '../../contexts/BookingContext';
+import { BookingContext, BookingType } from '../../contexts/BookingContext';
 import Modal from '../modal/Modal';
 import SeatModal from '../modal/SeatModal';
 
@@ -18,7 +18,7 @@ const TicketsList = () => {
       <section id='bus__selection' className='py-5'>
         <div className="container-lg">
           <div className="row">
-            { trips.map(( trip:TicketType ) => <TicketSelect key={trip._id} { ...trip } /> ) }
+            { trips.map(( trip:BookingType ) => <TicketSelect key={trip._id} { ...trip } /> ) }
           </div>
         </div>
         

@@ -8,9 +8,16 @@ import PaymentModal from '../../components/modal/PaymentModal';
 
 const PassengerDetails = () => {
   const {currentUser, setNextOfKin} = useContext(UserContext);
-  const {openModal, bookingState} = useContext(BookingContext);
-  console.log(bookingState);
+  const {openModal, bookingState: { bookedData, selectedSeatNo } } = useContext(BookingContext);
   
+  
+  const getDepartureTime = (departureDate: string): string => {
+    return new Date(departureDate).toLocaleTimeString();
+  }
+  const getDepartureDay = (departureDate: string): string => {
+    return new Date(departureDate).toDateString();
+  }
+
   return (
     <main id='passenger-details' className='py-5'>
       <div className="container-lg">
@@ -78,13 +85,13 @@ const PassengerDetails = () => {
             <div className="trip__summary-wrapper">
               <div>
                 <h3 className="text-center"> Trip Summary </h3>
-                <p className='w-100 d-flex'> <span>From</span> <span className='ms-auto fw-bold opacity-75'>Lagos</span></p>
-                <p className='w-100 d-flex'> <span>To</span> <span className='ms-auto fw-bold opacity-75'>Abuja</span></p>
-                <p className='w-100 d-flex'> <span>Date</span> <span className='ms-auto fw-bold opacity-75'>July 7, 2020</span></p>
-                <p className='w-100 d-flex'> <span>Time</span> <span className='ms-auto fw-bold opacity-75'>05: 30 AM</span></p>
+                <p className='w-100 d-flex'> <span>From</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.travellingFrom}</span></p>
+                <p className='w-100 d-flex'> <span>To</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.travellingTo}</span></p>
+                <p className='w-100 d-flex'> <span>Date</span> <span className='ms-auto fw-bold opacity-75'>{getDepartureDay(bookedData?.departureDate as string)}</span></p>
+                <p className='w-100 d-flex'> <span>Time</span> <span className='ms-auto fw-bold opacity-75'>{getDepartureTime(bookedData?.departureDate as string)}</span></p>
                 <p className='w-100 d-flex'> <span>Passenger</span> <span className='ms-auto fw-bold opacity-75'>1</span></p>
-                <p className='w-100 d-flex'> <span>Seat Number</span> <span className='ms-auto fw-bold opacity-75'>2</span></p>
-                <p className='w-100 d-flex'> <span>Amount</span> <span className='ms-auto fw-bold opacity-75'>N20000</span></p>
+                <p className='w-100 d-flex'> <span>Seat Number</span> <span className='ms-auto fw-bold opacity-75'>{selectedSeatNo}</span></p>
+                <p className='w-100 d-flex'> <span>Amount</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.price}</span></p>
                 <button onClick={openModal} className="btn w-100 pay">Pay</button>
               </div>
             </div>

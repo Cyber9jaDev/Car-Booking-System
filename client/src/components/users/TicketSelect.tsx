@@ -15,7 +15,7 @@ interface TripDataType {
   bookedSeats: number[]
 }
 
-const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, bookedSeats, price, _id }: TripDataType) => {
+const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, bookedSeats, price, _id, departureDate }: TripDataType) => {
   const { setBookingState } = useContext(BookingContext);
 
   return (
@@ -37,7 +37,15 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
             onClick={() => { 
               localStorage.setItem('selectedSeatNo', JSON.stringify(null));
               localStorage.setItem('selectedBus', JSON.stringify({ busType, availableSeats, _id, bookedSeats }));
-              setBookingState(prev => ({...prev, selectedSeatNo: null, isOpenModal: true, selectedBus: { busType, availableSeats, _id, bookedSeats }}))
+              localStorage.setItem("bookedData", JSON.stringify({ travellingFrom, travellingTo, departureDate, price }))
+              setBookingState(prev => (
+                {
+                  ...prev, 
+                  selectedSeatNo: null, 
+                  isOpenModal: true, 
+                  bookedData: { travellingFrom, travellingTo, departureDate, price },
+                  selectedBus: { busType, availableSeats, _id, bookedSeats }
+                }));
               }}> 
             View Seats
           </button>
