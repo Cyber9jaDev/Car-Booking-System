@@ -13,6 +13,7 @@ import PaymentModal from "./components/modal/PaymentModal";
 import Thanks from "./pages/users/Thanks";
 import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
+import Footer from "./components/users/Footer";
 
 
 const RouterLinks = () => {
@@ -33,6 +34,7 @@ const RouterLinks = () => {
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/admin/home" element={ <Home/>} /> 
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
