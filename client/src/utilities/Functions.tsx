@@ -42,3 +42,11 @@ export const BusImage: { [index: string]: string } = {
   toyota: new URL('../assets/toyota.jpg', import.meta.url).href,
   minibus: new URL('../assets/minibus.jpg', import.meta.url).href,
 }
+
+export const GetDepartureTime = (departureDate: string): string => {
+  return new Date(departureDate).toLocaleTimeString();
+}
+
+export const GetDepartureDay = (departureDate: string): string => {
+  return new Date(departureDate).toDateString();
+}

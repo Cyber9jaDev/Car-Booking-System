@@ -3,7 +3,7 @@ import { initializeTransaction, verifyTransaction } from '../../controllers/user
 
 const PaystackRouter = express.Router();
 
-PaystackRouter.route('/transaction/initialize').get(initializeTransaction);
+PaystackRouter.route('/transaction/initialize').post(initializeTransaction);
 PaystackRouter.route('/transaction/verify/:reference').get(verifyTransaction);
 
 export default PaystackRouter;
