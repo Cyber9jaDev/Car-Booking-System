@@ -5,17 +5,24 @@ import { UserContext } from '../../contexts/UserContext';
 import Modal from '../../components/modal/Modal';
 import { BookingContext } from '../../contexts/BookingContext';
 import PaymentModal from '../../components/modal/PaymentModal';
+import { GetDepartureDay, GetDepartureTime, Toast } from '../../utilities/Functions';
 
 const PassengerDetails = () => {
-  const {currentUser, setNextOfKin} = useContext(UserContext);
-  const {openModal, bookingState: { bookedData, selectedSeatNo } } = useContext(BookingContext);
+  const { currentUser, setNextOfKin, nextOfKin } = useContext(UserContext);
   
-  
-  const getDepartureTime = (departureDate: string): string => {
-    return new Date(departureDate).toLocaleTimeString();
-  }
-  const getDepartureDay = (departureDate: string): string => {
-    return new Date(departureDate).toDateString();
+  const { openModal, bookingState: { bookedData, selectedSeatNo } } = useContext(BookingContext);
+
+  function handleTrip() {
+    // if(!nextOfKin.fullName || !nextOfKin.phone){
+    //   return Toast('error', "Please add your next of kin's phone number and full name");
+    // } if(currentUser?.fullName === nextOfKin?.fullName){
+    //   return Toast('error', "Customer name cannot be the same as next of kin's name");
+    // } if(currentUser?.phone === nextOfKin?.phone){
+    //   return Toast('error', "Customer phone number cannot be the same as next of kin's phone number");
+    // } if(nextOfKin?.phone.length < 11){
+    //   return Toast('error', "Next of kin phone number cannot be less than 11 numbers");
+    // } 
+    openModal();
   }
 
   return (
@@ -64,7 +71,7 @@ const PassengerDetails = () => {
                   <div className="col-sm-12 col-md-6 my-2">
                     <div className="form-group">
                       <label className='mb-2' htmlFor="next-of-kin-number">Next of Kin's Phone Number</label>
-                      <input onChange={(e) => setNextOfKin((prev) => ({ ...prev, phone: e.target.value, fullName: '' }))} className="form-control w-100" id='next-of-kin-number' type="tel" />
+                      <input onChange={(e) => setNextOfKin((prev) => ({ ...prev, phone: e.target.value }))} className="form-control w-100" id='next-of-kin-number' type="tel" />
                     </div>
                   </div>
                 </div>
@@ -87,12 +94,15 @@ const PassengerDetails = () => {
                 <h3 className="text-center"> Trip Summary </h3>
                 <p className='w-100 d-flex'> <span>From</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.travellingFrom}</span></p>
                 <p className='w-100 d-flex'> <span>To</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.travellingTo}</span></p>
-                <p className='w-100 d-flex'> <span>Date</span> <span className='ms-auto fw-bold opacity-75'>{getDepartureDay(bookedData?.departureDate as string)}</span></p>
-                <p className='w-100 d-flex'> <span>Time</span> <span className='ms-auto fw-bold opacity-75'>{getDepartureTime(bookedData?.departureDate as string)}</span></p>
+                <p className='w-100 d-flex'> <span>Date</span> <span className='ms-auto fw-bold opacity-75'>{GetDepartureDay(bookedData?.departureDate as string)}</span></p>
+                <p className='w-100 d-flex'> <span>Time</span> <span className='ms-auto fw-bold opacity-75'>{GetDepartureTime(bookedData?.departureDate as string)}</span></p>
                 <p className='w-100 d-flex'> <span>Passenger</span> <span className='ms-auto fw-bold opacity-75'>1</span></p>
                 <p className='w-100 d-flex'> <span>Seat Number</span> <span className='ms-auto fw-bold opacity-75'>{selectedSeatNo}</span></p>
                 <p className='w-100 d-flex'> <span>Amount</span> <span className='ms-auto fw-bold opacity-75'>{bookedData?.price}</span></p>
-                <button onClick={openModal} className="btn w-100 pay">Pay</button>
+                <button
+                  className="btn w-100 pay"
+                  onClick={() => handleTrip()}> Pay
+                </button>
               </div>
             </div>
           </div>

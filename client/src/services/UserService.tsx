@@ -6,6 +6,13 @@ interface AuthUserPayload{
   password: string,
 }
 
+type PaystackType = {
+  email: string,
+  amount: number,
+  fullName: string,
+  phone: string
+}
+
 export default class UserService {
   static Register = async (data: AuthUserPayload) => {
     return await APICall('api/v1/register', 'POST', data);
@@ -19,11 +26,11 @@ export default class UserService {
     return await APICall('api/v1/all-trips', 'GET', {});
   }
 
-  static InitializeTransaction = async () => {
-    return await APICall('api/v1/paystack/transaction/initialize', 'GET', {});
+  static InitializePaystackTransaction = async (body: PaystackType) => {
+    return await APICall('api/v1/paystack/transaction/initialize', 'POST', body);
   }
 
-  static VerifyTransaction = async () => {
+  static VerifyPaystackTransaction = async () => {
     return await APICall('api/v1/paystack/transaction/verify/   ', 'GET', {});
   }
 
