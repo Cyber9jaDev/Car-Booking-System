@@ -4,22 +4,32 @@ import '../../sass/modal.scss';
 import { BookingContext } from "../../contexts/BookingContext";
 import { UserContext } from "../../contexts/UserContext";
 import { Toast } from "../../utilities/Functions";
+import { useNavigate } from "react-router-dom";
 
 const PaymentModal = () => {
   const { bookingState : { bookedData } } = useContext(BookingContext);
   const { currentUser } =  useContext(UserContext);
+  const navigate = useNavigate();
 
   const payWithPaystack = async(e:FormEvent) => {
     e.preventDefault();
 
-    if(!currentUser){ return Toast('error', 'Please log in') }
+    if(!currentUser){ 
+      Toast('error', 'Please log in');
+      localStorage.clear();
+      return navigate('/login');
+    } 
+
+    if(!bookedData){
+      return navigate("/");
+    }
 
     try {
       const body = {
-        email: 'tesr@gmail.com',
-        phone: '07045161448',
-        fullName: 'Test', 
-        amount: 2
+        email: currentUser?.email,
+        phone: currentUser?.phone,
+        fullName: currentUser?.fullName, 
+        amount: bookedData?.price
       }
       const { data: { data } } = await UserService.InitializePaystackTransaction(body);
       if (data) {
@@ -27,6 +37,10 @@ const PaymentModal = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+
+    finally{
+      // Remove bookedData from local storage
     }
   }
   

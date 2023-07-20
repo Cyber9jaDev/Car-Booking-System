@@ -1,0 +1,9 @@
+import React from 'react';
+
+const PaystackPaymentCallback = () => {
+  return (
+    <div>PaystackPaymentCallback</div>
+  )
+}
+
+export default PaystackPaymentCallback
