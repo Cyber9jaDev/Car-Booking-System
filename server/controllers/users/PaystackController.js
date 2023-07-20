@@ -31,7 +31,7 @@ export const verifyTransaction = async (req, res) => {
   const { data }  = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
     {
       headers: {
-        Authorization: `Beaer ${process.env.PAYSTACK_KEY}`,
+        Authorization: `Bearer ${process.env.PAYSTACK_KEY}`,
       }
     }
   );

@@ -10,11 +10,10 @@ import Home from "./pages/admin/Home";
 import Bookings from "./pages/users/Bookings";
 import PassengerDetails from "./pages/users/PassengerDetails";
 import PaymentModal from "./components/modal/PaymentModal";
-import Thanks from "./pages/users/Thanks";
 import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
-
+import PaystackPaymentCallback from "./pages/users/payment/PaystackPaymentCallback";
 
 const RouterLinks = () => {
   return (
@@ -30,7 +29,7 @@ const RouterLinks = () => {
         <Route path="/contact" element = {<Contact/>} />
         <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
-        <Route path="/paystack/callback" element = {<Thanks/>} />
+        <Route path="/paystack/callback" element = {<PaystackPaymentCallback/>} />
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/admin/home" element={ <Home/>} /> 
       </Routes>
