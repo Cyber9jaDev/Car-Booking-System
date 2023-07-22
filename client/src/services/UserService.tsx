@@ -13,6 +13,9 @@ type PaystackType = {
   phone: string
 }
 
+
+
+
 export default class UserService {
   static Register = async (data: AuthUserPayload) => {
     return await APICall('api/v1/register', 'POST', data);
@@ -31,7 +34,11 @@ export default class UserService {
   }
 
   static VerifyPaystackTransaction = async () => {
-    return await APICall('api/v1/paystack/transaction/verify/   ', 'GET', {});
+    return await APICall('api/v1/paystack/transaction/verify', 'GET', {});
+  }
+
+  static BookTicket = async () => {
+    return await APICall('api/v1/book-ticket', 'POST', {});
   }
 
 }

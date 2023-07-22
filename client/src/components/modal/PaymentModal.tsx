@@ -24,6 +24,7 @@ const PaymentModal = () => {
       return navigate("/");
     }
 
+    console.log(bookedData);
     try {
       const body = {
         email: currentUser?.email,
@@ -31,9 +32,11 @@ const PaymentModal = () => {
         fullName: currentUser?.fullName, 
         amount: bookedData?.price
       }
+
       const { data: { data } } = await UserService.InitializePaystackTransaction(body);
       if (data) {
-        window.location.href = data?.authorization_url;
+        console.log(data);
+        // window.location.href = data?.authorization_url;
       }
     } catch (error) {
       console.log(error);

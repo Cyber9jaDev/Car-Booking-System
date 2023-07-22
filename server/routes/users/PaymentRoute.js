@@ -1,5 +1,5 @@
 import express from 'express';
-import { initializeTransaction, verifyTransaction } from '../../controllers/users/PaystackController.js';
+import { initializeTransaction, verifyTransaction } from '../../controllers/users/PaymentController.js';
 
 const PaystackRouter = express.Router();
 
