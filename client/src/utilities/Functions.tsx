@@ -50,3 +50,13 @@ export const GetDepartureTime = (departureDate: string): string => {
 export const GetDepartureDay = (departureDate: string): string => {
   return new Date(departureDate).toDateString();
 }
+
+export const FormatAmount = (amount:number | undefined)=> {
+  if(typeof amount === 'undefined') { return 0 }
+
+  return new Intl.NumberFormat('en-US', {
+    currencySign: "standard",
+    style: "currency",
+    currency: "NGN"
+  }).format(amount)
+}

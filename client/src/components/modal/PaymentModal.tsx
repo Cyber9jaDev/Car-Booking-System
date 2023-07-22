@@ -3,7 +3,7 @@ import UserService from "../../services/UserService";
 import '../../sass/modal.scss';
 import { BookingContext } from "../../contexts/BookingContext";
 import { UserContext } from "../../contexts/UserContext";
-import { Toast } from "../../utilities/Functions";
+import { FormatAmount, Toast } from "../../utilities/Functions";
 import { useNavigate } from "react-router-dom";
 
 const PaymentModal = () => {
@@ -52,7 +52,7 @@ const PaymentModal = () => {
       <h2 className="trip-payment text-center my-4"> Trip Payment </h2>
       <p className="text-center my-4">You are about to fund this trip</p>
       <p className="text-center my-4">Amount</p>
-      <p className="text-center amount my-4">{bookedData?.price}</p>
+      <p className="text-center amount my-4">{FormatAmount(bookedData?.price)}</p>
       <h4 className="text-center my-4" >Select payment method</h4>
       <p className="text-center my-4 icon"> <i className="fa-solid fa-exclamation"></i> <span>Selecting any of the payment method will redirect you to their payment platform.</span></p>
 

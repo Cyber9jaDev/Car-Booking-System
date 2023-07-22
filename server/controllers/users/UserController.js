@@ -94,10 +94,11 @@ export const bookTicket = async (req, res) => {
   }
 }
 
-export const getAllTrips = async (req, res) => {
-  const foundAllTrips = await Trip.find({}).where();
-  if(!foundAllTrips){
-    throw new InternalServerError('An error occurred, please try again');
+export const getAllSeatsWithAvailableSeats  = async (req, res) => {
+  // Return all tickets having no empty seat
+  const seatsWithAvailableSeats  = await Trip.find({availableSeats: { $ne: [] }});
+  if(seatsWithAvailableSeats ){
+    return res.status(StatusCodes.OK).json(seatsWithAvailableSeats );
   }
-  return res.status(StatusCodes.OK).json(foundAllTrips);
+  throw new InternalServerError('An error occurred, please try again');
 }
