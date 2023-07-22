@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import '../../sass/booking.scss';
-import { BusImage, BusName, CityName } from '../../utilities/Functions';
+import { BusImage, BusName, CityName, FormatAmount } from '../../utilities/Functions';
 import { BookingContext } from '../../contexts/BookingContext';
 
 
@@ -31,7 +31,7 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
           <p className='my-auto'><i className="fa-solid fa-person-walking-luggage"></i> Adult: 1 <i className="fa-solid fa-clock ms-3"></i> 7: 30am</p>
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">
-          <p className='fee'>N{price}</p>
+          <p className='fee fw-bolder fs-5'>{FormatAmount(price)}</p>
           <button 
             className='w-100'
             onClick={() => { 
