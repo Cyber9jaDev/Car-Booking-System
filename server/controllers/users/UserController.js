@@ -73,12 +73,7 @@ export const bookTicket = async (req, res) => {
     const availableSeats = foundTicket?.availableSeats;
     const isAvailableSeat = availableSeats.includes(seatNo);
 
-    // Ensure the right no is passed in for seat number
-    if(!isBookedSeat && !isAvailableSeat){
-      throw new BadRequestError('The seat no is invalid');
-    }
-  
-    else if(isAvailableSeat){
+    if(isAvailableSeat){
       updatedAvailableSeats = availableSeats.filter(num => num !== seatNo);
       updatedBookedSeats.push(...bookedSeats, seatNo);
   
@@ -92,13 +87,15 @@ export const bookTicket = async (req, res) => {
       
       throw new InternalServerError('An error occurred while booking seat')
     } 
-  }
 
-  
+    if(!isBookedSeat && !isAvailableSeat){
+      throw new BadRequestError('The seat no is invalid');
+    }
+  }
 }
 
 export const getAllTrips = async (req, res) => {
-  const foundAllTrips = await Trip.find({});
+  const foundAllTrips = await Trip.find({}).where();
   if(!foundAllTrips){
     throw new InternalServerError('An error occurred, please try again');
   }

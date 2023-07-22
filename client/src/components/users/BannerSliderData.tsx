@@ -8,12 +8,12 @@ export type SliderType = SliderObjType[]
 
 const BannerSliderData: SliderType = [
   {
-    h4: "24/7 Taxi Service",
+    h4: "24/7 Bus Service",
     h5: 'One Call Away',
     img: new URL('../../assets/banner5.jpg', import.meta.url).href
   },
   {
-    h4: "Online Cab Booking",
+    h4: "Online Bus Booking",
     h5: 'No Extra Charges',
     img: new URL('../../assets/banner2.jpg', import.meta.url).href
   },
@@ -24,7 +24,7 @@ const BannerSliderData: SliderType = [
   },
   {
     h4: "Travel Safe & Secure",
-    h5: 'Assured Cab Service',
+    h5: 'Assured Bus Service',
     img: new URL('../../assets/banner4.jpg', import.meta.url).href
   }
 ]
