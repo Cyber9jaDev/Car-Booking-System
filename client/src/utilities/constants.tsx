@@ -143,7 +143,7 @@ export const modalStyle = {
   transform: 'translate(-50%, -50%)',
   width: '95%',
   maxWidth: 'sm',
-  bgcolor: 'background.paper',
+  bgcolor: '#fff',
   border: '1px solid #009cff',
   p: 4,
 }

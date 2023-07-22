@@ -3,34 +3,24 @@ import mongoose, { Schema } from "mongoose";
 const BookingSchema = new Schema({
   travellingFrom: {
     type: String,
-    required: true
+    // required: true
   },
   travellingTo:{
     type: String,
-    required: true,
+    // required: true,
   },
   departureDate: {
     type: Date,
-    required: true
+    // required: true
   },
-  returnDate: {
-    type: Date,
-    required: true,
+  metadata: {
+    type: Object,
   },
-  passengers: {
+  amount: {
     type: Number,
-    default: 1
   },
-  sortBy: {
-    type: String,
-  },
-  bus: {
-    type: String,
-    default: 'all'
-  },
-  transportCompany: {
-    type: String,
-    default:'all'
+  user: {
+    type: Object
   }
 
 }, { timestamps: true, minimize: false });
