@@ -2,14 +2,6 @@ import { useState } from 'react';
 import '../../sass/BookingForm.scss';
 import { Cities } from '../../utilities/Functions';
 
-export type BookingType = {
-  travellingFrom: string,
-  travellingTo: string,
-  departureDate: string,
-  price: number,
-  busType: string,
-}
-
 const BookingForm = () => {
   const [tripState, setTripState] = useState({
     travellingFrom: 'none',

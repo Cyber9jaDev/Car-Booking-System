@@ -7,7 +7,7 @@ import { FormatAmount, Toast } from "../../utilities/Functions";
 import { useNavigate } from "react-router-dom";
 
 const PaymentModal = () => {
-  const { bookingState : { bookedData } } = useContext(BookingContext);
+  const { bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
   const { currentUser } =  useContext(UserContext);
   const navigate = useNavigate();
 
@@ -25,19 +25,22 @@ const PaymentModal = () => {
     }
 
     console.log(bookedData);
+    console.log(selectedBus);
+    console.log(selectedSeatNo);
+    
     try {
       const body = {
-        email: currentUser?.email,
-        phone: currentUser?.phone,
-        fullName: currentUser?.fullName, 
-        amount: bookedData?.price
+        _id: selectedBus?._id,
+        seatNo: selectedSeatNo
       }
 
-      const { data: { data } } = await UserService.InitializePaystackTransaction(body);
-      if (data) {
-        console.log(data);
-        // window.location.href = data?.authorization_url;
-      }
+      // const { data: { data } } = await UserService.BookTicket(body);
+      const { data } = await UserService.BookTicket(body);
+      console.log(data);
+      // if (data) {
+      //   console.log(data);
+      //   // window.location.href = data?.authorization_url;
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +49,42 @@ const PaymentModal = () => {
       // Remove bookedData from local storage
     }
   }
+  // const payWithPaystack = async(e:FormEvent) => {
+  //   e.preventDefault();
+
+  //   if(!currentUser){ 
+  //     Toast('error', 'Please log in');
+  //     localStorage.clear();
+  //     return navigate('/login');
+  //   } 
+
+  //   if(!bookedData){
+  //     return navigate("/");
+  //   }
+
+  //   console.log(bookedData);
+  //   try {
+  //     const body = {
+  //       email: currentUser?.email,
+  //       phone: currentUser?.phone,
+  //       fullName: currentUser?.fullName, 
+  //       amount: bookedData?.price
+  //     }
+
+  //     const { data: { data } } = await UserService.InitializePaystackTransaction(body);
+  //     if (data) {
+  //       console.log(data);
+  //       // window.location.href = data?.authorization_url;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   finally{
+  //     // Remove bookedData from local storage
+  //   }
+  // }
+
   
   return (
     <section id="payment__modal">

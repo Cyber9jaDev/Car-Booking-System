@@ -1,18 +1,8 @@
 import { createContext, ReactElement, useState } from 'react';
 import UserService from '../services/UserService';
+import { BookingType } from '../utilities/Types';
 
 type ChildrenType = { children?: ReactElement | ReactElement[]} 
-
-export type BookingType = {
-  _id: string,
-  busType: string,
-  travellingFrom: string,
-  travellingTo: string,
-  departureDate: string,
-  price: number,
-  bookedSeats: number[],
-  availableSeats: number[],
-}; 
 
 type BookingStateType = {
   selectedSeatNo: number | null,

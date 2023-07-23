@@ -52,7 +52,7 @@ export const login = async (req, res) => {
   });
 }
 
-export const bookTicket = async (req, res) => {
+export async function bookTicket (req, res, next){
   const { seatNo, _id } = req.body;
   let updatedBookedSeats = [];
   let updatedAvailableSeats = [];
@@ -62,36 +62,46 @@ export const bookTicket = async (req, res) => {
   if(!foundTicket){
     return res.status(404).json({message: 'Ticket not found'})
   }
-  else{
-    const bookedSeats = foundTicket.bookedSeats;
-    const isBookedSeat = bookedSeats.includes(seatNo);
   
-    if(isBookedSeat){
-      throw new BadRequestError('Seat has been booked');
-    }
-  
-    const availableSeats = foundTicket?.availableSeats;
-    const isAvailableSeat = availableSeats.includes(seatNo);
+  const bookedSeats = foundTicket.bookedSeats;
+  const isBookedSeat = bookedSeats.includes(seatNo);
 
-    if(isAvailableSeat){
-      updatedAvailableSeats = availableSeats.filter(num => num !== seatNo);
-      updatedBookedSeats.push(...bookedSeats, seatNo);
-  
-      const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
-  
-      const updatedBooking = await Trip.findOneAndUpdate({_id}, filter, { new: true });
-      
-      if(updatedBooking){
-        return res.status(200).json(updatedBooking)
-      }
-      
-      throw new InternalServerError('An error occurred while booking seat')
-    } 
-
-    if(!isBookedSeat && !isAvailableSeat){
-      throw new BadRequestError('The seat no is invalid');
-    }
+  if(isBookedSeat){
+    throw new BadRequestError('Seat has been booked');
   }
+
+  const availableSeats = foundTicket?.availableSeats;
+  const isAvailableSeat = availableSeats.includes(seatNo);
+
+  if(isAvailableSeat){
+    updatedAvailableSeats = availableSeats.filter(num => num !== seatNo);
+    updatedBookedSeats.push(...bookedSeats, seatNo);
+
+    const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
+
+    const updatedBooking = await Trip.findOneAndUpdate({_id}, filter, { new: true });
+    
+    if(updatedBooking){
+      res.locals.test = updatedBooking;
+      // next(updatedBooking);
+      // return res.status(200).json(updatedBooking);
+      next();
+    } else{
+      throw new InternalServerError('An error occurred while booking seat')
+    }
+    
+  } 
+
+  if(!isBookedSeat && !isAvailableSeat){
+    throw new BadRequestError('The seat no is invalid');
+  }
+  
+  next();
+}
+
+export async function updateBookingsList (req, res){
+  const test = res.locals.test;
+  console.log(test);
 }
 
 export const getAllSeatsWithAvailableSeats  = async (req, res) => {

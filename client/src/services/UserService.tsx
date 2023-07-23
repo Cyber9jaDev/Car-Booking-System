@@ -13,8 +13,7 @@ type PaystackType = {
   phone: string
 }
 
-
-
+type BookTicketPayload = { _id: string | undefined, seatNo: number | null } 
 
 export default class UserService {
   static Register = async (data: AuthUserPayload) => {
@@ -37,8 +36,8 @@ export default class UserService {
     return await APICall('api/v1/paystack/transaction/verify', 'GET', {});
   }
 
-  static BookTicket = async () => {
-    return await APICall('api/v1/book-ticket', 'POST', {});
+  static BookTicket = async (body:BookTicketPayload) => {
+    return await APICall('api/v1/book-ticket', 'PATCH', body);
   }
 
 }
