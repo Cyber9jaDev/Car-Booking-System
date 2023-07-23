@@ -1,28 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
 const BookingSchema = new Schema({
-  travellingFrom: {
+  bookingId: {
     type: String,
-    // required: true
+    required: true
   },
-  travellingTo:{
-    type: String,
-    // required: true,
-  },
-  departureDate: {
-    type: Date,
-    // required: true
-  },
-  metadata: {
-    type: Object,
-  },
-  amount: {
-    type: Number,
-  },
-  user: {
-    type: Object
-  }
-
+  passengers: [
+    {
+      userId: { type: String, required: true },
+      metadata: {
+        nextOfKinName: { type: String, required: true },
+        nextOfKinPhone: { type: String, required: true },
+      }
+    }
+  ],
 }, { timestamps: true, minimize: false });
 
 const Bookings = mongoose.model('bookings', BookingSchema);

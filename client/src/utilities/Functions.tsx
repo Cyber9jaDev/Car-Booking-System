@@ -54,9 +54,10 @@ export const GetDepartureDay = (departureDate: string): string => {
 export const FormatAmount = (amount:number | undefined)=> {
   if(typeof amount === 'undefined') { return 0 }
 
-  return new Intl.NumberFormat('en-US', {
-    currencySign: "standard",
+  return new Intl.NumberFormat('en-NG', {
+    notation: 'standard',
     style: "currency",
-    currency: "NGN"
+    currency: "NGN",
+    maximumFractionDigits: 0,
   }).format(amount)
 }
