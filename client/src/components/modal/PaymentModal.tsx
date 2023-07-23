@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const PaymentModal = () => {
   const { bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
-  const { currentUser } =  useContext(UserContext);
+  const { currentUser, nextOfKin } =  useContext(UserContext);
   const navigate = useNavigate();
 
   const payWithPaystack = async(e:FormEvent) => {
@@ -24,14 +24,15 @@ const PaymentModal = () => {
       return navigate("/");
     }
 
-    console.log(bookedData);
-    console.log(selectedBus);
-    console.log(selectedSeatNo);
-    
     try {
       const body = {
-        _id: selectedBus?._id,
-        seatNo: selectedSeatNo
+        userId: currentUser?.userId,
+        ticketId: selectedBus?._id,
+        seatNo: selectedSeatNo,
+        metadata: {
+          nextOfKinName: nextOfKin?.fullName,
+          nextOfKinPhone: nextOfKin?.phone
+        }
       }
 
       // const { data: { data } } = await UserService.BookTicket(body);

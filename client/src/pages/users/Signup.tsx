@@ -48,7 +48,8 @@ const Signup = () => {
         const user : AuthUserDataType = {
           email: data.email,
           fullName: data.fullName,
-          phone: formData.phone
+          phone: formData.phone,
+          userId: data.userId,
         } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);
