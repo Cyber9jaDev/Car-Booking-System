@@ -35,7 +35,8 @@ const Login = () => {
         const user : AuthUserDataType = {
           email: data.email,
           fullName: data.fullName,
-          phone: data.phone
+          phone: data.phone,
+          userId: data.userId,
         } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);

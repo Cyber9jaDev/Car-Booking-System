@@ -3,6 +3,7 @@ import User from "../../models/users/UserModel.js";
 import { StatusCodes } from 'http-status-codes';
 import { validatePassword } from "../../utils/utils.js";
 import Trip from "../../models/admin/TripModel.js";
+import Bookings from "../../models/users/BookingModel.js";
 
 export const register = async (req, res) => {
   const { email, fullName, password, phone } = req.body;
@@ -23,6 +24,7 @@ export const register = async (req, res) => {
       email: newUser?.email, 
       fullName: newUser?.fullName, 
       phone: newUser?.phone,
+      userId: foundUser._id,
       token 
     })}
   }
@@ -48,16 +50,22 @@ export const login = async (req, res) => {
     email: foundUser.email, 
     fullName: foundUser.fullName, 
     phone: foundUser.phone,
-    token
+    token,
+    userId: foundUser._id
   });
 }
 
 export async function bookTicket (req, res, next){
-  const { seatNo, _id } = req.body;
+  const { seatNo, ticketId, metadata, userId } = req.body;
+
+  if(!seatNo || !ticketId || !metadata?.nextOfKinName || !metadata?.nextOfKinPhone || !userId){
+    throw new BadRequestError("Please provide all values");
+  }
+
   let updatedBookedSeats = [];
   let updatedAvailableSeats = [];
 
-  const foundTicket = await Trip.findOne({ _id });
+  const foundTicket = await Trip.findOne({ _id:ticketId });
 
   if(!foundTicket){
     return res.status(404).json({message: 'Ticket not found'})
@@ -79,29 +87,39 @@ export async function bookTicket (req, res, next){
 
     const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
 
-    const updatedBooking = await Trip.findOneAndUpdate({_id}, filter, { new: true });
+    const updatedBooking = await Trip.findOneAndUpdate({_id:ticketId}, filter, { new: true });
     
     if(updatedBooking){
-      res.locals.test = updatedBooking;
-      // next(updatedBooking);
-      // return res.status(200).json(updatedBooking);
-      next();
-    } else{
-      throw new InternalServerError('An error occurred while booking seat')
-    }
-    
+      const booking = { seatNo, ticketId, metadata, userId }
+      res.booking = booking
+      return next();
+    } 
+    throw new InternalServerError('An error occurred while booking seat')
   } 
 
   if(!isBookedSeat && !isAvailableSeat){
     throw new BadRequestError('The seat no is invalid');
   }
-  
-  next();
 }
 
 export async function updateBookingsList (req, res){
-  const test = res.locals.test;
-  console.log(test);
+  // booking data is gotten from bookTicket
+  const { booking: { ticketId, userId, seatNo, metadata } } = res;
+
+  const hasExistingBookings = await Bookings.find({ticketId});
+  
+  console.log(hasExistingBookings)
+
+  if(hasExistingBookings){
+    return res.status(200).json(hasExistingBookings)
+  }
+  
+  // const newBooking = await Bookings.create({ ticketId, passengers:  [ {seatNo, userId, metadata} ] })
+  // if(!newBooking){ throw new BadRequestError('Bad Request')}
+
+  // return res.status(200).json(newBooking)
+
+
 }
 
 export const getAllSeatsWithAvailableSeats  = async (req, res) => {

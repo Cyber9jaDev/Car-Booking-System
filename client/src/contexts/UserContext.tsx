@@ -6,6 +6,7 @@ export interface AuthUserDataType {
   fullName: string,
   email: string,
   phone: string,
+  userId: string,
 }
 
 export type AuthUserContextType = {
@@ -23,7 +24,6 @@ export const UserContext = createContext<AuthUserContextType>({} as AuthUserCont
 export const UserContextProvider = ({ children } : ChildrenType) : ReactElement => {
   const [ currentUser, setCurrentUser ] = useState<AuthUserDataType | null>(parsedCurrentUser);
   const [ nextOfKin, setNextOfKin ] = useState<Pick<AuthUserDataType, 'fullName' | 'phone'>>({} as Pick<AuthUserDataType, 'fullName' | 'phone'>) ;
-  
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser, nextOfKin, setNextOfKin }}>

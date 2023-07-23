@@ -1,12 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
 const BookingSchema = new Schema({
-  bookingId: {
+  ticketId: {
     type: String,
     required: true
   },
   passengers: [
     {
+      seatNo: { type: Number, required: true },
       userId: { type: String, required: true },
       metadata: {
         nextOfKinName: { type: String, required: true },

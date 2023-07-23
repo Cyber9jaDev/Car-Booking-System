@@ -13,7 +13,9 @@ type PaystackType = {
   phone: string
 }
 
-type BookTicketPayload = { _id: string | undefined, seatNo: number | null } 
+type Metadata = { nextOfKinName: string, nextOfKinPhone: string }
+
+type BookTicketPayload = {userId: string, ticketId: string | undefined, seatNo: number | null | Metadata } 
 
 export default class UserService {
   static Register = async (data: AuthUserPayload) => {
