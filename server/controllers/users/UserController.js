@@ -90,8 +90,8 @@ export async function bookTicket (req, res, next){
     const updatedBooking = await Trip.findOneAndUpdate({_id:ticketId}, filter, { new: true });
     
     if(updatedBooking){
-      const booking = { seatNo, ticketId, metadata, userId }
-      res.booking = booking
+      const bookingInfo = { seatNo, ticketId, metadata, userId }
+      res.bookingInfo = bookingInfo;
       return next();
     } 
     throw new InternalServerError('An error occurred while booking seat')
@@ -104,22 +104,20 @@ export async function bookTicket (req, res, next){
 
 export async function updateBookingsList (req, res){
   // booking data is gotten from bookTicket
-  const { booking: { ticketId, userId, seatNo, metadata } } = res;
+  const { bookingInfo: { ticketId, userId, seatNo, metadata } } = res;
 
-  const hasExistingBookings = await Bookings.find({ticketId});
-  
-  console.log(hasExistingBookings)
+  const foundExistingBooking = await Bookings.findOne({ticketId});
 
-  if(hasExistingBookings){
-    return res.status(200).json(hasExistingBookings)
+  if(foundExistingBooking){
+    const existingPassengers = foundExistingBooking?.passengers;
+    const updatedPassengers = [...existingPassengers, {metadata, seatNo, userId}];
+    const updatedExistingBooking = await Bookings.findOneAndUpdate({ticketId}, { passengers: updatedPassengers }, { new: true });
+    return res.status(200).json(updatedExistingBooking);
   }
   
-  // const newBooking = await Bookings.create({ ticketId, passengers:  [ {seatNo, userId, metadata} ] })
-  // if(!newBooking){ throw new BadRequestError('Bad Request')}
-
-  // return res.status(200).json(newBooking)
-
-
+  const newBooking = await Bookings.create({ ticketId, passengers: [{seatNo, userId, metadata}] });
+  if(!newBooking){ throw new BadRequestError('Bad Request')}
+  return res.status(200).json(newBooking)
 }
 
 export const getAllSeatsWithAvailableSeats  = async (req, res) => {

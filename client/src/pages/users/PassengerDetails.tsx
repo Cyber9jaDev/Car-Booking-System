@@ -13,15 +13,15 @@ const PassengerDetails = () => {
   const { openModal, bookingState: { bookedData, selectedSeatNo } } = useContext(BookingContext);
 
   function handleTrip() {
-    // if(!nextOfKin.fullName || !nextOfKin.phone){
-    //   return Toast('error', "Please add your next of kin's phone number and full name");
-    // } if(currentUser?.fullName === nextOfKin?.fullName){
-    //   return Toast('error', "Customer name cannot be the same as next of kin's name");
-    // } if(currentUser?.phone === nextOfKin?.phone){
-    //   return Toast('error', "Customer phone number cannot be the same as next of kin's phone number");
-    // } if(nextOfKin?.phone.length < 11){
-    //   return Toast('error', "Next of kin phone number cannot be less than 11 numbers");
-    // } 
+    if(!nextOfKin.fullName || !nextOfKin.phone){
+      return Toast('error', "Please add your next of kin's phone number and full name");
+    } if(currentUser?.fullName === nextOfKin?.fullName){
+      return Toast('error', "Customer name cannot be the same as next of kin's name");
+    } if(currentUser?.phone === nextOfKin?.phone){
+      return Toast('error', "Customer phone number cannot be the same as next of kin's phone number");
+    } if(nextOfKin?.phone.length < 11){
+      return Toast('error', "Next of kin phone number cannot be less than 11 numbers");
+    } 
     openModal();
   }
 
