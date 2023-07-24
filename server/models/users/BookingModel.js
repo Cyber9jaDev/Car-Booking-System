@@ -7,11 +7,12 @@ const BookingSchema = new Schema({
   },
   passengers: [
     {
-      seatNo: { type: Number, required: true },
       userId: { type: String, required: true },
       metadata: {
         nextOfKinName: { type: String, required: true },
         nextOfKinPhone: { type: String, required: true },
+        amount: { type: Number, required: true },
+        seatNo: { type: Number, required: true },
       }
     }
   ],
