@@ -56,9 +56,9 @@ export const login = async (req, res) => {
 }
 
 export async function bookTicket (req, res, next){
-  const { seatNo, ticketId, metadata, userId } = req.body;
+  const { ticketId, metadata, userId } = req.body;
 
-  if(!seatNo || !ticketId || !metadata?.nextOfKinName || !metadata?.nextOfKinPhone || !userId){
+  if(!metadata?.seatNo || !ticketId || !metadata?.nextOfKinName || !metadata?.nextOfKinPhone || !metadata?.amount || !userId){
     throw new BadRequestError("Please provide all values");
   }
 
@@ -72,25 +72,25 @@ export async function bookTicket (req, res, next){
   }
   
   const bookedSeats = foundTicket.bookedSeats;
-  const isBookedSeat = bookedSeats.includes(seatNo);
+  const isBookedSeat = bookedSeats.includes(metadata?.seatNo);
 
   if(isBookedSeat){
     throw new BadRequestError('Seat has been booked');
   }
 
   const availableSeats = foundTicket?.availableSeats;
-  const isAvailableSeat = availableSeats.includes(seatNo);
+  const isAvailableSeat = availableSeats?.includes(metadata?.seatNo) ?? false;
 
   if(isAvailableSeat){
-    updatedAvailableSeats = availableSeats.filter(num => num !== seatNo);
-    updatedBookedSeats.push(...bookedSeats, seatNo);
+    updatedAvailableSeats = availableSeats.filter(num => num !== metadata?.seatNo);
+    updatedBookedSeats.push(...bookedSeats, metadata?.seatNo);
 
     const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
 
     const updatedBooking = await Trip.findOneAndUpdate({_id:ticketId}, filter, { new: true });
     
     if(updatedBooking){
-      const bookingInfo = { seatNo, ticketId, metadata, userId }
+      const bookingInfo = { ticketId, metadata, userId }
       res.bookingInfo = bookingInfo;
       return next();
     } 
@@ -98,26 +98,30 @@ export async function bookTicket (req, res, next){
   } 
 
   if(!isBookedSeat && !isAvailableSeat){
-    throw new BadRequestError('The seat no is invalid');
+    throw new BadRequestError('The seat number is not valid');
   }
 }
 
 export async function updateBookingsList (req, res){
   // booking data is gotten from bookTicket
-  const { bookingInfo: { ticketId, userId, seatNo, metadata } } = res;
+  const { bookingInfo: { ticketId, userId, metadata } } = res;
 
   const foundExistingBooking = await Bookings.findOne({ticketId});
 
   if(foundExistingBooking){
     const existingPassengers = foundExistingBooking?.passengers;
-    const updatedPassengers = [...existingPassengers, {metadata, seatNo, userId}];
+    const updatedPassengers = [...existingPassengers, {metadata, userId}];
     const updatedExistingBooking = await Bookings.findOneAndUpdate({ticketId}, { passengers: updatedPassengers }, { new: true });
-    return res.status(200).json(updatedExistingBooking);
+    
+    if(updatedExistingBooking){
+      return res.status(200).json({ message: 'Ticket booked successfully' });
+    }
+    throw new InternalServerError('An error occurred, please try again');
   }
   
-  const newBooking = await Bookings.create({ ticketId, passengers: [{seatNo, userId, metadata}] });
+  const newBooking = await Bookings.create({ ticketId, passengers: [{userId, metadata}] });
   if(!newBooking){ throw new BadRequestError('Bad Request')}
-  return res.status(200).json(newBooking)
+  return res.status(200).json({ message: 'Ticket booked successfully' });
 }
 
 export const getAllSeatsWithAvailableSeats  = async (req, res) => {

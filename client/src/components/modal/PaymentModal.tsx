@@ -28,16 +28,16 @@ const PaymentModal = () => {
       const body = {
         userId: currentUser?.userId,
         ticketId: selectedBus?._id,
-        seatNo: selectedSeatNo,
         metadata: {
           nextOfKinName: nextOfKin?.fullName,
-          nextOfKinPhone: nextOfKin?.phone
+          nextOfKinPhone: nextOfKin?.phone,
+          amount: bookedData?.price,
+          seatNo: selectedSeatNo,
         }
       }
 
       // const { data: { data } } = await UserService.BookTicket(body);
-      const { data } = await UserService.BookTicket(body);
-      console.log(data);
+      await UserService.BookTicket(body);
       closeModal();
       navigate('/booking');
       // if (data) {
