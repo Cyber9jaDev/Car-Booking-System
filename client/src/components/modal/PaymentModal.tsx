@@ -7,7 +7,7 @@ import { FormatAmount, Toast } from "../../utilities/Functions";
 import { useNavigate } from "react-router-dom";
 
 const PaymentModal = () => {
-  const { bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
+  const { closeModal, bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
   const { currentUser, nextOfKin } =  useContext(UserContext);
   const navigate = useNavigate();
 
@@ -38,6 +38,8 @@ const PaymentModal = () => {
       // const { data: { data } } = await UserService.BookTicket(body);
       const { data } = await UserService.BookTicket(body);
       console.log(data);
+      closeModal();
+      navigate('/booking');
       // if (data) {
       //   console.log(data);
       //   // window.location.href = data?.authorization_url;
