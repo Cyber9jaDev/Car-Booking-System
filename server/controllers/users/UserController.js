@@ -124,7 +124,7 @@ export async function updateBookingsList (req, res){
   return res.status(200).json({ message: 'Ticket booked successfully' });
 }
 
-export const getAllSeatsWithAvailableSeats  = async (req, res) => {
+export const getAllTicketsWithAvailableSeats  = async (req, res) => {
   // Return all tickets having no empty seat
   const seatsWithAvailableSeats  = await Trip.find({availableSeats: { $ne: [] }});
   if(seatsWithAvailableSeats ){

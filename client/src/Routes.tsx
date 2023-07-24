@@ -13,7 +13,7 @@ import PaymentModal from "./components/modal/PaymentModal";
 import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
-import PaystackPaymentCallback from "./pages/users/payment/PaystackPaymentCallback";
+import VerifyPaystackPayment from "./pages/users/payment/verifyPaystackPayment";
 
 const RouterLinks = () => {
   return (
@@ -29,7 +29,7 @@ const RouterLinks = () => {
         <Route path="/contact" element = {<Contact/>} />
         <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
-        <Route path="/paystack/callback" element = {<PaystackPaymentCallback/>} />
+        <Route path="/paystack/verify-payment" element = {<VerifyPaystackPayment/>} />
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/admin/home" element={ <Home/>} /> 
       </Routes>
