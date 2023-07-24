@@ -11,6 +11,42 @@ const PaymentModal = () => {
   const { currentUser, nextOfKin } =  useContext(UserContext);
   const navigate = useNavigate();
 
+  // const payWithPaystack = async(e:FormEvent) => {
+  //   e.preventDefault();
+
+  //   if(!currentUser){ 
+  //     Toast('error', 'Please log in');
+  //     localStorage.clear();
+  //     return navigate('/login');
+  //   } 
+
+  //   if(!bookedData){
+  //     return navigate("/");
+  //   }
+
+  //   try {
+      // const body = {
+      //   userId: currentUser?.userId,
+      //   ticketId: selectedBus?._id,
+      //   metadata: {
+      //     nextOfKinName: nextOfKin?.fullName,
+      //     nextOfKinPhone: nextOfKin?.phone,
+      //     amount: bookedData?.price,
+      //     seatNo: selectedSeatNo,
+      //   }
+      // }
+  //     await UserService.BookTicket(body);
+  //     closeModal();
+  //     navigate('/booking');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   finally{
+  //     // Remove bookedData from local storage
+  //   }
+  // }
+  
   const payWithPaystack = async(e:FormEvent) => {
     e.preventDefault();
 
@@ -25,68 +61,29 @@ const PaymentModal = () => {
     }
 
     try {
+
       const body = {
-        userId: currentUser?.userId,
-        ticketId: selectedBus?._id,
+        email: currentUser?.email,
         metadata: {
+          userId: currentUser?.userId,
+          ticketId: selectedBus?._id,
+          passengerName: currentUser?.fullName, 
+          passengerPhoneNumber: currentUser?.phone,
           nextOfKinName: nextOfKin?.fullName,
-          nextOfKinPhone: nextOfKin?.phone,
+          nextOfKinPhoneNumber: nextOfKin?.phone,
           amount: bookedData?.price,
-          seatNo: selectedSeatNo,
+          seatNumber: selectedSeatNo,
         }
       }
 
-      // const { data: { data } } = await UserService.BookTicket(body);
-      await UserService.BookTicket(body);
-      closeModal();
-      navigate('/booking');
-      // if (data) {
-      //   console.log(data);
-      //   // window.location.href = data?.authorization_url;
-      // }
+      const { data: { data } } = await UserService.InitializePaystackTransaction(body);
+      if (data) {
+        window.location.href = data?.authorization_url;
+      }
     } catch (error) {
       console.log(error);
     }
-
-    finally{
-      // Remove bookedData from local storage
-    }
   }
-  // const payWithPaystack = async(e:FormEvent) => {
-  //   e.preventDefault();
-
-  //   if(!currentUser){ 
-  //     Toast('error', 'Please log in');
-  //     localStorage.clear();
-  //     return navigate('/login');
-  //   } 
-
-  //   if(!bookedData){
-  //     return navigate("/");
-  //   }
-
-  //   console.log(bookedData);
-  //   try {
-  //     const body = {
-  //       email: currentUser?.email,
-  //       phone: currentUser?.phone,
-  //       fullName: currentUser?.fullName, 
-  //       amount: bookedData?.price
-  //     }
-
-  //     const { data: { data } } = await UserService.InitializePaystackTransaction(body);
-  //     if (data) {
-  //       console.log(data);
-  //       // window.location.href = data?.authorization_url;
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   finally{
-  //     // Remove bookedData from local storage
-  //   }
-  // }
 
   
   return (

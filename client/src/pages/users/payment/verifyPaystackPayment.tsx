@@ -1,10 +1,10 @@
 
-const verifyPaystackPayment = () => {
+const VerifyPaystackPayment = () => {
   return (
     <main>
-
+        Verification Successful
     </main>
   )
 }
 
-export default verifyPaystackPayment;
+export default VerifyPaystackPayment;

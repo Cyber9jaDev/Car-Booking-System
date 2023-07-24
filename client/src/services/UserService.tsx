@@ -6,19 +6,25 @@ interface AuthUserPayload{
   password: string,
 }
 
-type PaystackType = {
-  email: string,
-  amount: number,
-  fullName: string,
-  phone: string
-}
-
 type Metadata = { 
   nextOfKinName: string, 
   nextOfKinPhone: string, 
   amount: number, 
   seatNo: number | null
 }
+
+type PaystackMetadataType = { 
+  "userId": string,
+  "ticketId": string | undefined,
+  "nextOfKinName": string, 
+  "nextOfKinPhoneNumber": string, 
+  "amount": number, 
+  "passengerName": string, 
+  "passengerPhoneNumber": string,
+  "seatNumber": number | null,
+}
+
+type PaystackType = { email: string, metadata: PaystackMetadataType }
 
 type BookTicketPayload = {userId: string, ticketId: string | undefined, metadata:  Metadata } 
 
