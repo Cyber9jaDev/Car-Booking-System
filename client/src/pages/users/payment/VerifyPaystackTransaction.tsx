@@ -38,7 +38,7 @@ const VerifyPaystackTransaction = () => {
       }
     }
     verifyTransaction();
-  }, [location]);
+  }, [location, navigate]);
 
   return (
     <main>
