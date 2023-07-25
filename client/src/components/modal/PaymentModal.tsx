@@ -76,12 +76,12 @@ const PaymentModal = () => {
         }
       }
 
-      const { data: { data } } = await UserService.InitializePaystackTransaction(body);
-      if (data) {
-        window.location.href = data?.authorization_url;
+      const { data } = await UserService.InitializePaystackTransaction(body);
+      if (data?.status) {
+        return window.location.href = data?.data?.authorization_url;
       }
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 

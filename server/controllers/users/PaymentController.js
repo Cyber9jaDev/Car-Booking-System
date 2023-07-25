@@ -2,13 +2,13 @@ import axios from "axios";
 import { BadRequestError, InternalServerError, UnAuthorizedError } from "../../errors/CustomAPIError.js";
 
 export const initializeTransaction = async(req, res, next) => {
-  const { email, amount, fullName, phone } = req.body;
-  
+  const { email, metadata } = req.body;
   const { data } = await axios.post('https://api.paystack.co/transaction/initialize',
     {
-      amount: amount * 100, 
+      amount: metadata?.amount * 100, 
       email, 
       callback_url: 'http://localhost:5173/paystack/verify-payment', 
+      "metadata": JSON.stringify(metadata)
     },
     {
       headers: {
@@ -17,19 +17,26 @@ export const initializeTransaction = async(req, res, next) => {
       }
     }
   );
-  
-  if(data?.message === 'Request failed with status code 401') { throw new UnAuthorizedError('You are not authorized to view this page')}
-  if(data?.message === 'Request failed with status code 400') { throw new BadRequestError('Bad request, please check your request and try again.')}
-  if(!data.status){ throw new InternalServerError('An error occurred') }
 
-  res.data = data
-  return next();
-  // return res.status(200).json(data);
+  if(data?.status){
+    res.authorizationData = data
+    return next();
+  } 
+  
+  else if(!data.status){
+    if(data.message === 'Request failed with status code 401'){
+      throw new UnAuthorizedError('Not authorized.');
+    }
+    if(data.message === 'Request failed with status code 400'){
+      throw new BadRequestError('Bad Request');
+    }
+    throw new InternalServerError(`${data.message}`);
+  }
 }
 
 export const Test = (req, res) => {
-  const { data } = res;
-  return res.status(200).json(data);
+  const { authorizationData } = res;
+  return res.status(200).json(authorizationData);
 }
 
 export const verifyTransaction = async (req, res) => {
@@ -42,9 +49,17 @@ export const verifyTransaction = async (req, res) => {
     }
   );
 
-  if(!data.status){
-    throw new BadRequestError('Bad Request')
+  if(data?.status && data?.data?.status === 'success'){
+    return res.status(200).json(data);
   }
-
-  return res.status(200).json(data);
+  
+  else if(!data.status){
+    if(data.message === 'Request failed with status code 401'){
+      throw new UnAuthorizedError('Not authorized.');
+    }
+    if(data.message === 'Request failed with status code 400'){
+      throw new BadRequestError('Bad Request');
+    }
+    throw new InternalServerError(`${data.message}`);
+  }
 }
