@@ -6,9 +6,9 @@ const VerifyPaystackTransaction = () => {
   const ref = params.get('reference');
   console.log(ref);
 
-//   useEffect(() => {
-// // 
-//   }, [ref])
+  useEffect(() => {
+    // const response = 
+  }, [ref])
 
   return (
     <main>
