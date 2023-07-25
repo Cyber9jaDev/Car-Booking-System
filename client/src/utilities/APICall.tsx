@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Toast } from './Functions';
 
 export default async function APICall(
@@ -32,32 +32,37 @@ export default async function APICall(
       }
       return response
     },
-    async (error: AxiosError) => {
+    async (error) => {
       // Handle timeout error
       if(error.code ==='ECONNABORTED'){
-        Toast('error', 'The request took too long to complete, please check your network connection.');
+        Toast('fail', 'The request took too long to complete, please check your network connection.');
         return Promise.reject(new Error('The request took too long to complete.'))
       }
       // Handle other errors
-      else if(error?.response?.status === 401){
-        Toast('error', 'You are not authorized');
+      else if(error?.response?.status >= 401 && error?.response?.status <= 403){
+        Toast("fail", `${error?.response?.data?.message as string}`);
         localStorage.clear();
-        window.location.reload();
-        return Promise.reject(new Error('You are not authorized.'));
+        return location.reload();
+        // return Promise.reject(new Error('You are not authorized.'));
       }
 
-      else if((error?.response?.status as number) >= 400 && (error?.response?.status as number) < 500){
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        Toast("error", `${(error?.response?.data as any).message as string}`);
-        return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
+      else if(error?.response?.status === 400){
+        Toast("fail", `${error?.response?.data?.message as string}`);
+        return Promise.reject(new Error(`${error?.response?.data?.message as string}`));
+        // return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
+      }
+
+      else if(error?.response?.status as number === 404){
+        Toast("fail", `${error?.response?.data?.message as string}`);
+        return Promise.reject(new Error(`${error?.response?.data?.message as string}`));
+        // return Promise.reject(new Error('Sorry your request is invalid. please check your request and try again'));
       }
 
       else if((error?.response?.status as number) >= 500){
-        Toast("error", "Sorry your request cannot be processed at this moment please try again later");
-        // window.location.reload();
-        Promise.reject(new Error('Sorry your request cannot be processed at this moment please try again later'))
+        Toast("fail", `${error?.response?.data?.message as string}`);
+        return Promise.reject(new Error(`${error?.response?.data?.message as string}`))
+        // return Promise.reject(new Error('Sorry your request cannot be processed at this moment please try again later'))
       }
-      return Promise.reject(error);
     }
   );
 

@@ -6,7 +6,7 @@ const UserRouter = express.Router();
 UserRouter.route('/register').post(register);
 UserRouter.route('/login').post(login);
 UserRouter.route('/paystack/transaction/initialize').post(initializeTransaction, Test);
-UserRouter.route('/book-ticket').patch(bookTicket, updateBookingsList);
+UserRouter.route('/book-ticket').post(bookTicket, updateBookingsList);
 UserRouter.route('/all-trips').get(getAllTicketsWithAvailableSeats);
 
 export default UserRouter;

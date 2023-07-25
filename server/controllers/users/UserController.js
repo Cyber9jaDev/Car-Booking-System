@@ -58,7 +58,7 @@ export const login = async (req, res) => {
 export async function bookTicket (req, res, next){
   const { ticketId, metadata, userId } = req.body;
 
-  if(!metadata?.seatNo || !ticketId || !metadata?.nextOfKinName || !metadata?.nextOfKinPhone || !metadata?.amount || !userId){
+  if(!metadata?.seatNumber || !ticketId || !metadata?.nextOfKinName || !metadata?.nextOfKinPhoneNumber || !metadata?.amount || !userId){
     throw new BadRequestError("Please provide all values");
   }
 
@@ -72,18 +72,18 @@ export async function bookTicket (req, res, next){
   }
   
   const bookedSeats = foundTicket.bookedSeats;
-  const isBookedSeat = bookedSeats.includes(metadata?.seatNo);
+  const isBookedSeat = bookedSeats.includes(metadata?.seatNumber);
 
   if(isBookedSeat){
-    throw new BadRequestError('Seat has been booked');
+    throw new BadRequestError('Seat not available for booking');
   }
 
   const availableSeats = foundTicket?.availableSeats;
-  const isAvailableSeat = availableSeats?.includes(metadata?.seatNo) ?? false;
+  const isAvailableSeat = availableSeats?.includes(metadata?.seatNumber) ?? false;
 
   if(isAvailableSeat){
-    updatedAvailableSeats = availableSeats.filter(num => num !== metadata?.seatNo);
-    updatedBookedSeats.push(...bookedSeats, metadata?.seatNo);
+    updatedAvailableSeats = availableSeats.filter(num => num !== metadata?.seatNumber);
+    updatedBookedSeats.push(...bookedSeats, metadata?.seatNumber);
 
     const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
 

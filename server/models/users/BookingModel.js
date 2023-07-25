@@ -10,9 +10,9 @@ const BookingSchema = new Schema({
       userId: { type: String, required: true },
       metadata: {
         nextOfKinName: { type: String, required: true },
-        nextOfKinPhone: { type: String, required: true },
+        nextOfKinPhoneNumber: { type: String, required: true },
         amount: { type: Number, required: true },
-        seatNo: { type: Number, required: true },
+        seatNumber: { type: Number, required: true },
       }
     }
   ],
