@@ -5,6 +5,7 @@ import { BookingContext } from "../../contexts/BookingContext";
 import { UserContext } from "../../contexts/UserContext";
 import { FormatAmount, Toast } from "../../utilities/Functions";
 import { useNavigate } from "react-router-dom";
+import PaymentService from "../../services/PaymentService";
 
 const PaymentModal = () => {
   const { closeModal, bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
@@ -76,7 +77,7 @@ const PaymentModal = () => {
         }
       }
 
-      const { data } = await UserService.InitializePaystackTransaction(body);
+      const { data } = await PaymentService.InitializePaystackTransaction(body);
       if (data?.status) {
         return window.location.href = data?.data?.authorization_url;
       }

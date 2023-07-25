@@ -13,18 +13,7 @@ type Metadata = {
   seatNo: number | null
 }
 
-type PaystackMetadataType = { 
-  "userId": string,
-  "ticketId": string | undefined,
-  "nextOfKinName": string, 
-  "nextOfKinPhoneNumber": string, 
-  "amount": number, 
-  "passengerName": string, 
-  "passengerPhoneNumber": string,
-  "seatNumber": number | null,
-}
 
-type PaystackPaymentType = { email: string, metadata: PaystackMetadataType }
 
 type BookTicketPayload = {userId: string, ticketId: string | undefined, metadata:  Metadata } 
 
@@ -39,14 +28,6 @@ export default class UserService {
 
   static GetAllTrips = async () => {
     return await APICall('api/v1/all-trips', 'GET', {});
-  }
-
-  static InitializePaystackTransaction = async (body: PaystackPaymentType) => {
-    return await APICall('api/v1/paystack/transaction/initialize', 'POST', body);
-  }
-
-  static VerifyPaystackTransaction = async (reference: string) => {
-    return await APICall(`api/v1/paystack/transaction/verify/${reference}`, 'GET', {});
   }
 
   static BookTicket = async (body:BookTicketPayload) => {

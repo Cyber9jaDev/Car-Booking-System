@@ -1,5 +1,5 @@
 import APICall from "../utilities/APICall.tsx";
-import { BookingType } from '../components/admin/Tickets.tsx';
+import { BookingType } from "../utilities/Types.tsx";
 
 export default class AdminService{
   static AddNewTrip = async (data:BookingType) => {
