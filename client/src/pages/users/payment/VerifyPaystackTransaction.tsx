@@ -1,14 +1,30 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
+import PaymentService from '../../../services/PaymentService';
+import UserService from '../../../services/UserService';
 
 const VerifyPaystackTransaction = () => {
   const location = window.location;
-  const params = useMemo(() => new URLSearchParams(location.search), [location]);
-  const ref = params.get('reference');
-  console.log(ref);
 
+  async function verifyTransaction(){
+    const params = new URLSearchParams(location.search);
+    const reference: string | null = params.get('reference');
+
+    try {
+      const response = await PaymentService.VerifyPaystackTransaction(reference);
+      console.log(response?.data?.data);
+      if(response?.data?.data.status === 'success'){
+        // const res = await UserService.BookTicket()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const verification = useCallback(() => { verifyTransaction()}, []);
+  
   useEffect(() => {
-    // const response = 
-  }, [ref])
+    verification();
+  }, [])
 
   return (
     <main>
