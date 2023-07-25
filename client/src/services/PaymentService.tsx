@@ -14,11 +14,14 @@ type PaystackMetadataType = {
 type PaystackPaymentType = { email: string, metadata: PaystackMetadataType }
 
 export default class PaymentService{
+
   static InitializePaystackTransaction = async (body: PaystackPaymentType) => {
     return await APICall('api/v1/paystack/transaction/initialize', 'POST', body);
   }
 
-  static VerifyPaystackTransaction = async (reference: string) => {
+  static VerifyPaystackTransaction = async (reference: string | null) => {
+    if(typeof(reference) === null){return}
     return await APICall(`api/v1/paystack/transaction/verify/${reference}`, 'GET', {});
   }
+  
 }
