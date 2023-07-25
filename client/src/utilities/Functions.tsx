@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { buses, cities } from "./Constants";
 
-export const Toast = ( type: string, text : string) => {
+export const Toast = ( type: 'success' | 'fail', text : string) => {
   if(type === 'success') return toast.success(text);
   return toast.error(text);
 }

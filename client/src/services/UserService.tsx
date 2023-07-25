@@ -8,14 +8,12 @@ interface AuthUserPayload{
 
 type Metadata = { 
   nextOfKinName: string, 
-  nextOfKinPhone: string, 
+  nextOfKinPhoneNumber: string, 
   amount: number, 
-  seatNo: number | null
+  seatNumber: number
 }
 
-
-
-type BookTicketPayload = {userId: string, ticketId: string | undefined, metadata:  Metadata } 
+type BookTicketPayload = {userId: string, ticketId: string, metadata: Metadata } 
 
 export default class UserService {
   static Register = async (data: AuthUserPayload) => {
@@ -31,7 +29,7 @@ export default class UserService {
   }
 
   static BookTicket = async (body:BookTicketPayload) => {
-    return await APICall('api/v1/book-ticket', 'PATCH', body);
+    return await APICall('api/v1/book-ticket', 'POST', body);
   }
 
 }
