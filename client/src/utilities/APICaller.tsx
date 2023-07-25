@@ -35,7 +35,7 @@ axios.interceptors.response.use(
   }
 );
 
-export default async function APICall<T>(
+export default async function APICaller<T>(
   url: string,
   method: AxiosRequestConfig['method'],
   data: AxiosRequestConfig['data'],

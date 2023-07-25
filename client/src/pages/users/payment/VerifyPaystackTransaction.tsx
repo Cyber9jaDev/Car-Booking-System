@@ -29,10 +29,11 @@ const VerifyPaystackTransaction = () => {
           const { data } = await UserService.BookTicket(body);
           if(data){
             Toast('success', 'Seat successfully booked');
-            // return navigate('/')
+            return navigate('/');
           }
         }
       } catch (error) {
+        console.log(error);
         return error;
       }
     }
