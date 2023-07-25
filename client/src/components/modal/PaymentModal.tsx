@@ -16,7 +16,7 @@ const PaymentModal = () => {
     e.preventDefault();
 
     if(!currentUser){ 
-      Toast('error', 'Please log in');
+      Toast('fail', 'Please log in');
       localStorage.clear();
       return navigate('/login');
     } 
