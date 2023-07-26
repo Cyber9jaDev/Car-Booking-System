@@ -31,8 +31,8 @@ const Signup = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if(formData.password !== formData.confirmPassword){ return Toast('error', 'Passwords do not match') }
-    if(formData.password.length < 8 ) { return Toast("error", "Password length cannot be less than 8 characters")}
+    if(formData.password !== formData.confirmPassword){ return Toast('fail', 'Passwords do not match') }
+    if(formData.password.length < 8 ) { return Toast('fail', "Password length cannot be less than 8 characters")}
     if(!isValidPassword(formData.password)){ return }
     
     const payload: StateType = {
