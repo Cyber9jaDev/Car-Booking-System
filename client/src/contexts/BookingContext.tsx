@@ -50,8 +50,11 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
 
   const getTicketsList = async() => {
     try {
-      const { data } = await UserService.GetAllTrips();
-      setBookingState(prev => ({ ...prev, trips: [ ...data ] }))
+      // const { data } = await UserService.GetAllTrips();
+      const response = await UserService.GetAllTrips();
+      console.log(response);
+      // const tripsArray : BookingType[] = Array.from(response);
+      setBookingState(prev => ({ ...prev, trips: [...response] }))
     } catch (error) {
       return error
     } 

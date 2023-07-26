@@ -1,9 +1,10 @@
 import { useCallback, useContext, useEffect } from 'react';
 import '../../sass/booking.scss';
 import TicketSelect from './TicketSelect';
-import { BookingContext, BookingType } from '../../contexts/BookingContext';
+import { BookingContext } from '../../contexts/BookingContext';
 import Modal from '../modal/Modal';
 import SeatModal from '../modal/SeatModal';
+import { BookingType } from '../../utilities/Types';
 
 
 const TicketsList = () => {
