@@ -1,4 +1,5 @@
 import APICall from "../utilities/APICall.tsx";
+import { BookingType } from "../utilities/Types.tsx";
 
 interface AuthUserPayload{
   username?: string,
@@ -25,7 +26,7 @@ export default class UserService {
   }
 
   static GetAllTrips = async () => {
-    return await APICall('api/v1/all-trips', 'GET', {});
+    return await APICall<BookingType>('api/v1/all-trips', 'GET', {});
   }
 
   static BookTicket = async (body:BookTicketPayload) => {
