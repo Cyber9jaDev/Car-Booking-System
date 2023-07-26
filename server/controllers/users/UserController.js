@@ -8,7 +8,7 @@ import Bookings from "../../models/users/BookingModel.js";
 export const register = async (req, res) => {
   const { email, fullName, password, phone } = req.body;
 
-  if(!email || !fullName || !password || !phone){ throw new BadRequestError('Fill in all fields')};
+  if(!email || !fullName || !password || !phone){ throw new BadRequestError('Fill all fields')};
   
   validatePassword(password);
 
@@ -20,15 +20,16 @@ export const register = async (req, res) => {
     const newUser = await User.create({ email, phone, password, fullName });
     const token = await newUser.generateJWT();
     // if(newUser){ return res.status(StatusCodes.CREATED).json(newUser, token)}
-    if(newUser){ return res.status(StatusCodes.CREATED).json({ 
-      email: newUser?.email, 
-      fullName: newUser?.fullName, 
-      phone: newUser?.phone,
-      userId: foundUser._id,
-      token 
+    if(newUser){ 
+      return res.status(StatusCodes.CREATED).json({ 
+        email: newUser?.email, 
+        fullName: newUser?.fullName, 
+        phone: newUser?.phone,
+        userId: newUser._id,
+        token 
     })}
   }
-  throw new InternalServerError('Something went wrong!');
+  // throw new InternalServerError('Something went wrong!');
 }
 
 export const login = async (req, res) => {
