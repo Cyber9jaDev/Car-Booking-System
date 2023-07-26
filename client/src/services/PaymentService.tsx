@@ -1,4 +1,5 @@
 import APICall from "../utilities/APICall";
+import { VerificationTypes } from "../utilities/Types";
 
 type PaystackMetadataType = { 
   userId: string,
@@ -11,6 +12,7 @@ type PaystackMetadataType = {
   seatNumber: number | null,
 }
 
+
 type PaystackPaymentType = { email: string, metadata: PaystackMetadataType }
 
 export default class PaymentService{
@@ -21,7 +23,7 @@ export default class PaymentService{
 
   static VerifyPaystackTransaction = async (reference: string | null) => {
     if(typeof(reference) === null){return}
-    return await APICall(`api/v1/paystack/transaction/verify/${reference}`, 'GET', {});
+    return await APICall<VerificationTypes>(`api/v1/paystack/transaction/verify/${reference}`, 'GET', {});
   }
   
 }
