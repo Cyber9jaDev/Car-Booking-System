@@ -1,0 +1,109 @@
+export type BookingType = {
+  _id: string,
+  busType: string,
+  travellingFrom: string,
+  travellingTo: string,
+  departureDate: string,
+  price: number,
+  bookedSeats: number[],
+  availableSeats: number[],
+}; 
+
+
+export type VerificationTypes = {
+    // status: boolean,
+    // message: string,
+    data: {
+        id: number,
+        domain: string,
+        status: string,
+        reference: string,
+        receipt_number: null | string,
+        amount: number,
+        message: null | string,
+        gateway_response: string,
+        paid_at: string,
+        created_at: string,
+        channel: string,
+        currency: string,
+        ip_address: string,
+        metadata: {
+            userId: string,
+            ticketId: string,
+            passengerName: string,
+            passengerPhoneNumber: string,
+            nextOfKinName: string,
+            nextOfKinPhoneNumber: string,
+            amount: number,
+            seatNumber: number
+        },
+        log: {
+            start_time: number,
+            time_spent: number,
+            attempts: number,
+            errors: number,
+            success: boolean,
+            mobile: boolean,
+            input: [],
+            history: [
+                {
+                    type: string,
+                    message: string,
+                    time: 1
+                },
+                {
+                    type: string,
+                    message: string,
+                    time: 3
+                },
+                {
+                    type: string,
+                    message: string,
+                    time: 3
+                }
+            ]
+        },
+        fees: 29500,
+        fees_split: null,
+        authorization: {
+            authorization_code: string,
+            bin: string,
+            last4:string,
+            exp_month: string,
+            exp_year: string,
+            channel: string,
+            card_type: string,
+            bank: string,
+            country_code: string,
+            brand: string,
+            reusable: true,
+            signature: string,
+            account_name: null,
+            receiver_bank_account_number: null,
+            receiver_bank: null
+        },
+        customer: {
+            id: 131302264,
+            first_name: null,
+            last_name: null,
+            email: string,
+            customer_code: string,
+            phone: null,
+            metadata: null,
+            risk_action: string,
+            international_format_phone: null
+        },
+        plan: null,
+        split: object,
+        order_id: null,
+        paidAt: string,
+        createdAt: string,
+        requested_amount: 1300000,
+        pos_transaction_data: null,
+        source: null,
+        fees_breakdown: null,
+        transaction_date: string,
+        plan_object: object,
+        subaccount: object
+    }
+}

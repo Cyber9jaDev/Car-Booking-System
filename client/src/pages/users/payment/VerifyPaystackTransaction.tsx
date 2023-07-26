@@ -3,10 +3,12 @@ import PaymentService from '../../../services/PaymentService';
 import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
+import { VerificationTypes } from '../../../utilities/Types';
 
 const VerifyPaystackTransaction = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  // const te;
 
   useEffect(() => { 
     ( async () => {
@@ -15,20 +17,21 @@ const VerifyPaystackTransaction = () => {
         const params = new URLSearchParams(location.search);
         const reference = params.get('reference');
         try {
-          const response = await PaymentService.VerifyPaystackTransaction(reference);
-          if (response?.data?.data.status === 'success') {
+          const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+          console.log(verificationResponse);
+          if (verificationResponse?.data?.status === 'success') {
             const body = {
-              userId: response?.data?.data?.metadata?.userId as string, 
-              ticketId: response?.data?.data?.metadata?.ticketId as string, 
+              userId: verificationResponse?.data?.metadata?.userId, 
+              ticketId: verificationResponse?.data?.metadata?.ticketId, 
               metadata: {
-                seatNumber: response?.data?.data?.metadata?.seatNumber as number,
-                amount: (response?.data?.data?.amount / 100) as number,
-                nextOfKinPhoneNumber: response?.data?.data?.metadata?.nextOfKinPhoneNumber as string,
-                nextOfKinName: response?.data?.data?.metadata?.nextOfKinName as string
+                seatNumber: verificationResponse?.data?.metadata?.seatNumber,
+                amount: verificationResponse?.data?.amount / 100,
+                nextOfKinPhoneNumber: verificationResponse?.data?.metadata?.nextOfKinPhoneNumber,
+                nextOfKinName: verificationResponse?.data?.metadata?.nextOfKinName
               }
             };
-            const { data } = await UserService.BookTicket(body);
-            if (data) { 
+            const bookingResponse  = await UserService.BookTicket(body);
+            if (bookingResponse) { 
               Toast('success', 'Booked successfully')
               // return navigate('/');
             }
@@ -39,7 +42,7 @@ const VerifyPaystackTransaction = () => {
       };
       
       await verifyTransaction();
-    });
+    })();
   }, [location, navigate]);
 
   return (

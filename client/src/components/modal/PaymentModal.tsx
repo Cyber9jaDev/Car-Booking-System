@@ -41,10 +41,11 @@ const PaymentModal = () => {
         }
       }
 
-      const { data } = await PaymentService.InitializePaystackTransaction(body);
-      if (data?.status) {
-        return window.location.href = data?.data?.authorization_url;
-      }
+      const response = await PaymentService.InitializePaystackTransaction(body);
+      console.log(response);
+      // if (data?.status) {
+      //   return window.location.href = data?.data?.authorization_url;
+      // }
     } catch (error) {
       return error;
     }
