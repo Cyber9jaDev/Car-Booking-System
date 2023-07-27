@@ -3,48 +3,40 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserService from '../../services/UserService';
 import { Toast } from '../../utilities/Functions';
 import { isValidPassword } from '../../utilities/Regex';
-import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/UserContext';
+import { AuthUserType } from '../../utilities/Types';
 
-type AuthLoginType = { email: string,  password: string }
+type LoginFormState = { email: string,  password: string }
 
 const Login = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const [ visiblePassword, setVisiblePassword ] = useState<boolean>(false);
-  const [ formData, setFormData ] = useState<AuthLoginType>({
-    email: '',
-    password: '',
-  });
-
+  const [ isVisiblePassword, setIsVisiblePassword ] = useState<boolean>(false);
+  const [ userFormData, setUserFormData ] = useState<LoginFormState>({ email: '', password: ''});
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const { email, password } = userFormData;
 
-  const handleSubmit = async(e: FormEvent) => {
+  const handleLoginSubmit = async(e: FormEvent) => {
     e.preventDefault();
-    if(!isValidPassword(formData.password)) return
 
-    const payload : AuthLoginType = {
-      email: formData.email,
-      password: formData.password,
-    }
+    if(!isValidPassword(password)) return
 
-    setIsLoading(true);
+    const payload : LoginFormState = { email, password }
+
     try {
-      const { data } = await UserService.Login(payload);
-      if(data){
-        const user : AuthUserDataType = {
-          email: data.email,
-          fullName: data.fullName,
-          phone: data.phone,
-          userId: data.userId,
-        } 
+      setIsLoading(true);
+      const response = await UserService.Login(payload);
+      if(response){
+        const { email, phone, fullName, userId } = response;
+        const user : Omit<AuthUserType, 'token'> = { email, fullName, phone, userId } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);
         Toast('success', 'Login successful');
         return navigate('/');
       }
     } catch (error) {
-        return error;
+        console.error(error);
     } finally{
         setIsLoading(false);
     }
@@ -53,7 +45,7 @@ const Login = () => {
   return (
     <main id='registration'>
       <div className="container d-flex align-items-center justify-content-center h-100 w-100">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLoginSubmit}>
           <header>
             <h4 className='text-center'>Login to continue</h4>
           </header>
@@ -61,14 +53,28 @@ const Login = () => {
           <div className='wrapper mt-3'>
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="email">Email</label>
-              <input onChange={(e) => setFormData({ ...formData, email: e.target.value })} className='d-block form-control' id='email' type="email" required/>
+              <input
+                required
+                className='d-block form-control' 
+                value={email}
+                id='email' 
+                type="email" 
+                onChange={(e) => setUserFormData({ ...userFormData, email: e.target.value })} 
+              />
             </div>
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
-              <input onChange={(e) => setFormData({ ...formData, password: e.target.value })} className='d-block form-control' id='password' type={`${ visiblePassword ? 'text' : 'password' }`} required />
+              <input 
+                required
+                className='d-block form-control' 
+                value={password}
+                id='password' 
+                type={`${ isVisiblePassword ? 'text' : 'password' }`} 
+                onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })} 
+              />
               <i 
-                onClick={() => !formData.password.length ? null : setVisiblePassword(!visiblePassword)} 
-                className={`eye-icon fa-regular fa-eye${visiblePassword && formData.password.length ? '' : '-slash'}`}>
+                className={`eye-icon fa-regular fa-eye${isVisiblePassword && password.length ? '' : '-slash'}`}
+                onClick={() => !password.length ? null : setIsVisiblePassword(!isVisiblePassword)}>
               </i>
             </div>
 

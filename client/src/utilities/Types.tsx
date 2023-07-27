@@ -9,8 +9,17 @@ export type BookingType = {
   availableSeats: number[],
 }; 
 
+export type PaystackInitializerType = {
+  status: boolean,
+  message: string,
+  data: {
+    authorization_url: string,
+    access_code: string,
+    reference: string
+  }
+}
 
-export type VerificationTypes = {
+export type PaystackVerificationType = {
     data: {
       status: string,
       reference: string,
@@ -26,4 +35,12 @@ export type VerificationTypes = {
         seatNumber: number
       },
     }
+}
+
+export type AuthUserType = {
+  email: string,
+  userId: string,
+  fullName: string,
+  phone: string
+  token: string
 }
