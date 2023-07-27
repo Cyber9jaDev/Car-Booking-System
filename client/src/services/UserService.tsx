@@ -26,7 +26,7 @@ export default class UserService {
   }
 
   static GetAllTrips = async () => {
-    return await APICall<BookingType>('api/v1/all-trips', 'GET', {});
+    return await APICall<BookingType[]>('api/v1/all-trips', 'GET', {});
   }
 
   static BookTicket = async (body:BookTicketPayload) => {
