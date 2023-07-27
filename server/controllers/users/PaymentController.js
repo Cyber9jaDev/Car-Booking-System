@@ -19,7 +19,7 @@ export const initializeTransaction = async(req, res, next) => {
   );
 
   if(data?.status){
-    res.authorizationData = data
+    res.authorizationData = data;
     return next();
   } 
   
