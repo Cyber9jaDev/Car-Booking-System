@@ -63,3 +63,4 @@ export const verifyTransaction = async (req, res) => {
     throw new InternalServerError(`${data.message}`);
   }
 }
+
