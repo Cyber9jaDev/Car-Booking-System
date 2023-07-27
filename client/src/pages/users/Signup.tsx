@@ -1,12 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import '../../sass/signin.scss';
-import { FormEvent, useContext, useState } from 'react';
+import { FormEvent, useContext, useState, ChangeEvent } from 'react';
 import { Toast } from '../../utilities/Functions';
 import UserService from '../../services/UserService';
 import { isValidPassword } from '../../utilities/Regex';
-import { AuthUserDataType, UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/UserContext';
+import { AuthUserType } from '../../utilities/Types';
 
-export type StateType = {
+export type SignupFormState = {
   fullName: string,
   email: string,
   password: string,
@@ -17,51 +18,46 @@ export type StateType = {
 }
 
 const Signup = () => {
-  const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const [toggleVisibility, setToggleVisibility] = useState({
-    visiblePassword: false,
-    visibleConfirmPassword: false,
+  const [ isSubmitting, setIsSubmitting ] = useState<boolean>(false);
+  const [ passwordVisibility , setPasswordVisibility ] = useState({
+    isVisiblePassword: false,
+    isVisibleConfirmPassword: false,
   });
-  const [formData, setFormData] = useState<StateType>(
+  const [userFormData, setUserFormData] = useState<SignupFormState>(
     { fullName: "", email: "", phone: '', password: "", confirmPassword: "", hasAgreedTerms: false }
   );
+  const { fullName, email, phone, password, confirmPassword, hasAgreedTerms} = userFormData ;
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if(formData.password !== formData.confirmPassword){ return Toast('fail', 'Passwords do not match') }
-    if(formData.password.length < 8 ) { return Toast('fail', "Password length cannot be less than 8 characters")}
-    if(!isValidPassword(formData.password)){ return }
+    if(password !== confirmPassword){ return Toast('fail', 'Passwords do not match') }
+    if(password.length < 8 ) { return Toast('fail', "Password length cannot be less than 8 characters")}
+    if(!isValidPassword(password)){ return }
     
-    const payload: StateType = {
-      fullName: formData.fullName,
-      email: formData.email,
-      password: formData.password,
-      phone: formData.phone
-    }
-    setIsLoading(true);
+    const payload: SignupFormState = { fullName, email, password, phone }
+
     try {
-      const { data } = await UserService.Register(payload);
-      if(data){
-        const user : AuthUserDataType = {
-          email: data.email,
-          fullName: data.fullName,
-          phone: formData.phone,
-          userId: data.userId,
-        } 
+      setIsSubmitting(true);
+      const response = await UserService.Register(payload);
+      if(response){
+        const { email, phone, fullName, userId } = response
+        const user : Omit<AuthUserType, 'token'> = { email, fullName, phone, userId } 
         localStorage.setItem('currentUser', JSON.stringify(user));
         setCurrentUser(user);
         Toast('success', 'Registration successful');
         return navigate('/');
       }
     } catch (error) {
-      return error;
+      console.error(error);
     } finally{
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   }
+
+  const { isVisiblePassword, isVisibleConfirmPassword } = passwordVisibility;
 
   return (
     <main id='registration'>
@@ -75,53 +71,53 @@ const Signup = () => {
             {/* Full name */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="fullName">Full Name</label>
-              <input onChange={(e) => setFormData({ ...formData, fullName: e.target.value})} className='d-block form-control' id='fullName' type="text" required />
+              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , fullName: e.target.value})} className='d-block form-control' id='fullName' type="text" required />
             </div>
 
             {/* Email */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="email">Email</label>
-              <input onChange={(e) => setFormData({ ...formData, email: e.target.value})} className='d-block form-control' id='email' type="email" required />
+              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , email: e.target.value})} className='d-block form-control' id='email' type="email" required />
             </div>
 
             {/* Phone */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="phone">Phone Number</label>
-              <input onChange={(e) => setFormData({ ...formData, phone: e.target.value})} className='d-block form-control' id='phone' type="tel" required />
+              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , phone: e.target.value})} className='d-block form-control' id='phone' type="tel" required />
             </div>
 
             {/* Password */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="password">Password</label>
-              <input onChange={(e) => setFormData({ ...formData, password: e.target.value})} className='d-block form-control' id='password' type={toggleVisibility.visiblePassword ? 'text' : 'password'} required />
+              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , password: e.target.value})} className='d-block form-control' id='password' type={isVisiblePassword ? 'text' : 'password'} required />
               <i 
-                onClick={() => !formData.password.length ? null : setToggleVisibility({ ...toggleVisibility, visiblePassword: !toggleVisibility.visiblePassword })} 
-                className={`eye-icon fa-regular fa-eye${toggleVisibility.visiblePassword && formData.password.length ? '' : '-slash'}`}>
+                onClick={() => !password.length ? null : setPasswordVisibility({ ...passwordVisibility , isVisiblePassword: !isVisiblePassword })} 
+                className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisiblePassword && userFormData .password.length ? '' : '-slash'}`}>
               </i>
             </div>
 
             {/* Confirm Password */}
             <div className="form-group mb-4">
               <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
-              <input onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={toggleVisibility.visibleConfirmPassword ? 'text': 'password'} required />
+              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={isVisibleConfirmPassword ? 'text': 'password'} required />
               <i 
-                onClick={() => !formData.confirmPassword?.length ? null : setToggleVisibility({...toggleVisibility, visibleConfirmPassword: !toggleVisibility.visibleConfirmPassword})} 
-                className={`eye-icon fa-regular fa-eye${toggleVisibility.visibleConfirmPassword ? '' : '-slash'}`}>
+                onClick={() => !confirmPassword?.length ? null : setPasswordVisibility({...passwordVisibility , isVisibleConfirmPassword: !isVisibleConfirmPassword})} 
+                className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisibleConfirmPassword ? '' : '-slash'}`}>
               </i>
             </div>
 
             {/* Terms and Condition */}
             <div className="form-check my-4">
-              <input onChange={() => setFormData({ ...formData, hasAgreedTerms: !formData.hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
+              <input onChange={() => setUserFormData({ ...userFormData , hasAgreedTerms: !hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
               <label className="form-check-label" htmlFor="form-check-label">I agree to the the terms & conditions</label>
             </div>
 
             {/* Submit */}
             <button 
-              disabled = { !(formData.hasAgreedTerms && formData.email.length && formData.password.length && formData.confirmPassword?.length && !isLoading && formData.fullName.length) } 
+              disabled = { !(hasAgreedTerms && email.length && password.length && confirmPassword?.length && !isSubmitting && fullName.length) } 
               type="submit" 
               className="btn w-100">
-              { isLoading ? 'Loading...' : 'Submit'  }
+              { isSubmitting ? 'Submitting...' : 'Submit'  }
             </button>
             <p className="my-4">Already have an account? <Link to='/login'>Sign in</Link></p>
           </div>

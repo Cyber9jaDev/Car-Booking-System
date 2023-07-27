@@ -1,5 +1,4 @@
 import { FormEvent, useContext } from "react";
-import UserService from "../../services/UserService";
 import '../../sass/modal.scss';
 import { BookingContext } from "../../contexts/BookingContext";
 import { UserContext } from "../../contexts/UserContext";
@@ -8,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import PaymentService from "../../services/PaymentService";
 
 const PaymentModal = () => {
-  const { closeModal, bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
+  const { bookingState : { bookedData, selectedBus, selectedSeatNo } } = useContext(BookingContext);
   const { currentUser, nextOfKin } =  useContext(UserContext);
   const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ const PaymentModal = () => {
     }
 
     try {
-
       const body = {
         email: currentUser?.email,
         metadata: {
@@ -42,12 +40,13 @@ const PaymentModal = () => {
       }
 
       const response = await PaymentService.InitializePaystackTransaction(body);
-      console.log(response);
-      // if (data?.status) {
-      //   return window.location.href = data?.data?.authorization_url;
-      // }
+      
+      if (response?.status && response?.message === 'Authorization URL created') {
+        return window.location.href = response?.data?.authorization_url;
+      }
+      
     } catch (error) {
-      return error;
+      console.error(error);
     }
   }
 

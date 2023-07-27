@@ -3,7 +3,6 @@ import PaymentService from '../../../services/PaymentService';
 import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
-import { VerificationTypes } from '../../../utilities/Types';
 
 const VerifyPaystackTransaction = () => {
   const location = useLocation();
@@ -12,7 +11,6 @@ const VerifyPaystackTransaction = () => {
 
   useEffect(() => { 
     ( async () => {
-      
       const verifyTransaction = async () => {
         const params = new URLSearchParams(location.search);
         const reference = params.get('reference');
