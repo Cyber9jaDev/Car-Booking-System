@@ -9,11 +9,6 @@ const VerifyPaystackTransaction = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // const fetchData
-  }, [])
-  
-
   useEffect(() => { 
     const verifyTransaction = async () => {
       const params = new URLSearchParams(location.search);
@@ -21,21 +16,25 @@ const VerifyPaystackTransaction = () => {
       try {
         setIsLoading(true);
         const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-        if (verificationResponse?.data?.status === 'success') {
-          const {data : { amount,  metadata : { userId, ticketId, seatNumber, nextOfKinPhoneNumber, nextOfKinName } } } = verificationResponse
-          const body = {
-            userId, 
-            ticketId, 
-            metadata: { seatNumber, nextOfKinPhoneNumber, nextOfKinName, amount: amount / 100 }
-          };
-          const bookingResponse = await UserService.BookTicket(body);
-          if (bookingResponse.message === 'Ticket booked successfully') { 
-            console.log(bookingResponse)
-            Toast('success', `${bookingResponse.message}`);
-            setIsLoading(false);
-            // return navigate('/profile');
-          }
-        }
+        // if(verificationResponse?.data. === 'Ticket booked successfully'){
+        //   return;
+        // }
+        console.log(verificationResponse);
+        // if (verificationResponse?.data?.status === 'success') {
+        //   const {data : { amount,  metadata : { userId, ticketId, seatNumber, nextOfKinPhoneNumber, nextOfKinName } } } = verificationResponse
+        //   const body = {
+        //     userId, 
+        //     ticketId, 
+        //     metadata: { seatNumber, nextOfKinPhoneNumber, nextOfKinName, amount: amount / 100 }
+        //   };
+        //   const bookingResponse = await UserService.BookTicket(body);
+        //   if (bookingResponse.message === 'Ticket booked successfully') { 
+        //     console.log(bookingResponse)
+        //     Toast('success', `${bookingResponse.message}`);
+        //     setIsLoading(false);
+        //     // return navigate('/profile');
+        //   }
+        // }
       } catch (error) {
         console.error(error);
         setIsLoading(false);
