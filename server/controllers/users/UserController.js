@@ -69,7 +69,7 @@ export async function bookTicket (req, res, next){
   const foundTicket = await Trip.findOne({ _id:ticketId });
 
   if(!foundTicket){
-    return res.status(404).json({message: 'Ticket not found'})
+    return res.status(404).json({message: 'Ticket not found'});
   }
   
   const bookedSeats = foundTicket.bookedSeats;
