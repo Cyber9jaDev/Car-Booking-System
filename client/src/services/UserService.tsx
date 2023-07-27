@@ -30,7 +30,7 @@ export default class UserService {
   }
 
   static BookTicket = async (body:BookTicketPayload) => {
-    return await APICall('api/v1/book-ticket', 'POST', body);
+    return await APICall<{ message: string }>('api/v1/book-ticket', 'POST', body);
   }
 
 }

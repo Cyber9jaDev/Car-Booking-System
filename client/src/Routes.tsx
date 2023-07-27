@@ -14,6 +14,7 @@ import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
 import VerifyPaystackTransaction from "./pages/users/payment/VerifyPaystackTransaction";
+import Profile from "./pages/users/Profile";
 
 const RouterLinks = () => {
   return (
@@ -31,6 +32,7 @@ const RouterLinks = () => {
         <Route path="/modal" element = {<PaymentModal/>} />
         <Route path="/paystack/verify-payment" element = {<VerifyPaystackTransaction/>} />
         <Route path="/booking" element = { <Bookings/> } />
+        <Route path="/profile" element = { <Profile/> } />
         <Route path="/admin/home" element={ <Home/>} /> 
       </Routes>
       <Footer />
