@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import '../../sass/booking.scss';
 import TicketSelect from './TicketSelect';
 import { BookingContext } from '../../contexts/BookingContext';
@@ -10,9 +10,7 @@ import { BookingType } from '../../utilities/Types';
 const TicketsList = () => {
   const { bookingState:{ trips }, getTicketsList } = useContext(BookingContext);
 
-  const memoizedTicketLists = useCallback( () => { getTicketsList() }, [getTicketsList] );
-
-  useEffect(() => { memoizedTicketLists() }, []);
+  useEffect(() => { getTicketsList() }, []);
 
   return (
     <>

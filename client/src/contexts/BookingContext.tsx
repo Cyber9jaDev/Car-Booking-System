@@ -50,16 +50,14 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
 
   const getTicketsList = async() => {
     try {
-      // const { data } = await UserService.GetAllTrips();
       const response = await UserService.GetAllTrips();
-      console.log(response);
-      // const tripsArray : BookingType[] = Array.from(response);
-      setBookingState(prev => ({ ...prev, trips: [...response] }))
+      setBookingState(prev => ({ ...prev, trips: [...response] }));
     } catch (error) {
       return error
     } 
   }
 
+  // Please remove this info, it is not in use
   const getSeatInfo = async (id: string): Promise<unknown> =>  {
     try {
       return id
