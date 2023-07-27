@@ -39,7 +39,7 @@ export const Test = (req, res) => {
   return res.status(200).json(authorizationData);
 }
 
-export const verifyTransaction = async (req, res) => {
+export const verifyTransaction = async (req, res, next) => {
   const { reference } = req.params;
   const { data }  = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
     {
@@ -50,7 +50,8 @@ export const verifyTransaction = async (req, res) => {
   );
 
   if(data?.status && data?.data?.status === 'success'){
-    return res.status(200).json(data);
+    res.verificationResponse = data;
+    next();
   }
   
   else if(!data.status){
@@ -64,3 +65,9 @@ export const verifyTransaction = async (req, res) => {
   }
 }
 
+
+export const testing = (req, res) => {
+  const verificationResponse = res.verificationResponse;
+  return res.status(200).json(verificationResponse);
+
+}
