@@ -122,7 +122,6 @@ export async function updateBookingsList (req, res){
       // return res.status(200).json(updatedExistingBooking);
       updatedExistingBooking.message = 'Ticket booked successfully';
       return res.status(200).json(updatedExistingBooking);
-
     }
     throw new InternalServerError('An error occurred, please try again');
   }
