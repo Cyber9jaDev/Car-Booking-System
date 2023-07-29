@@ -31,4 +31,10 @@
   .reference > p > strong{
     font-size: 1.5rem;
   }
+
+  @media screen and (max-width: 486px) {
+    .confirmation__text{
+      width: 100% !important;
+    }
+  }
 }
