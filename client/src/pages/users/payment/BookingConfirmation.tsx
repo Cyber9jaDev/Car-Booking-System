@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PaymentService from '../../../services/PaymentService';
 import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,31 +14,53 @@ const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => { 
-    const verifyTransaction = async () => {
-      const params = new URLSearchParams(location.search);
-      const reference = params.get('reference');
-      
-      try {
-        setIsLoading(true);
-        const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-        if(verificationResponse?.status){
-          setBookingInfo({...verificationResponse });
-          return;
-        }
-      } catch (error) {
-        console.error(error);
-        setHasError(true);
-      }  finally{
-        setIsLoading(false)
+  const verifyTransaction = useCallback(async () => {
+    const params = new URLSearchParams(location.search);
+    const reference = params.get('reference');
+
+    try {
+      setHasError(false);
+      setIsLoading(true);
+      const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+      if (verificationResponse?.status) {
+        setBookingInfo({ ...verificationResponse });
+        return;
       }
-    };
+    } catch (error) {
+      console.error(error);
+      setHasError(true);
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+  }, [location.search]);
+
+
+  useEffect(() => { 
+    // const verifyTransaction = async () => {
+    //   const params = new URLSearchParams(location.search);
+    //   const reference = params.get('reference');
+      
+    //   try {
+    //     setHasError(false);
+    //     setIsLoading(true);
+    //     const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+    //     if(verificationResponse?.status){
+    //       setBookingInfo({...verificationResponse });
+    //       return;
+    //     }
+    //   } catch (error) {
+    //     console.error(error);
+    //     setHasError(true);
+    //     return;
+    //   }  finally{
+    //     setIsLoading(false);
+    //   }
+    // };
 
     verifyTransaction();
     
-  }, []);
-
-  console.log(bookingInfo);
+  }, [verifyTransaction]);
 
   return (
     <main id='verification'>
