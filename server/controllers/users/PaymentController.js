@@ -18,9 +18,8 @@ export const initializeTransaction = async(req, res, next) => {
     }
   );
 
-  if(data?.status){
-    res.authorizationData = data;
-    return next();
+  if(data?.status && data?.message === 'Authorization URL created'){
+    return res.status(200).json(data)
   } 
   
   else if(!data.status){
@@ -32,11 +31,6 @@ export const initializeTransaction = async(req, res, next) => {
     }
     throw new InternalServerError(`${data.message}`);
   }
-}
-
-export const Test = (req, res) => {
-  const { authorizationData } = res;
-  return res.status(200).json(authorizationData);
 }
 
 export const verifyTransaction = async (req, res, next) => {
@@ -64,7 +58,6 @@ export const verifyTransaction = async (req, res, next) => {
     throw new InternalServerError(`${data.message}`);
   }
 }
-
 
 export const testing = (req, res) => {
   const verificationResponse = res.verificationResponse;

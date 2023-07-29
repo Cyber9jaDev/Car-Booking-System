@@ -20,21 +20,19 @@ export type PaystackInitializerType = {
 }
 
 export type PaystackVerificationType = {
-    data: {
-      status: string,
-      reference: string,
-      amount: number,
-      metadata: {
-        userId: string,
-        ticketId: string,
-        passengerName: string,
-        passengerPhoneNumber: string,
-        nextOfKinName: string,
-        nextOfKinPhoneNumber: string,
-        amount: number,
-        seatNumber: number
-      },
-    }
+  status: boolean,
+  reference: string,
+  userId: string,
+  ticketId: string,
+  amount: number,
+  metadata: {
+    passengerName: string,
+    passengerPhoneNumber: string,
+    nextOfKinName: string,
+    nextOfKinPhoneNumber: string,
+    amount: number,
+    seatNumber: number
+  },
 }
 
 export type AuthUserType = {

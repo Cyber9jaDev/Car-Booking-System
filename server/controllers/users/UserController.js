@@ -68,7 +68,6 @@ export async function bookTicket (req, res, next){
   let updatedBookedSeats = [];
   let updatedAvailableSeats = [];
 
-
   const foundTicket = await Trip.findOne({ _id:ticketId });
 
   if(!foundTicket){
@@ -118,19 +117,16 @@ export async function updateBookingsList (req, res){
     const updatedExistingBooking = await Bookings.findOneAndUpdate({ticketId}, { passengers: updatedPassengers }, { new: true });
     
     if(updatedExistingBooking){
-      // return res.status(200).json({ message: 'Ticket booked successfully' });
-      // return res.status(200).json(updatedExistingBooking);
-      updatedExistingBooking.message = 'Ticket booked successfully';
-      return res.status(200).json(updatedExistingBooking);
+      return res.status(200).json({ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
     }
     throw new InternalServerError('An error occurred, please try again');
   }
   
-  const newBooking = await Bookings.create({ ticketId, passengers: [{userId, metadata}] });
-  if(!newBooking){ throw new BadRequestError('Bad Request')}
-  newBooking.message = 'Ticket booked successfully';
-  return res.status(200).json(newBooking);
-    // return res.status(200).json({ message: 'Ticket booked successfully'});
+  const newBooking = await Bookings.create({ ticketId, passengers: [{ userId, metadata }] });
+  if(newBooking){ 
+    return res.status(200).json({ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
+  }
+  throw new InternalServerError('An error occurred, please try again');
 }
 
 export const getAllTicketsWithAvailableSeats  = async (req, res) => {

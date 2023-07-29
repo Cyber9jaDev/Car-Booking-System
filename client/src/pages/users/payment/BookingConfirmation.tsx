@@ -3,48 +3,42 @@ import PaymentService from '../../../services/PaymentService';
 import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
-import '../../../sass/verification.scss'
+import '../../../sass/verification.scss';
+import {PaystackVerificationType} from '../../../utilities/Types'
+
 
 const BookingConfirmation = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [bookingInfo, setBookingInfo] = useState({} as PaystackVerificationType);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // useEffect(() => { 
-  //   const verifyTransaction = async () => {
-  //     const params = new URLSearchParams(location.search);
-  //     const reference = params.get('reference');
-  //     try {
-  //       setIsLoading(true);
-  //       const verificationResponse = await PaymentService.BookingConfirmation(reference);
-  //       // if(verificationResponse?.data. === 'Ticket booked successfully'){
-  //       //   return;
-  //       // }
-  //       console.log(verificationResponse);
-  //       // if (verificationResponse?.data?.status === 'success') {
-  //       //   const {data : { amount,  metadata : { userId, ticketId, seatNumber, nextOfKinPhoneNumber, nextOfKinName } } } = verificationResponse
-  //       //   const body = {
-  //       //     userId, 
-  //       //     ticketId, 
-  //       //     metadata: { seatNumber, nextOfKinPhoneNumber, nextOfKinName, amount: amount / 100 }
-  //       //   };
-  //       //   const bookingResponse = await UserService.BookTicket(body);
-  //       //   if (bookingResponse.message === 'Ticket booked successfully') { 
-  //       //     console.log(bookingResponse)
-  //       //     Toast('success', `${bookingResponse.message}`);
-  //       //     setIsLoading(false);
-  //       //     // return navigate('/profile');
-  //       //   }
-  //       // }
-  //     } catch (error) {
-  //       console.error(error);
-  //       setIsLoading(false);
-  //     } 
-  //   };
+  useEffect(() => { 
+    const verifyTransaction = async () => {
+      const params = new URLSearchParams(location.search);
+      const reference = params.get('reference');
+      
+      try {
+        setIsLoading(true);
+        const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+        if(verificationResponse?.status){
+          setBookingInfo({...verificationResponse });
+          return;
+        }
+      } catch (error) {
+        console.error(error);
+        setHasError(true);
+      }  finally{
+        setIsLoading(false)
+      }
+    };
 
-  //   verifyTransaction();
+    verifyTransaction();
     
-  // }, [location]);
+  }, []);
+
+  console.log(bookingInfo);
 
   return (
     <main id='verification'>
@@ -64,7 +58,7 @@ const BookingConfirmation = () => {
           <div className="row">
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Name:</p>
-              <strong className='m-0'>AYODEJI OLADAPO ADEWALE</strong>
+              <strong className='m-0'>{bookingInfo?.metadata?.passengerName}</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Phone:</p>
