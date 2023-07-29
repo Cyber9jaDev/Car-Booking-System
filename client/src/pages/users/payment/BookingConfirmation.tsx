@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
 import '../../../sass/verification.scss'
 
-const VerifyPaystackTransaction = () => {
+const BookingConfirmation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const VerifyPaystackTransaction = () => {
   //     const reference = params.get('reference');
   //     try {
   //       setIsLoading(true);
-  //       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+  //       const verificationResponse = await PaymentService.BookingConfirmation(reference);
   //       // if(verificationResponse?.data. === 'Ticket booked successfully'){
   //       //   return;
   //       // }
@@ -60,7 +60,7 @@ const VerifyPaystackTransaction = () => {
           <p className='m-0'>PNR: <strong>55S468</strong></p> 
         </div>
 
-        <div className="booking__info d-flex align-self-center justify-content-between my-5 w-75 mx-auto">
+        <div className="booking__info d-flex align-self-center w-75 justify-content-between my-5 mx-auto">
           <div className="row">
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Name:</p>
@@ -114,4 +114,4 @@ const VerifyPaystackTransaction = () => {
   );
 };
 
-export default VerifyPaystackTransaction;
+export default BookingConfirmation;

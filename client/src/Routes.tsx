@@ -13,8 +13,8 @@ import PaymentModal from "./components/modal/PaymentModal";
 import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
-import VerifyPaystackTransaction from "./pages/users/payment/VerifyPaystackTransaction";
 import Profile from "./pages/users/Profile";
+import BookingConfirmation from "./pages/users/payment/BookingConfirmation";
 
 const RouterLinks = () => {
   return (
@@ -30,7 +30,7 @@ const RouterLinks = () => {
         <Route path="/contact" element = {<Contact/>} />
         <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
-        <Route path="/paystack/verify-payment" element = {<VerifyPaystackTransaction/>} />
+        <Route path="/booking/confirmation" element = {<BookingConfirmation/>} />
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/profile" element = { <Profile/> } />
         <Route path="/admin/home" element={ <Home/>} /> 

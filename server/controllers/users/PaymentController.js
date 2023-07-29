@@ -7,7 +7,7 @@ export const initializeTransaction = async(req, res, next) => {
     {
       amount: metadata?.amount * 100, 
       email, 
-      callback_url: 'http://localhost:5173/paystack/verify-payment', 
+      callback_url: 'http://localhost:5173/booking/confirmation', 
       "metadata": JSON.stringify(metadata)
     },
     {
