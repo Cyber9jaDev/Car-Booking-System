@@ -10,13 +10,18 @@ const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+console.log('Out');
+  useEffect(() => {
+    console.log('Effect')
+  }, [])
+  
   // useEffect(() => { 
   //   const verifyTransaction = async () => {
   //     const params = new URLSearchParams(location.search);
   //     const reference = params.get('reference');
   //     try {
   //       setIsLoading(true);
-  //       const verificationResponse = await PaymentService.BookingConfirmation(reference);
+  //       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference as string);
   //       // if(verificationResponse?.data. === 'Ticket booked successfully'){
   //       //   return;
   //       // }
