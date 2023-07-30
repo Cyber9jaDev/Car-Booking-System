@@ -7,6 +7,7 @@ const BookingSchema = new Schema({
   },
   passengers: [
     {
+      reference: { type: String, required: true },
       userId: { type: String, required: true },
       metadata: {
         nextOfKinName: { type: String, required: true },
