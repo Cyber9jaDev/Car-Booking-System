@@ -7,7 +7,7 @@ export const initializeTransaction = async(req, res, next) => {
     {
       amount: metadata?.amount * 100, 
       email, 
-      callback_url: 'http://localhost:5173/booking/confirmation', 
+      callback_url: 'http://localhost:5173/paystack/verify', 
       "metadata": JSON.stringify(metadata)
     },
     {
@@ -33,7 +33,7 @@ export const initializeTransaction = async(req, res, next) => {
   }
 }
 
-export const verifyTransaction = async (req, res, next) => {
+export const verifyTransaction = async (req, res) => {
   const { reference } = req.params;
   const { data }  = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
     {
@@ -44,8 +44,7 @@ export const verifyTransaction = async (req, res, next) => {
   );
 
   if(data?.status && data?.data?.status === 'success'){
-    res.verificationResponse = data;
-    next();
+    return res.status(200).json(data);
   }
   
   else if(!data.status){

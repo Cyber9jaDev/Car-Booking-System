@@ -42,3 +42,13 @@ export type AuthUserType = {
   phone: string
   token: string
 }
+
+export type TripStateType = {
+  travellingFrom: string,
+  travellingTo: string,
+  departureDate: string,
+  price: number,
+  busType: string,
+  isLoading: boolean,
+  hasError: boolean,
+}
