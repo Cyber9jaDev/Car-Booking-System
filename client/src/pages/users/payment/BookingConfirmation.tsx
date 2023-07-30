@@ -14,10 +14,7 @@ const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const verifyTransaction = useCallback(async () => {
-    const params = new URLSearchParams(location.search);
-    const reference = params.get('reference');
-
+  const verifyTransaction = async (reference:string) => {
     try {
       setHasError(false);
       setIsLoading(true);
@@ -33,7 +30,7 @@ const BookingConfirmation = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [location.search]);
+  }
 
 
   useEffect(() => { 
@@ -57,10 +54,12 @@ const BookingConfirmation = () => {
     //     setIsLoading(false);
     //   }
     // };
+    const params = new URLSearchParams(location.search);
+    const reference = params.get('reference');
 
-    verifyTransaction();
+    verifyTransaction(reference as string);
     
-  }, [verifyTransaction]);
+  }, [location.search]);
 
   return (
     <main id='verification'>

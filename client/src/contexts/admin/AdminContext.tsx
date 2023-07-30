@@ -1,16 +1,7 @@
 import { ReactElement, createContext, useState, FormEvent } from "react";
 import AdminService from "../../services/AdminService";
 import { Toast } from "../../utilities/Functions";
-
-export type TripStateType = {
-  travellingFrom: string,
-  travellingTo: string,
-  departureDate: string,
-  price: number,
-  busType: string,
-  isLoading: boolean,
-  hasError: boolean,
-}
+import { TripStateType } from "../../utilities/Types";
 
 const initTripState: TripStateType = {
   travellingFrom: 'aba',
@@ -40,28 +31,30 @@ export const AdminContextProvider = ({children}: ChildrenType) => {
     e.preventDefault();
     const {travellingFrom, travellingTo, busType, price, departureDate} = tripState;
     if( travellingFrom === 'none' || travellingTo === 'none' || !price || !departureDate ){
-      return Toast('error', 'Please fill all fields')
+      return Toast('fail', 'Please fill all fields');
     }
 
-    setTripState((prevState) => ({ ...prevState, isLoading: true, hasError: false }));
     try {
-      const body: Omit<TripStateType, 'isLoading' | 'hasError'> = { travellingFrom, travellingTo, departureDate, price, busType  }
-      const {data} = await AdminService.AddNewTrip(body);
-      if(data){
-        Toast('success', 'Trip updated successfully')
-        setTripState({...initTripState });
-        window.location.reload();
+      setTripState((prevState) => ({ ...prevState, isLoading: true, hasError: false }));
+      const body: Omit<TripStateType, 'isLoading' | 'hasError'> = { travellingFrom, travellingTo, departureDate, price, busType }
+      const response  = await AdminService.AddNewTrip(body);
+      if(response?.message){
+          Toast('success', 'Trip updated successfully');
+          setTripState({...initTripState });
+          window.location.reload();
       }
+
     } catch (error) {
       setTripState((prevState) => ({ ...prevState, hasError: true }));
+      console.error(error)
       return error;
     } 
   }
 
   const cancelTrip = async () => { 
     try {
-      const data = await AdminService.CancelTrip({ ...tripState });
-      return data;
+      // const data = await AdminService.CancelTrip({ ...tripState });
+      // return data;
     } catch (error) {
       return error;
     }
