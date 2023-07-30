@@ -19,7 +19,7 @@ export const initializeTransaction = async(req, res, next) => {
   );
 
   if(data?.status && data?.message === 'Authorization URL created'){
-    return res.status(200).json(data)
+    return res.status(200).json(data);
   } 
   
   else if(!data.status){
@@ -33,7 +33,7 @@ export const initializeTransaction = async(req, res, next) => {
   }
 }
 
-export const verifyTransaction = async (req, res) => {
+export const verifyTransaction = async (req, res, next) => {
   const { reference } = req.params;
   const { data }  = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
     {
@@ -44,7 +44,10 @@ export const verifyTransaction = async (req, res) => {
   );
 
   if(data?.status && data?.data?.status === 'success'){
-    return res.status(200).json(data);
+    res.metadata = data?.data?.metadata;
+    res.reference = data?.data?.reference;
+    next();
+    // return res.status(200).json(data?.data);
   }
   
   else if(!data.status){
@@ -59,7 +62,9 @@ export const verifyTransaction = async (req, res) => {
 }
 
 export const testing = (req, res) => {
-  const verificationResponse = res.verificationResponse;
-  return res.status(200).json(verificationResponse);
+  const { metadata, reference } = res;
+  console.log(metadata);
+  console.log(reference);
 
+  return res.status(200).json({m: 'dsds'});
 }

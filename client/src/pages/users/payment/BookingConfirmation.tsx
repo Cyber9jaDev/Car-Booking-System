@@ -4,7 +4,7 @@ import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
 import '../../../sass/verification.scss';
-import {PaystackVerificationType} from '../../../utilities/Types'
+import {PaystackVerificationType} from '../../../utilities/Types';
 
 
 const BookingConfirmation = () => {
@@ -14,11 +14,15 @@ const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const verifyTransaction = async (reference:string) => {
+  const verifyTransaction = async () => {
+    const params = new URLSearchParams(location.search);
+    const reference = params.get('reference');
+
     try {
       setHasError(false);
       setIsLoading(true);
       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+      console.log(verificationResponse);
       if (verificationResponse?.status) {
         setBookingInfo({ ...verificationResponse });
         return;
@@ -32,11 +36,16 @@ const BookingConfirmation = () => {
     }
   }
 
+  useEffect(() => {
+    verifyTransaction();
+  }, []);
+  
+
 
   useEffect(() => { 
     // const verifyTransaction = async () => {
-    //   const params = new URLSearchParams(location.search);
-    //   const reference = params.get('reference');
+      // const params = new URLSearchParams(location.search);
+      // const reference = params.get('reference');
       
     //   try {
     //     setHasError(false);
@@ -54,24 +63,20 @@ const BookingConfirmation = () => {
     //     setIsLoading(false);
     //   }
     // };
-    const params = new URLSearchParams(location.search);
-    const reference = params.get('reference');
-console.log('Out');
-  useEffect(() => {
-    console.log('Effect')
-  }, [])
+
+  }, []);
   
   // useEffect(() => { 
-  //   const verifyTransaction = async () => {
-  //     const params = new URLSearchParams(location.search);
-  //     const reference = params.get('reference');
-  //     try {
-  //       setIsLoading(true);
-  //       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference as string);
+  // //   const verifyTransaction = async () => {
+  // //     const params = new URLSearchParams(location.search);
+  // //     const reference = params.get('reference');
+  // //     try {
+  // //       setIsLoading(true);
+  // //       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference as string);
   //       // if(verificationResponse?.data. === 'Ticket booked successfully'){
   //       //   return;
   //       // }
-  //       console.log(verificationResponse);
+  // //       console.log(verificationResponse);
   //       // if (verificationResponse?.data?.status === 'success') {
   //       //   const {data : { amount,  metadata : { userId, ticketId, seatNumber, nextOfKinPhoneNumber, nextOfKinName } } } = verificationResponse
   //       //   const body = {
@@ -84,18 +89,15 @@ console.log('Out');
   //       //     console.log(bookingResponse)
   //       //     Toast('success', `${bookingResponse.message}`);
   //       //     setIsLoading(false);
-  //       //     // return navigate('/profile');
+  //           // return navigate('/profile');
   //       //   }
   //       // }
-  //     } catch (error) {
-  //       console.error(error);
-  //       setIsLoading(false);
-  //     } 
-  //   };
-
-    verifyTransaction(reference as string);
-    
-  }, [location.search]);
+  // //     } catch (error) {
+  // //       console.error(error);
+  // //       setIsLoading(false);
+  // //     } 
+  // //   };
+  // }, []);
 
   return (
     <main id='verification'>
