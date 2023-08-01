@@ -68,10 +68,18 @@ export const verifyTransaction = async (req, res, next) => {
 
 export const bookTicket = async (req, res, next) => {
   const { metadata, reference } = res;
-  const { seatNumber, ticketId, nextOfKinName, nextOfKinPhoneNumber, amount, userId } = metadata;
+  const { seatNumber, ticketId, userId } = metadata;
   
   // Check bookings if a booking exist with the reference code
-  // Code here
+  const foundBookingByReference = await Bookings.findOne({ "passengers.reference": reference });
+  if(foundBookingByReference){
+    const passengers = foundBookingByReference.passengers;
+    const foundPassengerBooking = passengers.find(passenger => passenger.reference === reference )
+    if(foundPassengerBooking){
+      const { reference, metadata } = foundPassengerBooking;
+      return res.status(200).json({ reference, metadata, status: 'success' } );
+    }
+  }
 
   // Store booking details
   const foundTicket = await Trip.findOne({ _id:ticketId });
@@ -114,8 +122,8 @@ export const updateBookingsList = async (req, res) => {
   const { bookingInfo } = res;
   const { ticketId, userId, metadata, reference } = bookingInfo;
 
+  // Add the passenger to the list of passengers corresponding ta booking ticket
   const foundExistingBooking = await Bookings.findOne({ticketId});
-
   if(foundExistingBooking){
     const existingPassengers = foundExistingBooking?.passengers;
     const updatedPassengers = [...existingPassengers, { metadata, userId, reference }];
@@ -123,8 +131,6 @@ export const updateBookingsList = async (req, res) => {
     
     if(updatedExistingBooking){
       return res.status(200).json({ reference, metadata, status: 'success' });
-      // return res.status(200).json({ reference, ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
-      // return res.status(200).json({reference, ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
     }
     throw new InternalServerError('An error occurred, please try again');
   }
