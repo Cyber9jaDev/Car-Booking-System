@@ -1,6 +1,5 @@
 import express from 'express';
-import { initializeTransaction, testing, verifyTransaction } from '../../controllers/users/PaymentController.js';
-import { bookTicket, updateBookingsList } from '../../controllers/users/UserController.js';
+import { bookTicket, initializeTransaction, updateBookingsList, verifyTransaction } from '../../controllers/users/PaymentController.js';
 
 const PaystackRouter = express.Router();
 
