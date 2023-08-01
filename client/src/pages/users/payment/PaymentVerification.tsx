@@ -10,30 +10,30 @@ const PaymentVerification = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const verifyTransaction = async (reference:string) => {
-    try {
-      // setHasError(false);
-      // setIsLoading(true);
-      const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-      console.log(verificationResponse);
-      // if (verificationResponse?.status) {
-      //   setBookingInfo({ ...verificationResponse });
-      //   return;
-      // }
-    } catch (error) {
-      console.error(error);
-      // setHasError(true);
-      return;
-    } finally {
-      // setIsLoading(false);
-    }
-  }
+  // const verifyTransaction = async (reference:string) => {
+  //   try {
+  //     // setHasError(false);
+  //     // setIsLoading(true);
+  //     const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+  //     console.log(verificationResponse);
+  //     // if (verificationResponse?.status) {
+  //     //   setBookingInfo({ ...verificationResponse });
+  //     //   return;
+  //     // }
+  //   } catch (error) {
+  //     console.error(error);
+  //     // setHasError(true);
+  //     return;
+  //   } finally {
+  //     // setIsLoading(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const reference = params.get('reference');
-    verifyTransaction(reference as string);
-  }, []);
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const reference = params.get('reference');
+  //   verifyTransaction(reference as string);
+  // }, []);
   
   return (
     <main id='verification'>
