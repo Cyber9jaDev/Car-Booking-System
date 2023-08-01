@@ -5,6 +5,9 @@ import Bookings from "../../models/users/BookingModel.js";
 
 export const initializeTransaction = async(req, res, next) => {
   const { email, metadata } = req.body;
+
+  // Before initializing transaction, ensure the ticket is available for booking.
+
   const { data } = await axios.post('https://api.paystack.co/transaction/initialize',
     {
       amount: metadata?.amount * 100, 
@@ -63,28 +66,19 @@ export const verifyTransaction = async (req, res, next) => {
   }
 }
 
-export async function bookTicket (req, res, next){
+export const bookTicket = async (req, res, next) => {
   const { metadata, reference } = res;
-  console.log(reference)
   const { seatNumber, ticketId, nextOfKinName, nextOfKinPhoneNumber, amount, userId } = metadata;
+  
+  // Check bookings if a booking exist with the reference code
+  // Code here
 
-  if(!seatNumber || !ticketId || !nextOfKinName || !nextOfKinPhoneNumber || !amount || !userId || !reference){
-    throw new BadRequestError("An error occurred, required values are not supplied");
-  }
-
+  // Store booking details
   const foundTicket = await Trip.findOne({ _id:ticketId });
-  
+
+  // If ticket is not available for booking then throw an error
   if(!foundTicket){
-    return res.status(404).json({message: 'Ticket not found'});
-  }
-  
-  const findBookingWithReference = await Bookings.findOne({ ticketId });
-  if(findBookingWithReference){
-    const passengers = findBookingWithReference?.passengers;
-    const foundUserBooking = passengers.find(passenger => passenger.reference === reference)
-    if(foundUserBooking){
-      return res.status(200).json(foundUserBooking);
-    }
+    throw new InternalServerError('An error occurred');  //it should be 'not found' actually.
   }
 
   let updatedBookedSeats = [];
@@ -93,40 +87,57 @@ export async function bookTicket (req, res, next){
   const bookedSeats = foundTicket?.bookedSeats;
   const isBookedSeat = bookedSeats?.includes(seatNumber) ?? false;
 
-  // if(isBookedSeat){
-  //   throw new BadRequestError('Seat not available for booking, please book another seat');
-  // }
-
   const availableSeats = foundTicket?.availableSeats;
   const isAvailableSeat = availableSeats?.includes(seatNumber) ?? false;
-  // console.log(isAvailableSeat);
-  // console.log(isBookedSeat);
 
   if(isAvailableSeat && !isBookedSeat){
-
     updatedAvailableSeats = availableSeats.filter(num => num !== seatNumber);
     updatedBookedSeats.push(...bookedSeats, seatNumber);
 
     const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
-    const updatedBooking = await Trip.findOneAndUpdate({_id:ticketId}, filter, { new: true });
-
+    const updatedBooking = await Trip.findOneAndUpdate({ _id:ticketId }, filter , { new: true });
+    
     if(updatedBooking){
       const bookingInfo = { ticketId, metadata, userId, reference }
       res.bookingInfo = bookingInfo;
       return next();
     } 
-    throw new InternalServerError('An error occurred while booking seat')
-  } 
-
-  if(!isBookedSeat && !isAvailableSeat){
+    throw new InternalServerError('An error occurred while booking seat');
+  } else if (isBookedSeat && !isAvailableSeat){
+    throw new BadRequestError("Seat is not available for booking");
+  } else{
     throw new BadRequestError('The seat number is not valid');
   }
+}
 
-  // console.log(foundTicket);
+export const updateBookingsList = async (req, res) => {
+  const { bookingInfo } = res;
+  const { ticketId, userId, metadata, reference } = bookingInfo;
+
+  const foundExistingBooking = await Bookings.findOne({ticketId});
+
+  if(foundExistingBooking){
+    const existingPassengers = foundExistingBooking?.passengers;
+    const updatedPassengers = [...existingPassengers, { metadata, userId, reference }];
+    const updatedExistingBooking = await Bookings.findOneAndUpdate({ ticketId }, { passengers: updatedPassengers }, { new: true });
+    
+    if(updatedExistingBooking){
+      return res.status(200).json({ reference, metadata, status: 'success' });
+      // return res.status(200).json({ reference, ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
+      // return res.status(200).json({reference, ticketId, userId, metadata, status: true, message: 'Booking created successfully'});
+    }
+    throw new InternalServerError('An error occurred, please try again');
+  }
+  
+  const newBooking = await Bookings.create({ ticketId, passengers: [{ reference, userId, metadata }] });
+  if(newBooking){ 
+    return res.status(200).json({ reference, metadata, status: 'success'} );
+  }
+  throw new InternalServerError('An error occurred, please try again');
 
 }
 
-export async function updateBookingsList (req, res){
+export async function updateBookingsLis(req, res){
   // booking data is gotten from bookTicket
   const { bookingInfo: { ticketId, userId, metadata, reference } } = res;
   const { bookingInfo } = res;
@@ -155,16 +166,69 @@ export async function updateBookingsList (req, res){
 }
 
 
+// export async function bookTicket (req, res, next){
+//   const { metadata, reference } = res;
+//   console.log(reference)
+//   const { seatNumber, ticketId, nextOfKinName, nextOfKinPhoneNumber, amount, userId } = metadata;
 
+//   if(!seatNumber || !ticketId || !nextOfKinName || !nextOfKinPhoneNumber || !amount || !userId || !reference){
+//     throw new BadRequestError("An error occurred, required values are not supplied");
+//   }
 
+//   const foundTicket = await Trip.findOne({ _id:ticketId });
+  
+//   if(!foundTicket){
+//     return res.status(404).json({message: 'Ticket not found'});
+//   }
+  
+//   const findBookingWithReference = await Bookings.findOne({ ticketId });
 
+//   if(findBookingWithReference){
+//     const passengers = findBookingWithReference?.passengers;
+//     const foundUserBooking = passengers.find(passenger => passenger.reference === reference)
+//     if(foundUserBooking){
+//       return res.status(200).json(foundUserBooking);
+//     }
+//   }
 
+//   let updatedBookedSeats = [];
+//   let updatedAvailableSeats = [];
+  
+//   const bookedSeats = foundTicket?.bookedSeats;
+//   const isBookedSeat = bookedSeats?.includes(seatNumber) ?? false;
 
+//   // if(isBookedSeat){
+//   //   throw new BadRequestError('Seat not available for booking, please book another seat');
+//   // }
 
+//   const availableSeats = foundTicket?.availableSeats;
+//   const isAvailableSeat = availableSeats?.includes(seatNumber) ?? false;
+//   // console.log(isAvailableSeat);
+//   // console.log(isBookedSeat);
 
+//   if(isAvailableSeat && !isBookedSeat){
 
+//     updatedAvailableSeats = availableSeats.filter(num => num !== seatNumber);
+//     updatedBookedSeats.push(...bookedSeats, seatNumber);
 
+//     const filter = { availableSeats: updatedAvailableSeats, bookedSeats: updatedBookedSeats };
+//     const updatedBooking = await Trip.findOneAndUpdate({_id:ticketId}, filter, { new: true });
 
+//     if(updatedBooking){
+//       const bookingInfo = { ticketId, metadata, userId, reference }
+//       res.bookingInfo = bookingInfo;
+//       return next();
+//     } 
+//     throw new InternalServerError('An error occurred while booking seat')
+//   } 
+
+//   if(!isBookedSeat && !isAvailableSeat){
+//     throw new BadRequestError('The seat number is not valid');
+//   }
+
+//   console.log(foundTicket);
+
+// }
 
 
 export const testing = (req, res) => {

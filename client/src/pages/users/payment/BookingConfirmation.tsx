@@ -14,35 +14,35 @@ const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const verifyTransaction = async () => {
-    const params = new URLSearchParams(location.search);
-    const reference = params.get('reference');
+  // const verifyTransaction = async () => {
+  //   const params = new URLSearchParams(location.search);
+  //   const reference = params.get('reference');
 
-    try {
-      setHasError(false);
-      setIsLoading(true);
-      const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-      console.log(verificationResponse);
-      if (verificationResponse?.status) {
-        setBookingInfo({ ...verificationResponse });
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-      setHasError(true);
-      return;
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  //   try {
+  //     setHasError(false);
+  //     setIsLoading(true);
+  //     const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+  //     console.log(verificationResponse);
+  //     if (verificationResponse?.status) {
+  //       setBookingInfo({ ...verificationResponse });
+  //       return;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setHasError(true);
+  //     return;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    verifyTransaction();
-  }, []);
+  // useEffect(() => {
+    // verifyTransaction();
+  // }, []);
   
 
 
-  useEffect(() => { 
+  // useEffect(() => { 
     // const verifyTransaction = async () => {
       // const params = new URLSearchParams(location.search);
       // const reference = params.get('reference');
@@ -64,7 +64,7 @@ const BookingConfirmation = () => {
     //   }
     // };
 
-  }, []);
+  // }, []);
   
   // useEffect(() => { 
   // //   const verifyTransaction = async () => {
