@@ -4,101 +4,42 @@ import UserService from '../../../services/UserService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../utilities/Functions';
 import '../../../sass/verification.scss';
-import {PaystackVerificationType} from '../../../utilities/Types';
+import { PaystackVerificationType } from '../../../utilities/Types';
 
 
 const BookingConfirmation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [bookingInfo, setBookingInfo] = useState({} as PaystackVerificationType);
+  const [ bookingInfo, setBookingInfo ] = useState({} as PaystackVerificationType);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // const verifyTransaction = async () => {
-  //   const params = new URLSearchParams(location.search);
-  //   const reference = params.get('reference');
-
-  //   try {
-  //     setHasError(false);
-  //     setIsLoading(true);
-  //     const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-  //     console.log(verificationResponse);
-  //     if (verificationResponse?.status) {
-  //       setBookingInfo({ ...verificationResponse });
-  //       return;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     setHasError(true);
-  //     return;
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-    // verifyTransaction();
-  // }, []);
+  useEffect(() => {
+    const verifyTransaction = async () => {
+      const params = new URLSearchParams(location.search);
+      const reference = params.get('reference');
   
-
-
-  // useEffect(() => { 
-    // const verifyTransaction = async () => {
-      // const params = new URLSearchParams(location.search);
-      // const reference = params.get('reference');
-      
-    //   try {
-    //     setHasError(false);
-    //     setIsLoading(true);
-    //     const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-    //     if(verificationResponse?.status){
-    //       setBookingInfo({...verificationResponse });
-    //       return;
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //     setHasError(true);
-    //     return;
-    //   }  finally{
-    //     setIsLoading(false);
-    //   }
-    // };
-
-  // }, []);
+      try {
+        // setHasError(false);
+        // setIsLoading(true);
+        const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
+        console.log(verificationResponse);
+        if (verificationResponse?.status === 'success') {
+          setBookingInfo({ ...verificationResponse });
+        }
+      } catch (error) {
+        console.error(error);
+        // setHasError(true);
+        return;
+      } finally {
+        setIsLoading(false);
+      }
+    }
   
-  // useEffect(() => { 
-  // //   const verifyTransaction = async () => {
-  // //     const params = new URLSearchParams(location.search);
-  // //     const reference = params.get('reference');
-  // //     try {
-  // //       setIsLoading(true);
-  // //       const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference as string);
-  //       // if(verificationResponse?.data. === 'Ticket booked successfully'){
-  //       //   return;
-  //       // }
-  // //       console.log(verificationResponse);
-  //       // if (verificationResponse?.data?.status === 'success') {
-  //       //   const {data : { amount,  metadata : { userId, ticketId, seatNumber, nextOfKinPhoneNumber, nextOfKinName } } } = verificationResponse
-  //       //   const body = {
-  //       //     userId, 
-  //       //     ticketId, 
-  //       //     metadata: { seatNumber, nextOfKinPhoneNumber, nextOfKinName, amount: amount / 100 }
-  //       //   };
-  //       //   const bookingResponse = await UserService.BookTicket(body);
-  //       //   if (bookingResponse.message === 'Ticket booked successfully') { 
-  //       //     console.log(bookingResponse)
-  //       //     Toast('success', `${bookingResponse.message}`);
-  //       //     setIsLoading(false);
-  //           // return navigate('/profile');
-  //       //   }
-  //       // }
-  // //     } catch (error) {
-  // //       console.error(error);
-  // //       setIsLoading(false);
-  // //     } 
-  // //   };
-  // }, []);
+    verifyTransaction();
 
+  }, [location.search]);
+  
   return (
     <main id='verification'>
       <div className='container-lg'>
@@ -110,7 +51,7 @@ const BookingConfirmation = () => {
           An email has been sent to you as a confirmation of this flight booking. You will be contacted soon by our agent as your booking is being processed.
         </p>
         <div className="reference d-flex justify-content-center align-items-center mx-auto mt-4">
-          <p className='m-0'>PNR: <strong>55S468</strong></p> 
+          <p className='m-0'>PNR: <strong>{bookingInfo?.reference}</strong></p> 
         </div>
 
         <div className="booking__info d-flex align-self-center w-75 justify-content-between my-5 mx-auto">
@@ -121,11 +62,12 @@ const BookingConfirmation = () => {
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Phone:</p>
-              <strong className='m-0'>08062128170</strong>
+              <strong className='m-0'>{bookingInfo?.metadata?.passengerPhoneNumber}</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Email:</p>
-              <strong className='m-0'>ayodejioladapo15@gmail.com</strong>
+              {/* <strong className='m-0'>{ bookingInfo?.metadata?.email }</strong> */}
+              <strong className='m-0'> test@gmail.com</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Travelling From:</p>

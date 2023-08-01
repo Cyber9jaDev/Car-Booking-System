@@ -7,6 +7,7 @@ export const initializeTransaction = async(req, res, next) => {
   const { email, metadata } = req.body;
 
   // Before initializing transaction, ensure the ticket is available for booking.
+  // Code goes here
 
   const { data } = await axios.post('https://api.paystack.co/transaction/initialize',
     {

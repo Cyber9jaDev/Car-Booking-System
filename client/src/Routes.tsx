@@ -32,7 +32,7 @@ const RouterLinks = () => {
         <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
         <Route path="/booking/confirmation" element = {<BookingConfirmation/>} />
-        <Route path="/paystack/verify" element = {<PaymentVerification/>} />
+        <Route path="/paystack/verify" element = {<BookingConfirmation/>} />
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/profile" element = { <Profile/> } />
         <Route path="/admin/home" element={ <Home/>} /> 
