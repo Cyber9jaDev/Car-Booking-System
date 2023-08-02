@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import '../../sass/booking.scss';
-import { BusImage, BusName, CityName, FormatAmount } from '../../utilities/Functions';
+import { BusImage, BusName, CityName, FormatAmount, FormatDateAndTime } from '../../utilities/Functions';
 import { BookingContext } from '../../contexts/BookingContext';
 
 
@@ -27,8 +27,12 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
         <div className="info col-sm-12 col-md-6 col-lg-6 d-flex flex-column align-self-center">
           <h1>{BusName(busType)}</h1>
           <h6 className='mt-1 fs-5'>{CityName(travellingFrom)} <i className="fa-solid fa-right-long mx-2"></i>{CityName(travellingTo)}</h6>
-          <p className='mt-2'><i className="fa-solid fa-couch me-1"></i> {availableSeats.length} seats (available) </p>
-          <p className='my-auto'><i className="fa-solid fa-person-walking-luggage"></i> Adult: 1 <i className="fa-solid fa-clock ms-3"></i> 7: 30am</p>
+          <p className='mt-2'><i className="fa-solid fa-couch me-1"></i> {availableSeats.length} {availableSeats.length > 1 ? 'Seats' : 'Seat'} (Available) </p>
+          <p className='my-auto'>
+            <i className="fa-solid fa-person-walking-luggage"></i> Adult: 1 
+            <i className="fa-solid fa-clock ms-3"></i> {FormatDateAndTime(departureDate, 'time')}
+            <i className="fa-regular fa-calendar ms-3"></i> {FormatDateAndTime(departureDate, 'date')}
+          </p>
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">
           <p className='fee fw-bolder fs-5'>{FormatAmount(price)}</p>

@@ -53,7 +53,6 @@ export const verifyTransaction = async (req, res, next) => {
     res.metadata = data?.data?.metadata;
     res.reference = data?.data?.reference;
     next();
-    // return res.status(200).json(data?.data);
   }
   
   else if(!data.status){

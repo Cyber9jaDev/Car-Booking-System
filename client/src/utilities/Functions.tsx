@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { buses, cities } from "./Constants";
+import { buses, cities } from "./constants";
 
 export const Toast = ( type: 'success' | 'fail', text : string) => {
   if(type === 'success') return toast.success(text);
@@ -60,4 +60,19 @@ export const FormatAmount = (amount:number | undefined)=> {
     currency: "NGN",
     maximumFractionDigits: 0,
   }).format(amount)
+}
+
+export const FormatDateAndTime = (date: string, value: 'time' | 'date') => {
+  if(value === 'date'){
+    return (new Date(date)).toDateString();
+  } else if(value === 'time'){
+    const time = date.split('T')[1].split(':');
+    const hour: number = Number(time[0]) as number;
+    const minute = time[1];
+    if(hour > 12){
+      return `${hour - 12}:${minute} pm`;
+    } else {
+      return `${hour}:${minute} am`;
+    }
+  }
 }

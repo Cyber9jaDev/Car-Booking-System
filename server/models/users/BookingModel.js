@@ -14,6 +14,9 @@ const BookingSchema = new Schema({
         passengerPhoneNumber: { type: String, required: true },
         nextOfKinName: { type: String, required: true },
         nextOfKinPhoneNumber: { type: String, required: true },
+        travellingFrom: { type: String, required: true },
+        travellingTo: { type: String, required: true },
+        departureDate: { type: String, required: true },
         amount: { type: Number, required: true },
         seatNumber: { type: Number, required: true }
       }
