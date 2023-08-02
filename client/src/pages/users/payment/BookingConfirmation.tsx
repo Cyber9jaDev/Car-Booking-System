@@ -3,7 +3,7 @@ import PaymentService from '../../../services/PaymentService';
 import { useLocation } from 'react-router-dom';
 import '../../../sass/verification.scss';
 import { PaystackVerificationType } from '../../../utilities/Types';
-import { FormatDateAndTime } from '../../../utilities/Functions';
+import { FormatAmount, FormatDateAndTime } from '../../../utilities/Functions';
 
 
 const BookingConfirmation = () => {
@@ -20,7 +20,7 @@ const BookingConfirmation = () => {
         setIsLoading('pending');
         const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
         if (verificationResponse?.status === 'success') {
-          console.log(verificationResponse)
+          console.log(verificationResponse);
           setBookingInfo({ ...verificationResponse });
           setIsLoading('successful');
         }
@@ -49,42 +49,54 @@ const BookingConfirmation = () => {
 
         <div className="booking__info d-flex align-self-center w-75 justify-content-between my-5 mx-auto">
           <div className="row">
-            <div className='col-sm-6 col-md-4 mt-4'>
-              <p className='m-0'>Name:</p>
-              <strong className='m-0'>{bookingInfo?.metadata?.passengerName}</strong>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Passenger Name:</p>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.passengerName}</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
-              <p className='m-0'>Phone:</p>
-              <strong className='m-0'>{bookingInfo?.metadata?.passengerPhoneNumber}</strong>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Passenger Phone:</p>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.passengerPhoneNumber}</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
-              <p className='m-0'>Email:</p>
-              {/* <strong className='m-0'>{ bookingInfo?.metadata?.email }</strong> */}
-              <strong className='m-0'> test@gmail.com</strong>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Passenger Email:</p>
+              {/* <span className='m-0 fw-semibold'>{ bookingInfo?.metadata?.email }</span> */}
+              <span className='m-0 fw-semibold'> test@gmail.com</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Next of Kin's Name:</p>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.nextOfKinName}</span>
+            </div>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Next of Kin's Phone Number:</p>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.nextOfKinPhoneNumber}</span>
+            </div>
+            <div className='col-sm-6 col-md-4 mt-5'>
+              <p className='m-0'>Ticket Fee:</p>
+              <span className='m-0 fw-semibold'>{ FormatAmount(bookingInfo?.metadata?.amount) }</span>
+            </div>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Travelling From:</p>
-              <strong className='m-0'>ABUJA</strong>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.travellingFrom}</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Travelling To:</p>
-              <strong className='m-0'>LAGOS</strong>
+              <span className='m-0 fw-semibold'>{bookingInfo?.metadata?.travellingTo}</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Departure Date:</p>
-              <strong className='m-0'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'date')}</strong>
+              {<span className='m-0 fw-semibold'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'date')}</span>}
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Departure Time:</p>
-              <strong className='m-0'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'time')}</strong>
+              { bookingInfo?.metadata?.departureDate && <span className='m-0 fw-semibold'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'time')}</span> }
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Booking Date</p>
-              <strong className='m-0'>WED JUNE, 2023</strong>
+              <span className='m-0 fw-semibold'>WED JUNE, 2023</span>
             </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
+            <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Booking Date</p>
-              <strong className='m-0'>WED JUNE, 2023</strong>
+              <span className='m-0 fw-semibold'>WED JUNE, 2023</span>
             </div>
 
           </div>

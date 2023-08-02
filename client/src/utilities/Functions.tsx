@@ -63,16 +63,20 @@ export const FormatAmount = (amount:number | undefined)=> {
 }
 
 export const FormatDateAndTime = (date: string, value: 'time' | 'date') => {
+  // const splitDate = date.split('T');
+  // const datee = new Date(date)
   if(value === 'date'){
     return (new Date(date)).toDateString();
+    // return splitDate[0];
   } else if(value === 'time'){
+    // return new Date(date).toLocaleTimeString
     const time = date.split('T')[1].split(':');
-    const hour: number = Number(time[0]) as number;
     const minute = time[1];
+    const hour: number = Number(time[0]) as number;
     if(hour > 12){
-      return `${hour - 12}:${minute} pm`;
+      return `${hour - 12}:${minute}pm`;
     } else {
-      return `${hour}:${minute} am`;
+      return `${hour}:${minute}am`;
     }
   }
 }
