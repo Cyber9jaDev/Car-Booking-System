@@ -76,8 +76,9 @@ export const bookTicket = async (req, res, next) => {
     const passengers = foundBookingByReference.passengers;
     const foundPassengerBooking = passengers.find(passenger => passenger.reference === reference )
     if(foundPassengerBooking){
-      const { reference, metadata } = foundPassengerBooking;
-      return res.status(200).json({ reference, metadata, status: 'success' } );
+      // console.log(foundPassengerBooking);
+      const { reference, metadata, bookingDate } = foundPassengerBooking;
+      return res.status(200).json({ bookingDate, reference, metadata, status: 'success' } );
     }
   }
 
@@ -120,15 +121,17 @@ export const bookTicket = async (req, res, next) => {
 
 export const updateBookingsList = async (req, res) => {
   const { bookingInfo } = res;
+  // console.log(bookingInfo);
   const { ticketId, userId, metadata, reference } = bookingInfo;
 
-  // Add the passenger to the list of passengers corresponding ta booking ticket
+  // Add the passenger to the list of passengers corresponding to booking ticket
   const foundExistingBooking = await Bookings.findOne({ticketId});
   if(foundExistingBooking){
     const existingPassengers = foundExistingBooking?.passengers;
     const updatedPassengers = [...existingPassengers, { metadata, userId, reference }];
     const updatedExistingBooking = await Bookings.findOneAndUpdate({ ticketId }, { passengers: updatedPassengers }, { new: true });
     
+    // console.log(updatedExistingBooking);
     if(updatedExistingBooking){
       return res.status(200).json({ reference, metadata, status: 'success' });
     }
@@ -136,6 +139,7 @@ export const updateBookingsList = async (req, res) => {
   }
   
   const newBooking = await Bookings.create({ ticketId, passengers: [{ reference, userId, metadata }] });
+  // console.log(newBooking);
   if(newBooking){ 
     return res.status(200).json({ reference, metadata, status: 'success'} );
   }

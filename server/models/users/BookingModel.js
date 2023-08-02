@@ -9,6 +9,7 @@ const BookingSchema = new Schema({
     {
       reference: { type: String, required: true },
       userId: { type: String, required: true },
+      bookingDate: { type: Date, default: new Date().toLocaleDateString() },
       metadata: {
         passengerName: { type: String, required: true },
         passengerPhoneNumber: { type: String, required: true },
