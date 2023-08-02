@@ -15,7 +15,6 @@ import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
 import Profile from "./pages/users/Profile";
 import BookingConfirmation from "./pages/users/payment/BookingConfirmation";
-import PaymentVerification from "./pages/users/payment/PaymentVerification";
 
 const RouterLinks = () => {
   return (
@@ -31,7 +30,6 @@ const RouterLinks = () => {
         <Route path="/contact" element = {<Contact/>} />
         <Route path="/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
         <Route path="/modal" element = {<PaymentModal/>} />
-        <Route path="/booking/confirmation" element = {<BookingConfirmation/>} />
         <Route path="/paystack/verify" element = {<BookingConfirmation/>} />
         <Route path="/booking" element = { <Bookings/> } />
         <Route path="/profile" element = { <Profile/> } />

@@ -28,7 +28,10 @@ export type PaystackVerificationType = {
     nextOfKinName: string,
     nextOfKinPhoneNumber: string,
     amount: number,
-    seatNumber: number
+    seatNumber: number,
+    travellingFrom: string,
+    travellingTo: string,
+    departureDate: string,
   },
 }
 

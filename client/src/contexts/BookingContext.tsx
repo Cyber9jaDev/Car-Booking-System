@@ -33,7 +33,6 @@ type BookingContextType = {
   bookingState: BookingStateType,
   setBookingState: React.Dispatch<React.SetStateAction<BookingStateType>>
   getTicketsList: () => void,
-  getSeatInfo : (id: string) => Promise<unknown>
   handleSeatSelect:(seatNo: number) => void
   openModal: () => void
   closeModal: (option?: boolean) => void
@@ -57,15 +56,6 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
     } 
   }
 
-  // Please remove this info, it is not in use
-  const getSeatInfo = async (id: string): Promise<unknown> =>  {
-    try {
-      return id
-    } catch (error) {
-      return error;
-    }
-  }
-
   const handleSeatSelect = (seatNo: number): void => {
     const availableSeats = bookingState.selectedBus?.availableSeats;
     const bookedSeats = bookingState.selectedBus?.bookedSeats;
@@ -77,7 +67,7 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
     return
   }
 
-  const contextValue = { openModal, closeModal, bookingState, setBookingState, getTicketsList, getSeatInfo, handleSeatSelect }
+  const contextValue = { openModal, closeModal, bookingState, setBookingState, getTicketsList, handleSeatSelect }
   
   return(
     <BookingContext.Provider value={contextValue}>

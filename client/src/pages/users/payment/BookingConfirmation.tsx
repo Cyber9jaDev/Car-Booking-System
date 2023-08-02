@@ -1,18 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PaymentService from '../../../services/PaymentService';
-import UserService from '../../../services/UserService';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Toast } from '../../../utilities/Functions';
+import { useLocation } from 'react-router-dom';
 import '../../../sass/verification.scss';
 import { PaystackVerificationType } from '../../../utilities/Types';
+import { FormatDateAndTime } from '../../../utilities/Functions';
 
 
 const BookingConfirmation = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState('idle');
   const [ bookingInfo, setBookingInfo ] = useState({} as PaystackVerificationType);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyTransaction = async () => {
@@ -20,19 +17,15 @@ const BookingConfirmation = () => {
       const reference = params.get('reference');
   
       try {
-        // setHasError(false);
-        // setIsLoading(true);
+        setIsLoading('pending');
         const verificationResponse = await PaymentService.VerifyPaystackTransaction(reference);
-        console.log(verificationResponse);
         if (verificationResponse?.status === 'success') {
+          console.log(verificationResponse)
           setBookingInfo({ ...verificationResponse });
+          setIsLoading('successful');
         }
       } catch (error) {
-        console.error(error);
-        // setHasError(true);
-        return;
-      } finally {
-        setIsLoading(false);
+        setIsLoading('rejected');
       }
     }
   
@@ -79,23 +72,15 @@ const BookingConfirmation = () => {
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Departure Date:</p>
-              <strong className='m-0'>SATURDAY, JAN 2024</strong>
+              <strong className='m-0'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'date')}</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Departure Time:</p>
-              <strong className='m-0'>6:30AM</strong>
+              <strong className='m-0'>{FormatDateAndTime(bookingInfo?.metadata?.departureDate, 'time')}</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Booking Date</p>
               <strong className='m-0'>WED JUNE, 2023</strong>
-            </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
-              <p className='m-0'>Booking ID:</p>
-              <strong className='m-0'>55S468</strong>
-            </div>
-            <div className='col-sm-6 col-md-4 mt-4'>
-              <p className='m-0'>Booking Status</p>
-              <strong className='m-0'>APPROVED</strong>
             </div>
             <div className='col-sm-6 col-md-4 mt-4'>
               <p className='m-0'>Booking Date</p>

@@ -24,6 +24,8 @@ const PaymentModal = () => {
       return navigate("/");
     }
 
+    console.log(bookedData);
+
     try {
       const body = {
         email: currentUser?.email,
@@ -36,6 +38,9 @@ const PaymentModal = () => {
           nextOfKinPhoneNumber: nextOfKin?.phone,
           amount: bookedData?.price,
           seatNumber: selectedSeatNo,
+          travellingFrom: bookedData?.travellingFrom,
+          travellingTo: bookedData?.travellingTo,
+          departureDate: bookedData?.departureDate,
         }
       }
 
