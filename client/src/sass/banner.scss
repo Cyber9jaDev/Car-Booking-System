@@ -2,45 +2,6 @@
   position: relative;
   min-height: calc(100vh - 70px) !important;
   max-height: calc(100vh - 70px) !important;
-  height: 100%;
-
-  .menu{
-    display: none;
-  }
-
-  nav{
-    padding-top: 1.5em;
-  }
-
-  nav > ul{
-    display: flex;
-    justify-content: center;
-    padding-left: 0;
-  }
-
-  nav > ul > li {
-    list-style: none;
-    margin: 0 10px;
-    z-index: 1 !important;
-  }
-
-  nav > ul > li > .nav-link{
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.125em;
-    letter-spacing: 1px;
-    padding: 8px 25px;
-    font-weight: 600;
-    border: 2px solid transparent;
-    text-shadow: 1px 1px 2px #000000;
-  }
-
-  nav > ul > li > .nav-link:hover, nav > ul > li > .nav-link.active{
-    color: #ffffff;
-    text-shadow: 1px 1px 2px #000000;
-    border: 2px solid #ccc;
-    border-radius: 3px;
-  }
 
   .slider-container{
     position: absolute;
@@ -113,60 +74,6 @@
     min-height: 62vh !important;
     max-height: 62vh !important;
 
-    .menu{
-      position: relative;
-      top: 20px;
-      padding: 10px 0 5px 0 !important;
-      z-index: 1 !important;
-      display: block;
-      text-align: center;
-      background-color: #ffc107;
-      width: 60px;
-      margin: 0 auto;
-      cursor: pointer;
-    }
-
-    .menu > i{
-      color: black;
-      font-size: 2.2em;
-    }
-
-    nav{
-      position: absolute !important;
-      width: 100%;
-      left: -100%;
-      transition: left 1.3s ease-in-out;
-      top: 50px;
-    }
-
-    nav > ul{
-      background-color: rgba(0, 0, 0, 0.8);
-      width: 90%;
-      margin: 0 auto;
-      height: 100%;
-      padding-top: 20px;
-      border-radius: 5px;
-    }
-
-    nav.active{
-      left: 0 !important;
-      display: block !important;
-      top: 50px;
-    }
-    
-    nav > ul{
-      flex-direction: column;
-    }
-
-    nav > ul > li{
-      margin: 10px auto;
-      width: 180px;
-    }
-
-    nav > ul > li > .nav-link{
-      text-align: center;
-    }
-
     .wrapper{
       min-height: 62vh !important;
       max-height: 62vh !important;
@@ -175,7 +82,6 @@
     .banner-info h4, .banner-info h5 {
       font-size: 2.7em;
       text-align: center;
-
     }
   }
 

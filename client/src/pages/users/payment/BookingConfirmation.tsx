@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import PaymentService from '../../../services/PaymentService';
 import { useLocation } from 'react-router-dom';
-import '../../../sass/verification.scss';
 import { PaystackVerificationType } from '../../../utilities/Types';
 import { FormatAmount, FormatDateAndTime } from '../../../utilities/Functions';
 import { findLocationByValue } from '../../../utilities/constants';
+import '../../../sass/confirmation.scss';
 
 
 const BookingConfirmation = () => {
-  const [isLoading, setIsLoading] = useState('idle');
+  const [ bookingStatus, setIsLoading ] = useState('idle');
   const [ bookingInfo, setBookingInfo ] = useState({} as PaystackVerificationType);
   const location = useLocation();
 
@@ -33,9 +33,17 @@ const BookingConfirmation = () => {
     verifyTransaction();
 
   }, [location.search]);
+
+  if(bookingStatus === 'idle' || bookingStatus === 'pending'){
+    return <div>Loading .......</div>
+  }
+
+  if(bookingStatus === "rejected"){
+    return <div>Error message</div>
+  }
   
   return (
-    <main id='verification'>
+    <main id='confirmation'>
       <div className='container-lg'>
         <div className="icon d-flex justify-content-center align-items-center mx-auto my-4">
           <i className="fa-solid fa-check"></i>

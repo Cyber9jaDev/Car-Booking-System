@@ -15,10 +15,12 @@ import PublicRoute from "./utilities/PublicRoute";
 import Footer from "./components/users/Footer";
 import Profile from "./pages/users/Profile";
 import BookingConfirmation from "./pages/users/payment/BookingConfirmation";
+import Header from "./components/users/Header";
 
 const RouterLinks = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<SharedLayout/>}>
           <Route index element={ <Homepage/> } />
