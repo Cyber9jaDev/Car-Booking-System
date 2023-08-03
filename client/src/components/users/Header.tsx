@@ -49,7 +49,26 @@ const Header = () => {
           </ul>
         </div>}
         <div className="profile">
-          <Link to='/profile' className='nav-link'>Profile</Link>
+          <div className="icon">
+            <i className="fa-solid fa-user"></i>
+          </div>
+          <div className="dropdown">
+            <ul>
+              <li className='nav-item'>
+                <Link to='' className='nav-link'>Dropdown</Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='' className='nav-link'>Dropdown</Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='' className='nav-link'>Dropdown</Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='' className='nav-link'>Dropdown</Link>
+              </li>
+            </ul>
+          </div>
+          {/* <Link to='/profile' className='nav-link'>Profile</Link> */}
         </div>
       </div>
     </header>

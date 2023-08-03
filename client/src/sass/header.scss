@@ -17,12 +17,52 @@
   .logo, .profile{
     display: flex;
     align-self: center;
+    position: relative;
   }
 
   .logo > .nav-link, .profile > .nav-link{
     font-size: 2.5em;
     color: #009cff;
   }
+
+  .profile > .icon{
+    background-color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile > .icon > i{
+    font-size: 2rem;
+    color: #009cff;
+    cursor: pointer;
+    padding: 20px;
+
+  }
+
+  .profile > .dropdown{
+    position: absolute;
+    left: -40px;
+    top: 75px;
+    background-color: red;
+  }
+
+  .profile > .dropdown > ul{
+    list-style-type: none;
+    padding-left: 0;
+    padding: 20px;
+    width: fit-content;
+  }
+
+  .profile > .dropdown > ul > li{
+    padding-left: 0;
+    margin: 1rem 0;
+  }
+
+
 
   .menu{ display: none }
   nav, .authentication{ display: block !important }
@@ -123,7 +163,7 @@
       background-color: #fff;
     }
 
-    .authentication{
+    .authentication, .profile{
       display: none !important;
     }
   }
