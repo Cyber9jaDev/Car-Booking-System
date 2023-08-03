@@ -22,6 +22,7 @@ export type PaystackInitializerType = {
 export type PaystackVerificationType = {
   status: string,
   reference: string,
+  bookingDate: string,
   metadata: {
     passengerName: string,
     passengerPhoneNumber: string,
