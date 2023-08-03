@@ -30,7 +30,7 @@ const Header = () => {
             <li onClick={() => setShowMenu(false)} className="nav-item">
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/contact">Contact</NavLink>
             </li>
-            { !currentUser && <li onClick={() => setShowMenu(false)} className={`nav-item ${ currentUser ? 'mobile-login' : '' }`}>
+            { !currentUser && <li onClick={() => setShowMenu(false)} className={`nav-item ${ currentUser ? 'hide' : 'nav-item mobile-login'}`}>
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/login">Login</NavLink>
             </li> }
           </ul>
@@ -38,6 +38,16 @@ const Header = () => {
         <div className="menu" onClick={() => setShowMenu(!showMenu)} >
           <i className={`fa-solid ${showMenu ? 'fa-xmark' : 'fa-bars'}`}></i>
         </div>
+        { !currentUser && <div className="authentication">
+          <ul>
+            <li onClick={() => setShowMenu(false)} className="nav-item">
+              <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/login">Login</NavLink>
+            </li>
+            <li onClick={() => setShowMenu(false)} className="nav-item">
+              <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/register">Register</NavLink>
+            </li>
+          </ul>
+        </div>}
       </div>
     </header>
   )
