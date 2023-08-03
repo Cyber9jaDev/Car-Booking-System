@@ -14,12 +14,12 @@
     position: relative !important;
   }
 
-  .logo{
+  .logo, .profile{
     display: flex;
     align-self: center;
   }
 
-  .logo > .nav-link{
+  .logo > .nav-link, .profile > .nav-link{
     font-size: 2.5em;
     color: #009cff;
   }

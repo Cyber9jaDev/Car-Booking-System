@@ -5,7 +5,6 @@ import Team from '../../components/users/Team';
 import Testimonial from '../../components/users/Testimonial';
 
 const Homepage = () => {
-
   return (
     <>
       <Banner />
