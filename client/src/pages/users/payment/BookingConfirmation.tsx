@@ -89,7 +89,6 @@ const BookingConfirmation = () => {
             </div>
             <div className='col-sm-6 col-md-4 mt-5'>
               <p className='m-0'>Booking Date:</p>
-              {/* {<b className='m-0'>{FormatDateAndTime(bookingInfo?.bookingDate, 'date')}</b>} */}
               {<b className='m-0'>{bookingInfo?.metadata?.departureDate && FormatDateAndTime(bookingInfo?.bookingDate, 'time')}, {" "} {FormatDateAndTime(bookingInfo?.bookingDate, 'date')}</b>}
             </div>
           </div>
