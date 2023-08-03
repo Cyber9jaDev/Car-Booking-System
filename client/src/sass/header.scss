@@ -2,6 +2,10 @@
   background-color: #000;
   height: 100px;
 
+  .hide{
+    display: none;
+  }
+
   .wrapper{
     display: flex;
     align-items: center;
@@ -20,28 +24,23 @@
     color: #009cff;
   }
 
-  .menu{
-    display: none;
-  }
+  .menu{ display: none }
+  nav, .authentication{ display: block !important }
 
-  nav{
-    display: block !important;
-  }
-
-  nav > ul{
+  nav > ul, .authentication > ul{
     display: block !important                                                                                    ;
     padding-left: 0;
     margin: auto 0;
   }
 
-  nav > ul > li {
+  nav > ul > li, .authentication > ul > li {
     list-style: none;
     margin: auto 10px;
     z-index: 1 !important;
     display: inline-block;
   }
 
-  nav > ul > li > .nav-link{
+  nav > ul > li > .nav-link, .authentication > ul > li > .nav-link{
     text-decoration: none;
     color: #fff;
     font-size: 1em;
@@ -51,16 +50,24 @@
     text-shadow: 1px 1px 2px #009cff;
     padding: 10px 15px;
   }
+
+  .authentication > ul > li > .nav-link{
+    background-color: #fff;
+    color: #009cff;
+    width: 100px;
+    text-align: center;
+  }
   
-  nav > ul > li > .nav-link:hover, nav > ul > li > .nav-link.active{
+  nav > ul > li > .nav-link:hover, 
+  .authentication > ul > li > .nav-link:hover, 
+  nav > ul > li > .nav-link.active,
+  .authentication > ul > li > .nav-link.active{
     color: #009cff;
     border: 1px solid #009cff;
     border-radius: 3px;
   }
 
-  .mobile-login{
-    display: none;
-  }
+  .mobile-login{ display: none !important }
 
   @media screen and (max-width: 768px){
 
@@ -110,13 +117,14 @@
       padding: 20px;
       width: 120px;
     }
-  }
 
-  .mobile-login{
-    display: inherit !important;
-  }
+    .mobile-login{
+      display: block !important;
+      background-color: #fff;
+    }
 
-  @media screen and (max-width: 468px){
-
+    .authentication{
+      display: none !important;
+    }
   }
 }
