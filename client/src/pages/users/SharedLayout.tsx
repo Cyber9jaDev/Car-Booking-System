@@ -1,11 +1,13 @@
-// import TopNav from '../../components/users/TopNav';
 import { Outlet } from 'react-router-dom';
+import Header from '../../components/users/Header';
+import Footer from '../../components/users/Footer';
 
 const SharedLayout = () => {
   return (
     <>
-      {/* <TopNav /> */}
+      <Header />
       <Outlet />
+      <Footer />
     </>
   )
 }

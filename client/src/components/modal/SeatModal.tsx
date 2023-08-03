@@ -16,11 +16,11 @@ const SeatModal = () => {
 
   const handleTrip = () => {
     if(!currentUser){
-      return Toast('error', 'Please log in to book this seat');
+      return Toast('fail', 'Please log in to book this seat');
     }
     if(selectedSeatNo === null ){ return }
     closeModal();
-    navigate('/passenger-details');
+    navigate('/booking/passenger-details');
   }
 
 
