@@ -1,0 +1,122 @@
+#header{
+  background-color: #000;
+  height: 100px;
+
+  .wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px !important;
+    position: relative !important;
+  }
+
+  .logo{
+    display: flex;
+    align-self: center;
+  }
+
+  .logo > .nav-link{
+    font-size: 2.5em;
+    color: #009cff;
+  }
+
+  .menu{
+    display: none;
+  }
+
+  nav{
+    display: block !important;
+  }
+
+  nav > ul{
+    display: block !important                                                                                    ;
+    padding-left: 0;
+    margin: auto 0;
+  }
+
+  nav > ul > li {
+    list-style: none;
+    margin: auto 10px;
+    z-index: 1 !important;
+    display: inline-block;
+  }
+
+  nav > ul > li > .nav-link{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    text-shadow: 1px 1px 2px #009cff;
+    padding: 10px 15px;
+  }
+  
+  nav > ul > li > .nav-link:hover, nav > ul > li > .nav-link.active{
+    color: #009cff;
+    border: 1px solid #009cff;
+    border-radius: 3px;
+  }
+
+  .mobile-login{
+    display: none;
+  }
+
+  @media screen and (max-width: 768px){
+
+    .menu{
+      position: relative;
+      padding: 10px 0 5px 0 !important;
+      z-index: 1 !important;
+      display: block;
+      cursor: pointer;
+    }
+
+    .menu > i{
+      color: #009cff;
+      font-size: 2em;
+    }
+
+    nav{
+      position: absolute !important;
+      width: 100%;
+      left: -100%;
+      transition: left 1.3s ease-in-out;
+      top: 100px !important;
+      z-index: 1 !important;
+    }
+
+    nav > ul{
+      padding: 20px 0; 
+      background-color: rgba(0, 0, 0, 0.8);
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+    }
+
+    nav.active{
+      left: 0 !important;
+      display: block !important;
+    }
+  
+    nav > ul > li{
+      margin: 0 auto;
+      display: block;
+      width: fit-content;
+    }
+
+    nav > ul > li > .nav-link{
+      text-align: center;
+      padding: 20px;
+      width: 120px;
+    }
+  }
+
+  .mobile-login{
+    display: inherit !important;
+  }
+
+  @media screen and (max-width: 468px){
+
+  }
+}
