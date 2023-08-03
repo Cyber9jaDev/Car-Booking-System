@@ -148,4 +148,10 @@ export const modalStyle = {
   p: 4,
 }
 
-
+export const findLocationByValue = (location: string) => {
+  const foundLabel = cities.find(value => value.value === location);
+  if(foundLabel){
+    return foundLabel?.label
+  }
+  return location; 
+}
