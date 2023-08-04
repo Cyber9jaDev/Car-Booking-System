@@ -9,11 +9,11 @@ import Contact from "./pages/users/Contact";
 import Home from "./pages/admin/Home";
 import Bookings from "./pages/users/Bookings";
 import PassengerDetails from "./pages/users/PassengerDetails";
-import PaymentModal from "./components/modal/PaymentModal";
 import PrivateRoute from "./utilities/PrivateRoute";
 import PublicRoute from "./utilities/PublicRoute";
 import Profile from "./pages/users/Profile";
 import BookingConfirmation from "./pages/users/payment/BookingConfirmation";
+import Settings from "./pages/users/Settings";
 
 const RouterLinks = () => {
   return (
@@ -27,6 +27,7 @@ const RouterLinks = () => {
           <Route path="booking" element = { <Bookings/> } />
           <Route path="booking/passenger-details" element = {<PrivateRoute><PassengerDetails/></PrivateRoute>}/>
           <Route path="profile" element = { <PrivateRoute><Profile/></PrivateRoute> } />
+          <Route path="profile/settings" element = { <PrivateRoute><Settings/></PrivateRoute> } />
         </Route>
         <Route path="/register" element={ <PublicRoute><Signup/></PublicRoute>} />
         <Route path="login" element={<PublicRoute><Login/></PublicRoute>}/> 
