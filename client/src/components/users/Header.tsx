@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import '../../sass/header.scss';
 import { UserContext } from '../../contexts/UserContext';
@@ -8,7 +8,7 @@ const Header = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState<boolean>(false);
   const { currentUser } = useContext(UserContext);
   const { pathname } = useLocation();
-  
+
   return (
     <header id='header' style={{ position: pathname === '/' ? 'fixed' : 'sticky' }}>
       <div className="wrapper container-lg">
