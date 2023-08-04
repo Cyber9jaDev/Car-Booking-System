@@ -1,17 +1,21 @@
-import { useContext, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import '../../sass/header.scss';
 import { UserContext } from '../../contexts/UserContext';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState<boolean>(false);
   const { currentUser } = useContext(UserContext);
-
+  const { pathname } = useLocation();
+  
   return (
-    <header id='header'>
+    <header id='header' style={{ position: pathname === '/' ? 'fixed' : 'sticky' }}>
       <div className="wrapper container-lg">
         <div className="logo">
-          <Link to='' className='nav-link'>Logo</Link>
+          <Link to='' className='nav-link'>
+            <i className="fas fa-taxi"></i>BUSCITY
+          </Link>
         </div>
         <nav className={showMenu ? `active` : ''}>
           <ul>
@@ -33,9 +37,12 @@ const Header = () => {
             { !currentUser && <li onClick={() => setShowMenu(false)} className={`nav-item ${ currentUser ? 'hide' : 'nav-item mobile-login'}`}>
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/login">Login</NavLink>
             </li> }
+            <li onClick={() => setShowMenu(false)} className={`nav-item ${ currentUser ? 'mobile-profile' : 'hide'}`}>
+              <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/profile">Profile</NavLink>
+            </li>
           </ul>
         </nav>
-        <div className="menu" onClick={() => setShowMenu(!showMenu)} >
+        <div className="menu" onClick={() => setShowMenu(prev => !prev)} >
           <i className={`fa-solid ${showMenu ? 'fa-xmark' : 'fa-bars'}`}></i>
         </div>
         { !currentUser && <div className="authentication">
@@ -47,29 +54,26 @@ const Header = () => {
               <NavLink className={({isActive, isPending}) => isPending ? 'nav-link' : isActive ? 'nav-link active' : 'nav-link'} to="/register">Register</NavLink>
             </li>
           </ul>
-        </div>}
-        <div className="profile">
-          <div className="icon">
+          </div>
+        }
+        { currentUser && <div className="profile">
+          <div onClick={() => setShowProfileDropdown(prev => !prev)} className="icon">
             <i className="fa-solid fa-user"></i>
           </div>
-          <div className="dropdown">
+          { showProfileDropdown && <div className="dropdown">
             <ul>
-              <li className='nav-item'>
-                <Link to='' className='nav-link'>Dropdown</Link>
+              <li onClick={() => setShowProfileDropdown(false)} className='nav-item'>
+                <Link to='/profile' className='nav-link'>Profile</Link>
               </li>
-              <li className='nav-item'>
-                <Link to='' className='nav-link'>Dropdown</Link>
+              <li onClick={() => setShowProfileDropdown(false)} className='nav-item'>
+                <Link to='/profile/settings' className='nav-link'>Settings</Link>
               </li>
-              <li className='nav-item'>
-                <Link to='' className='nav-link'>Dropdown</Link>
-              </li>
-              <li className='nav-item'>
-                <Link to='' className='nav-link'>Dropdown</Link>
+              <li onClick={() => setShowProfileDropdown(false)} className='nav-item'>
+                <span className='nav-link'>Logout</span>
               </li>
             </ul>
-          </div>
-          {/* <Link to='/profile' className='nav-link'>Profile</Link> */}
-        </div>
+          </div> }
+        </div>}
       </div>
     </header>
   )
