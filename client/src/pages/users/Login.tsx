@@ -50,38 +50,46 @@ const Login = () => {
             <h4 className='text-center'>Login to continue</h4>
           </header>
 
-          <div className='wrapper mt-3'>
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="email">Email</label>
-              <input
-                required
-                className='d-block form-control' 
-                value={email}
-                id='email' 
-                type="email" 
-                onChange={(e) => setUserFormData({ ...userFormData, email: e.target.value })} 
-              />
+          <div className="container-lg">
+            <div className="row">
+              <div className="col-12">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="email">Email</label>
+                  <input
+                    required
+                    className='d-block form-control' 
+                    value={email}
+                    id='email' 
+                    type="email" 
+                    onChange={(e) => setUserFormData({ ...userFormData, email: e.target.value })} 
+                  />
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="password">Password</label>
+                  <input 
+                    required
+                    className='d-block form-control' 
+                    value={password}
+                    id='password' 
+                    type={`${ isVisiblePassword ? 'text' : 'password' }`} 
+                    onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })} 
+                  />
+                  <i 
+                    className={`eye-icon fa-regular fa-eye${isVisiblePassword && password.length ? '' : '-slash'}`}
+                    onClick={() => !password.length ? null : setIsVisiblePassword(!isVisiblePassword)}>
+                  </i>
+                </div>
+              </div>
+              <div className="col-12">
+                <button 
+                  // disabled={ isLoading } 
+                  disabled = { email==='' ||  password==='' || isLoading } 
+                  type="submit" className="btn w-100 my-2">{isLoading ? 'Loading...' : 'Login'}</button>
+                <p className="my-4">Don't have an account? <Link to='/register'>Sign up</Link></p>
+              </div>
             </div>
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="password">Password</label>
-              <input 
-                required
-                className='d-block form-control' 
-                value={password}
-                id='password' 
-                type={`${ isVisiblePassword ? 'text' : 'password' }`} 
-                onChange={(e) => setUserFormData({ ...userFormData, password: e.target.value })} 
-              />
-              <i 
-                className={`eye-icon fa-regular fa-eye${isVisiblePassword && password.length ? '' : '-slash'}`}
-                onClick={() => !password.length ? null : setIsVisiblePassword(!isVisiblePassword)}>
-              </i>
-            </div>
-
-            <button disabled={ isLoading } type="submit" className="btn w-100 my-2">{isLoading ? 'Loading...' : 'Login'}</button>
-
-            <p className="my-4">Don't have an account? <Link to='/register'>Sign up</Link></p>
-
           </div>
         </form>
       </div>
