@@ -61,65 +61,68 @@ const Signup = () => {
 
   return (
     <main id='registration'>
-      <div className="container-lg d-flex align-items-center justify-content-center h-100 w-100">
+      <div className="d-flex align-items-center justify-content-center h-100 w-100">
         <form onSubmit={handleSubmit}>
           <header>
-            <h4 className='text-center'>Create account</h4>
+            <h4 className='text-center'>Sign up</h4>
           </header>
-          <div className='wrapper mt-3'>
-
-            {/* Full name */}
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="fullName">Full Name</label>
-              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , fullName: e.target.value})} className='d-block form-control' id='fullName' type="text" required />
+          
+          <div className="container-lg">
+            <div className="row">
+              <div className="col-sm-12 col-md-6">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="fullName">Full Name</label>
+                  <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , fullName: e.target.value})} className='d-block form-control' id='fullName' type="text" required />
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-6">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="email">Email</label>
+                  <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , email: e.target.value})} className='d-block form-control' id='email' type="email" required />
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-12">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="phone">Phone Number</label>
+                  <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , phone: e.target.value})} className='d-block form-control' id='phone' type="tel" required />
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-6">
+                <div className="form-group mb-4">
+                    <label className='d-block' htmlFor="password">Password</label>
+                    <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , password: e.target.value})} className='d-block form-control' id='password' type={isVisiblePassword ? 'text' : 'password'} required />
+                    <i 
+                      onClick={() => !password.length ? null : setPasswordVisibility({ ...passwordVisibility , isVisiblePassword: !isVisiblePassword })} 
+                      className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisiblePassword && userFormData .password.length ? '' : '-slash'}`}>
+                    </i>
+                </div>
+              </div>
+              <div className="col-sm-12 col-md-6">
+                <div className="form-group mb-4">
+                  <label className='d-block' htmlFor="confirm-password">Confirm Password</label>
+                  <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={isVisibleConfirmPassword ? 'text': 'password'} required />
+                  <i 
+                    onClick={() => !confirmPassword?.length ? null : setPasswordVisibility({...passwordVisibility , isVisibleConfirmPassword: !isVisibleConfirmPassword})} 
+                    className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisibleConfirmPassword ? '' : '-slash'}`}>
+                  </i>
+                </div>
+              </div>
+              <div className="col-sm-12">
+                <div className="form-check my-4">
+                  <input onChange={() => setUserFormData({ ...userFormData , hasAgreedTerms: !hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
+                  <label className="form-check-label" htmlFor="form-check-label">I agree to the the terms & conditions</label>
+                </div>
+              </div>
+              <div className="col-sm-12">
+                <button 
+                  disabled = { !(hasAgreedTerms && email.length && password.length && confirmPassword?.length && !isSubmitting && fullName.length) } 
+                  type="submit" 
+                  className="btn w-100">
+                  { isSubmitting ? 'Submitting...' : 'Submit'  }
+                </button>
+                <p className="my-4">Already have an account? <Link to='/login'>Sign in</Link></p>
+              </div>
             </div>
-
-            {/* Email */}
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="email">Email</label>
-              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , email: e.target.value})} className='d-block form-control' id='email' type="email" required />
-            </div>
-
-            {/* Phone */}
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="phone">Phone Number</label>
-              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , phone: e.target.value})} className='d-block form-control' id='phone' type="tel" required />
-            </div>
-
-            {/* Password */}
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="password">Password</label>
-              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , password: e.target.value})} className='d-block form-control' id='password' type={isVisiblePassword ? 'text' : 'password'} required />
-              <i 
-                onClick={() => !password.length ? null : setPasswordVisibility({ ...passwordVisibility , isVisiblePassword: !isVisiblePassword })} 
-                className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisiblePassword && userFormData .password.length ? '' : '-slash'}`}>
-              </i>
-            </div>
-
-            {/* Confirm Password */}
-            <div className="form-group mb-4">
-              <label className='d-block my-1' htmlFor="confirm-password">Confirm Password</label>
-              <input onChange={(e:ChangeEvent<HTMLInputElement>) => setUserFormData({ ...userFormData , confirmPassword: e.target.value})} className='d-block form-control' id='confirm-password' type={isVisibleConfirmPassword ? 'text': 'password'} required />
-              <i 
-                onClick={() => !confirmPassword?.length ? null : setPasswordVisibility({...passwordVisibility , isVisibleConfirmPassword: !isVisibleConfirmPassword})} 
-                className={`eye-icon fa-regular fa-eye${passwordVisibility .isVisibleConfirmPassword ? '' : '-slash'}`}>
-              </i>
-            </div>
-
-            {/* Terms and Condition */}
-            <div className="form-check my-4">
-              <input onChange={() => setUserFormData({ ...userFormData , hasAgreedTerms: !hasAgreedTerms })} type="checkbox" className="form-check-input" id="form-check-label"/>
-              <label className="form-check-label" htmlFor="form-check-label">I agree to the the terms & conditions</label>
-            </div>
-
-            {/* Submit */}
-            <button 
-              disabled = { !(hasAgreedTerms && email.length && password.length && confirmPassword?.length && !isSubmitting && fullName.length) } 
-              type="submit" 
-              className="btn w-100">
-              { isSubmitting ? 'Submitting...' : 'Submit'  }
-            </button>
-            <p className="my-4">Already have an account? <Link to='/login'>Sign in</Link></p>
           </div>
         </form>
       </div>
