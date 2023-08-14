@@ -64,13 +64,17 @@ export const getAllTicketsWithAvailableSeats  = async (req, res) => {
   if(travellingTo !== 'none' && travellingFrom !== travellingTo){ queries.travellingTo = travellingTo }
   if(departureDate !== 'none') { queries.departureDate = departureDate}
 
-  console.log(queries)
-
   const seatsWithAvailableSeats  = await Trip.find({ ...queries, availableSeats: { $ne: [] } })
-    .limit(pageSize)
-    .skip((page - 1) * pageSize);
+    .limit(pageSize).skip((page - 1) * pageSize);
+
+  const totalPages =  await Trip.find({ ...queries, availableSeats: { $ne: [] } }).countDocuments();
+
   if(seatsWithAvailableSeats ){
-    return res.status(StatusCodes.OK).json(seatsWithAvailableSeats );
+    return res.status(StatusCodes.OK).json({
+      tickets:seatsWithAvailableSeats,
+      totalPages: Math.ceil( totalPages / pageSize),
+      currentPage: parseInt(page),
+    });
   }
   throw new InternalServerError('An error occurred, please try again');
 }
