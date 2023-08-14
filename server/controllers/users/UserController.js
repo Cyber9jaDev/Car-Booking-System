@@ -56,9 +56,19 @@ export const login = async (req, res) => {
   });
 }
 
+// Return all tickets having no empty seat
 export const getAllTicketsWithAvailableSeats  = async (req, res) => {
-  // Return all tickets having no empty seat
-  const seatsWithAvailableSeats  = await Trip.find({availableSeats: { $ne: [] }});
+  const { travellingFrom, travellingTo, departureDate, page, pageSize } = req.query;
+  const queries = {  }
+  if(travellingFrom !== 'none' && travellingFrom !== travellingTo){ queries.travellingFrom = travellingFrom }
+  if(travellingTo !== 'none' && travellingFrom !== travellingTo){ queries.travellingTo = travellingTo }
+  if(departureDate !== 'none') { queries.departureDate = departureDate}
+
+  console.log(queries)
+
+  const seatsWithAvailableSeats  = await Trip.find({ ...queries, availableSeats: { $ne: [] } })
+    .limit(pageSize)
+    .skip((page - 1) * pageSize);
   if(seatsWithAvailableSeats ){
     return res.status(StatusCodes.OK).json(seatsWithAvailableSeats );
   }

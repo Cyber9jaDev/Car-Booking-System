@@ -10,12 +10,13 @@ interface TripDataType {
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
+  departureTime: string,
   price: number,
   availableSeats: number[],
   bookedSeats: number[]
 }
 
-const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, bookedSeats, price, _id, departureDate }: TripDataType) => {
+const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, bookedSeats, price, _id, departureDate, departureTime }: TripDataType) => {
   const { setBookingState } = useContext(BookingContext);
 
   return (
@@ -30,8 +31,8 @@ const TicketSelect = ({ busType, travellingFrom, travellingTo, availableSeats, b
           <p className='mt-2'><i className="fa-solid fa-couch me-1"></i> {availableSeats.length} {availableSeats.length > 1 ? 'Seats' : 'Seat'} (Available) </p>
           <p className='my-auto'>
             <i className="fa-solid fa-person-walking-luggage"></i> Adult: 1 
-            <i className="fa-solid fa-clock ms-3"></i> {FormatDateAndTime(departureDate, 'time')}
-            <i className="fa-regular fa-calendar ms-3"></i> {FormatDateAndTime(departureDate, 'date')}
+            <i className="fa-solid fa-clock ms-3"></i> {departureDate}
+            <i className="fa-regular fa-calendar ms-3"></i> {departureTime}
           </p>
         </div>
         <div className="col-sm-12 col-md-2 col-lg-2 d-flex align-self-center flex-column align-items-center fee-wrapper">

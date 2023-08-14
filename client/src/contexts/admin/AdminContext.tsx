@@ -7,6 +7,7 @@ const initTripState: TripStateType = {
   travellingFrom: 'aba',
   travellingTo: 'aba',
   departureDate: '',
+  departureTime: '',
   price: 1,
   busType: 'minibus',
   isLoading: false,
@@ -29,14 +30,14 @@ export const AdminContextProvider = ({children}: ChildrenType) => {
 
   const addNewTrip = async (e:FormEvent) => { 
     e.preventDefault();
-    const {travellingFrom, travellingTo, busType, price, departureDate} = tripState;
+    const {travellingFrom, travellingTo, busType, price, departureDate, departureTime} = tripState;
     if( travellingFrom === 'none' || travellingTo === 'none' || !price || !departureDate ){
       return Toast('fail', 'Please fill all fields');
     }
 
     try {
       setTripState((prevState) => ({ ...prevState, isLoading: true, hasError: false }));
-      const body: Omit<TripStateType, 'isLoading' | 'hasError'> = { travellingFrom, travellingTo, departureDate, price, busType }
+      const body: Omit<TripStateType, 'isLoading' | 'hasError'> = { travellingFrom, travellingTo, departureDate, price, busType, departureTime }
       const response  = await AdminService.AddNewTrip(body);
       if(response?.message){
           Toast('success', 'Trip updated successfully');

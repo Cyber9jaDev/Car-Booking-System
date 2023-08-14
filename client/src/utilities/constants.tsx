@@ -155,3 +155,5 @@ export const findLocationByValue = (location: string) => {
   }
   return location; 
 }
+
+export const today = new Date().toISOString().split("T")[0];

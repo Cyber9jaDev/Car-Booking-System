@@ -1,17 +1,30 @@
 import { FormEvent, useContext, useState } from 'react';
 import '../../sass/BookingForm.scss';
-import { Cities } from '../../utilities/Functions';
+import { Cities, Toast } from '../../utilities/Functions';
 import { BookingContext } from '../../contexts/BookingContext';
 import UserService from '../../services/UserService';
+// import { today } from '../../utilities/constants';
+
 
 const BookingForm = () => {
   const { setBookingState } = useContext(BookingContext);
-  const [ tripState, setTripState ] = useState({ travellingFrom: 'all', travellingTo: 'all', departureDate: 'all' });
+  const [ tripState, setTripState ] = useState({ 
+    travellingFrom: 'none', 
+    travellingTo: 'none', 
+    departureDate: 'none',
+    page: 1, 
+    pageSize: 2,
+    totalPages: null
+  });
   const { travellingFrom, travellingTo, departureDate } = tripState;
 
   const getAllTrips = async(e:FormEvent) => {
-    // e.preventDefault();
-    console.log('test')
+    e.preventDefault();
+
+    // Ensure the user does not select the same city for arrival and departure
+    if((travellingFrom !== 'none') && (travellingTo !== 'none') && (travellingFrom === travellingTo)) { 
+      return Toast('fail', 'Departure City cannot be the same as the Arrival City'); 
+    }
 
     try {
       const response = await UserService.GetAllTrips(travellingFrom, travellingTo, departureDate);
@@ -29,8 +42,9 @@ const BookingForm = () => {
           <div className="row">
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
-              <select defaultValue={travellingFrom} onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
+              <select defaultValue='none' onChange={e => setTripState({...tripState, travellingFrom: e.target.value})} 
                 className="d-block mt-0 w-100" name="travellingFrom" id="travelling-from">
+                  <option value="none"> --- Departure City --- </option>
                 { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
@@ -38,15 +52,16 @@ const BookingForm = () => {
             {/* Travelling To */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
-              <select defaultValue={travellingTo} onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
+              <select defaultValue='none' onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
                 className="d-block mt-0 w-100" name="travellingTo" id="traveling-to">
+                  <option value="none"> --- Arrival City --- </option>
                 { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
 
             {/* Departure Date and Time */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
+              <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date</label>
               <input 
                 name='departureDate' 
                 defaultValue={departureDate}

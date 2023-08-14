@@ -4,6 +4,7 @@ export type BookingType = {
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
+  departureTime: string,
   price: number,
   bookedSeats: number[],
   availableSeats: number[],
@@ -48,8 +49,10 @@ export type TripStateType = {
   travellingFrom: string,
   travellingTo: string,
   departureDate: string,
+  departureTime: string,
   price: number,
   busType: string,
   isLoading: boolean,
   hasError: boolean,
+  
 }

@@ -21,6 +21,10 @@ const TripSchema = new Schema({
     type: String,
     required: true,
   },
+  departureTime: {
+    type: String,
+    required: true,
+  },
   availableSeats: {
     type: Array,
     default: function(){

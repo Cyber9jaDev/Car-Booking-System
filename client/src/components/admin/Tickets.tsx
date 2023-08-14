@@ -14,7 +14,7 @@ export type TicketType = {
 const Ticket = () => {
   const { tripState, setTripState, addNewTrip } = useContext( AdminContext );
   const { price, busType, isLoading, departureDate, travellingFrom, travellingTo } = tripState;
-  
+
   return (
     <section id="ticket" className="py-5">
       <div className="container">
@@ -58,7 +58,7 @@ const Ticket = () => {
             {/* Departure Date and Time */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
-              <input onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
+              <input onChange={e => setTripState({ ...tripState, departureDate: e.target.value.split('T')[0], departureTime: e.target.value.split('T')[1] })} name='departure' className='w-100' id="departure-date" type='datetime-local' min="2020-01-01" max="2023-12-31"/>
             </div>
 
             {/* Ticket Price */}
