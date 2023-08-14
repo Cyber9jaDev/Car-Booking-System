@@ -25,8 +25,12 @@ export default class UserService {
     return await APICall<AuthUserType>('api/v1/login', 'POST', data);
   }
 
-  static GetAllTrips = async () => {
-    return await APICall<BookingType[]>('api/v1/all-trips', 'GET', {});
+  static GetAllTrips = async (travellingFrom = 'none', travellingTo= 'none', departureDate= 'none') => {
+    let url = 'api/v1/all-trips';
+    if(travellingFrom){ url = url + `?travellingFrom=${travellingFrom}`}
+    if(travellingTo){ url = url + `&travellingTo=${travellingTo}`}
+    if(departureDate){ url = url + `&departureDate=${departureDate}`}
+    return await APICall<BookingType[]>(url, 'GET', {});
   }
 
   static BookTicket = async (body:BookTicketPayload) => {

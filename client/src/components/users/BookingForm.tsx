@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import '../../sass/BookingForm.scss';
 import { Cities } from '../../utilities/Functions';
+import { BookingContext } from '../../contexts/BookingContext';
+import UserService from '../../services/UserService';
 
 const BookingForm = () => {
-  const [tripState, setTripState] = useState({
-    travellingFrom: 'none',
-    travellingTo: 'none',
-    departureDate: '',
-  });
+  const { setBookingState } = useContext(BookingContext);
+  const [ tripState, setTripState ] = useState({ travellingFrom: 'all', travellingTo: 'all', departureDate: 'all' });
+  const { travellingFrom, travellingTo, departureDate } = tripState;
 
-  const { travellingFrom, travellingTo } = tripState;
+  const getAllTrips = async(e:FormEvent) => {
+    // e.preventDefault();
+    console.log('test')
+
+    try {
+      const response = await UserService.GetAllTrips(travellingFrom, travellingTo, departureDate);
+      console.log(response)
+      setBookingState(prev => ({ ...prev, trips: [...response] }));
+    } catch (error) {
+      return error;
+    } 
+  }
 
   return (
     <section id='booking__form-wrapper' className='py-5'>
       <div className="container">
-        <form className="container">
+        <form className="container" onSubmit={getAllTrips}>
           <div className="row">
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-from">Travelling From</label>
@@ -28,7 +39,7 @@ const BookingForm = () => {
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="form-label" htmlFor="travelling-to">Travelling To</label>
               <select defaultValue={travellingTo} onChange={e => setTripState({...tripState, travellingTo: e.target.value})}  
-                className="d-block mt-0 w-100" name="to" id="traveling-to">
+                className="d-block mt-0 w-100" name="travellingTo" id="traveling-to">
                 { Cities().map((city) => <option key={city.value} value={city.value}>{city.label}</option>) }
               </select>
             </div>
@@ -36,11 +47,16 @@ const BookingForm = () => {
             {/* Departure Date and Time */}
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
               <label className="d-block mb-2 form-label" htmlFor="departure-date">Departure Date and Time</label>
-              <input onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} name='departure' className='w-100' id="departure-date" type='date' min="2020-01-01" max="2023-12-31"/>
+              <input 
+                name='departureDate' 
+                defaultValue={departureDate}
+                className='w-100' id="departure-date" type='date' min="2020-01-01" max="2023-12-31"
+                onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} 
+              />
             </div>
 
             <div className="form-group col-sm-12 col-md-6 col-lg-3 my-3">
-              <label className="d-block form-label form-submit" htmlFor="submit">j</label>
+              <label className="d-block form-label form-submit" htmlFor="submit">{'Empty'}</label>
               <button id='submit' type='submit' className="w-100"> Find Ticket </button>
             </div>
           </div>

@@ -52,7 +52,7 @@ export const BookingContextProvider = ({ children }: ChildrenType) : ReactElemen
       const response = await UserService.GetAllTrips();
       setBookingState(prev => ({ ...prev, trips: [...response] }));
     } catch (error) {
-      return error
+      return error;
     } 
   }
 

@@ -1,0 +1,80 @@
+#contact{
+  background-size: contain;
+  color: #fff;
+
+  .content{ 
+    height: 200px; 
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .content > h1{
+    font-weight: bolder;
+    font-size: 3.8em;
+  }
+
+  .icon{
+    color: #009cff;
+    font-size: 2.2em;
+    margin: 10px 0;
+  }
+
+  span, h5{
+    margin: 10px 0;
+  }
+
+  span, span > a, h5{
+    text-decoration: none;
+    color: #302525;
+    font-weight: 500;
+  }
+
+  span > a:hover{
+    color: #000;
+  }
+
+  .form-wrapper{
+    -webkit-border-radius: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f4f5f7;
+    -webkit-box-shadow: 12px 12px 24px #b2b8c9, -12px -12px 24px #f0f8ff;
+    box-shadow: 12px 12px 24px #b2b8c9, -12px -12px 24px #f0f8ff;
+  }
+
+  input{
+    height: 50px;
+    border: 1px solid #9dd1f0;
+    color: #000;
+    font-weight: 500;
+  }
+
+  input:not([type=submit]):focus, textarea:focus{
+    box-shadow: none;
+  }
+
+  input[type=submit]{
+    background-color: #009cff;
+    font-weight: 600;
+    color: #ffff;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  textarea{
+    resize: vertical;
+    min-height: 200px;
+    border: 1px solid #9dd1f0;
+    color: #000;
+    font-weight: 500;
+  }
+
+  ::placeholder{
+    color: rgba(0, 0, 0, .4);
+    font-weight: 400 !important;
+  }
+
+}
