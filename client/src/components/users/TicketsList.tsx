@@ -5,6 +5,7 @@ import { BookingContext } from '../../contexts/BookingContext';
 import Modal from '../modal/Modal';
 import SeatModal from '../modal/SeatModal';
 import { BookingType } from '../../utilities/Types';
+import Pagination from '../../utilities/Pagination';
 
 
 const TicketsList = () => {
@@ -19,6 +20,7 @@ const TicketsList = () => {
           <div className="row">
             { trips.map(( trip:BookingType ) => <TicketSelect key={trip._id} { ...trip } /> ) }
           </div>
+          <Pagination />
         </div>
         
       </section>
