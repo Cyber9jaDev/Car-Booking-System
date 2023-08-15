@@ -10,6 +10,12 @@ export type BookingType = {
   availableSeats: number[],
 }; 
 
+export type TicketType = {
+  tickets: BookingType[],
+  currentPage: number,
+  totalPages: number
+}
+
 export type PaystackInitializerType = {
   status: boolean,
   message: string,

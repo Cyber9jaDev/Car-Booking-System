@@ -27,9 +27,8 @@ const BookingForm = () => {
     }
 
     try {
-      const response = await UserService.GetAllTrips(travellingFrom, travellingTo, departureDate);
-      console.log(response);
-      // setBookingState(prev => ({ ...prev, trips: [...response?.tickets] }));
+      const { tickets } = await UserService.GetAllTickets(travellingFrom, travellingTo, departureDate);
+      setBookingState(prev => ({ ...prev, trips: [...tickets] }));
     } catch (error) {
       return error;
     } 

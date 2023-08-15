@@ -67,7 +67,10 @@ export const getAllTicketsWithAvailableSeats  = async (req, res) => {
   const seatsWithAvailableSeats  = await Trip.find({ ...queries, availableSeats: { $ne: [] } })
     .limit(pageSize).skip((page - 1) * pageSize);
 
-  const totalPages =  await Trip.find({ ...queries, availableSeats: { $ne: [] } }).countDocuments();
+  const totalPages = await Trip.find({ ...queries, availableSeats: { $ne: [] } }).countDocuments();
+
+  console.log(totalPages)
+  console.log(queries)
 
   if(seatsWithAvailableSeats ){
     return res.status(StatusCodes.OK).json({

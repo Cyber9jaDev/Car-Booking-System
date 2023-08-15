@@ -1,6 +1,5 @@
 import APICall from "../utilities/APICall.tsx";
-import { AuthUserType, BookingType } from "../utilities/Types.tsx";
-import { today } from "../utilities/constants.tsx";
+import { AuthUserType, TicketType } from "../utilities/Types.tsx";
 
 interface AuthUserPayload{
   username?: string,
@@ -26,13 +25,13 @@ export default class UserService {
     return await APICall<AuthUserType>('api/v1/login', 'POST', data);
   }
 
-  static GetAllTrips = async (travellingFrom='none', travellingTo='none', departureDate='none', page=Number(1), pageSize=Number(5) ) => {
+  static GetAllTickets = async (travellingFrom='none', travellingTo='none', departureDate='none', page=Number(1), pageSize=Number(7) ) => {
     let url = `api/v1/all-trips?page=${page}&pageSize=${pageSize}`;
     if(travellingFrom){ url = url + `&travellingFrom=${travellingFrom}`}
     if(travellingTo){ url = url + `&travellingTo=${travellingTo}`}
     if(departureDate){ url = url + `&departureDate=${departureDate}`}
 
-    return await APICall<BookingType[]>(url, 'GET', {});
+    return await APICall<TicketType>(url, 'GET', {});
   }
 
   static BookTicket = async (body:BookTicketPayload) => {
