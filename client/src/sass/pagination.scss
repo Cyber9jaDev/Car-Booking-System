@@ -1,6 +1,6 @@
 #pagination{
-  
-  li{
+
+  li:not(.page){
     cursor: pointer;
   }
 }
