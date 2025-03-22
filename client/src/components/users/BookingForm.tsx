@@ -65,7 +65,9 @@ const BookingForm = () => {
                 name='departureDate' 
                 defaultValue={departureDate}
                 className='w-100' id="departure-date" type='date' min="2020-01-01" max="2023-12-31"
-                onChange={e => setTripState({ ...tripState, departureDate: e.target.value })} 
+                onChange={e => setTripState({ ...tripState, departureDate: e.target.value })}
+                
+                
               />
             </div>
 

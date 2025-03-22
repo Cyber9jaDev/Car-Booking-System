@@ -17,6 +17,8 @@ const Header = () => {
             <i className="fas fa-taxi"></i>BUSCITY
           </Link>
         </div>
+
+        {/* Navbar */}
         <nav className={showMenu ? `active` : ''}>
           <ul>
             <li onClick={() => setShowMenu(false)} className="nav-item">
@@ -42,9 +44,12 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+
+
         <div className="menu" onClick={() => setShowMenu(prev => !prev)} >
           <i className={`fa-solid ${showMenu ? 'fa-xmark' : 'fa-bars'}`}></i>
         </div>
+        
         { !currentUser && <div className="authentication">
           <ul>
             <li onClick={() => setShowMenu(false)} className="nav-item">

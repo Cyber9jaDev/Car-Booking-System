@@ -92,7 +92,7 @@
   }
 
   .menu{ display: none }
-  nav, .authentication{ display: block !important }
+  nav, .authentication{ display: block !important; background-color: red; }
 
   nav > ul, .authentication > ul{
     display: block !important                                                                                    ;
@@ -165,6 +165,7 @@
       transition: left 1.3s ease-in-out;
       top: 100px !important;
       z-index: 1 !important;
+      // background-color: green
     }
 
     nav > ul{
